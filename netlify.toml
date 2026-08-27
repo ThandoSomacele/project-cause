@@ -1,0 +1,10 @@
+# Build settings. Security headers live in src/hooks.server.ts instead — rules
+# here only reliably reach statically-served files, not the SSR function.
+[build]
+	command = "pnpm run build"
+	publish = "build"
+
+[build.environment]
+	NODE_VERSION = "22"
+	# Netlify defaults to an older pnpm; pin it to what the lockfile was written with.
+	PNPM_VERSION = "11"
