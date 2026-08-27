@@ -1,0 +1,22 @@
+node_modules
+.DS_Store
+
+# Output
+.svelte-kit
+build
+dist
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Playwright
+test-results
+playwright-report
+blob-report
+.playwright-mcp
+
+# Local design reference — 38MB of raw Figma pulls, not needed to build
+design/raw/
+design/build-*.png

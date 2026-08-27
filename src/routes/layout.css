@@ -1,0 +1,137 @@
+@import 'tailwindcss';
+
+/* Two typefaces are used in the design: Geist for the newer sections
+   (FAQ, fee calculator) and Inter for the marketing sections. */
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist/wght-italic.css';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/inter/wght-italic.css';
+
+@plugin '@tailwindcss/forms';
+
+@theme {
+	/* ---- Brand ------------------------------------------------------ */
+	--color-ink: #0a1538; /* primary navy: headings, dark panels, footer */
+	--color-ink-800: #141d3d; /* hero backdrop */
+	--color-ink-700: #182344; /* inputs on navy */
+	--color-ink-600: #232d4c; /* raised chips on navy */
+	--color-ink-500: #2d3654; /* unfilled slider track, hairlines on navy */
+
+	--color-accent: #ff8404; /* orange: highlight words, primary CTA */
+	--color-accent-dark: #e67300; /* orange hover/pressed */
+	/* #ff8404 is 2.4:1 on the page surface and #e67300 only 2.95:1 — both fail
+	   WCAG AA for small text. This is the lightest orange that clears 4.5:1,
+	   so small orange links use it instead. Large display type keeps --accent. */
+	--color-accent-link: #b35c00;
+
+	--color-mint: #1fc197; /* slider fill, check marks */
+	--color-amber: #ffcb6e; /* value-offering card, final CTA ground */
+	--color-amber-deep: #f6ad2c; /* mascot halo */
+
+	/* ---- Neutrals --------------------------------------------------- */
+	--color-surface: #fafafa; /* page background */
+	--color-cream: #fbf9f4; /* calculator stat cards */
+	--color-line: #dbdbdb; /* alternatives panel, dividers */
+	--color-line-strong: #d1d1d1; /* tab bar ground */
+	--color-muted: #6c6e85; /* secondary text on light */
+	--color-muted-dark: #5b5b5b; /* body text on light */
+
+	/* ---- Type ------------------------------------------------------- */
+	--font-display: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+	--font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+	/* Fluid scale: floor at 390px, ceiling at 1440px. */
+	/* The hero headline runs much larger than the section headings: ~73px at the
+	   design's 1425px frame, measured off the render. */
+	--text-hero: clamp(2.25rem, 1.3675rem + 3.62vw, 4.625rem); /* 36 → 74 */
+	--text-hero--line-height: 1.02;
+	--text-hero--letter-spacing: -0.01em;
+
+	--text-display: clamp(2rem, 1.443rem + 2.286vw, 3.5rem); /* 32 → 56 */
+	--text-display--line-height: 0.96;
+	--text-display--letter-spacing: -0.02em;
+
+	/* Marketing section headings run at 56px in the design (Inter). The FAQ is a
+	   separate, smaller 48px Geist heading — see --text-h3-alt. */
+	--text-h2: clamp(1.875rem, 1.271rem + 2.476vw, 3.5rem); /* 30 → 56 */
+	--text-h2--line-height: 1.03;
+	--text-h2--letter-spacing: -0.02em;
+
+	--text-h2-alt: clamp(1.75rem, 1.353rem + 1.63vw, 3rem); /* 28 → 48, FAQ */
+	--text-h2-alt--line-height: 1.08;
+	--text-h2-alt--letter-spacing: -0.03em;
+
+	--text-h3: clamp(1.5rem, 1.268rem + 0.952vw, 2.125rem); /* 24 → 34 */
+	--text-h3--line-height: 1.15;
+	--text-h3--letter-spacing: -0.02em;
+
+	--text-stat: clamp(2.25rem, 1.905rem + 1.41vw, 3.125rem); /* 36 → 50 */
+	--text-stat--line-height: 1;
+	--text-stat--letter-spacing: -0.02em;
+
+	/* ---- Shape ------------------------------------------------------ */
+	--radius-card: 16px;
+	--radius-panel: 24px;
+	--radius-input: 8px;
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		background-color: var(--color-surface);
+		color: var(--color-ink);
+		font-family: var(--font-sans);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* One visible focus treatment everywhere, including on navy panels. */
+	:focus-visible {
+		outline: 3px solid var(--color-accent);
+		outline-offset: 2px;
+		border-radius: 4px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+}
+
+/* The design uses two grid widths inside its 1425px frame: sections sit on a
+   1200px column, the nav and hero on a wider 1282px one. Max-widths include the
+   gutters so both resolve to those exact content widths at 1425px. */
+@utility container-page {
+	margin-inline: auto;
+	width: 100%;
+	max-width: 1264px;
+	padding-inline: 1.25rem;
+
+	@media (width >= 48rem) {
+		padding-inline: 2rem;
+	}
+}
+
+@utility container-wide {
+	margin-inline: auto;
+	width: 100%;
+	max-width: 1346px;
+	padding-inline: 1.25rem;
+
+	@media (width >= 48rem) {
+		padding-inline: 2rem;
+	}
+}

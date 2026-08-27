@@ -1,0 +1,56 @@
+<!doctype html><meta charset="utf-8">
+<title>background keyer</title>
+<script>
+// Flood-fill transparency inward from the image corners. Only background that is
+// actually connected to an edge is removed, so enclosed light areas inside the
+// artwork (the mascot's cream hands, tusks) survive.
+window.keyOut = async function (url, tolerance) {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = url; });
+
+  const w = img.naturalWidth, h = img.naturalHeight;
+  const cv = document.createElement('canvas');
+  cv.width = w; cv.height = h;
+  const ctx = cv.getContext('2d', { willReadFrequently: true });
+  ctx.drawImage(img, 0, 0);
+  const data = ctx.getImageData(0, 0, w, h);
+  const px = data.data;
+
+  const seen = new Uint8Array(w * h);
+  const stack = [];
+  const seeds = [];
+  for (let x = 0; x < w; x++) { seeds.push([x, 0], [x, h - 1]); }
+  for (let y = 0; y < h; y++) { seeds.push([0, y], [w - 1, y]); }
+
+  const colourAt = (i) => [px[i * 4], px[i * 4 + 1], px[i * 4 + 2]];
+  const near = (a, b) =>
+    Math.abs(a[0] - b[0]) <= tolerance &&
+    Math.abs(a[1] - b[1]) <= tolerance &&
+    Math.abs(a[2] - b[2]) <= tolerance;
+
+  for (const [sx, sy] of seeds) {
+    const si = sy * w + sx;
+    if (seen[si]) continue;
+    const seed = colourAt(si);
+    stack.push(si);
+    while (stack.length) {
+      const i = stack.pop();
+      if (seen[i]) continue;
+      if (!near(colourAt(i), seed)) continue;
+      seen[i] = 1;
+      px[i * 4 + 3] = 0;
+      const x = i % w, y = (i / w) | 0;
+      if (x > 0) stack.push(i - 1);
+      if (x < w - 1) stack.push(i + 1);
+      if (y > 0) stack.push(i - w);
+      if (y < h - 1) stack.push(i + w);
+    }
+  }
+
+  ctx.putImageData(data, 0, 0);
+  const cleared = seen.reduce((n, v) => n + v, 0);
+  return { dataUrl: cv.toDataURL('image/png'), w, h, clearedPct: +(100 * cleared / (w * h)).toFixed(1) };
+};
+</script>
+<body>keyer ready</body>
