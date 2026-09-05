@@ -76,11 +76,15 @@
 					fetchpriority="high"
 					class="absolute top-[6%] left-1/2 w-[58%] -translate-x-1/2 lg:top-[10.9%] lg:left-[35.7%] lg:w-[40.7%] lg:translate-x-0"
 				/>
+				<!-- Mirrored: the exported artwork carries the pole on its right, but
+				     the design places the pole on the mascot's left (measured at x753-764
+				     against the 1:1 render). Unmirrored, the pole lands at x~1019 and is
+				     hidden behind the phones. -->
 				<img
 					src="/images/mascot-pole.svg"
 					alt=""
 					aria-hidden="true"
-					class="absolute top-[43.4%] left-[2.9%] hidden w-[44.3%] lg:block"
+					class="absolute top-[41.9%] left-[1.7%] hidden w-[41.8%] -scale-x-100 lg:block"
 				/>
 			</div>
 		</div>
