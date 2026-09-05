@@ -46,11 +46,14 @@
 			       lg:absolute lg:-top-6 lg:-right-[46px] lg:mx-0 lg:mt-0 lg:w-[717px]"
 		>
 			<div class="relative mx-auto aspect-[420/560] w-full max-w-[340px] sm:max-w-[380px] lg:aspect-[700/783] lg:max-w-none">
+				<!-- Positioned so the bracket's arrowhead lands on the "t" of
+				     "connects", as in the design. All percentages of the cluster box,
+				     so the relationship holds as the hero scales. -->
 				<img
 					src="/icons/hero-frame.svg"
 					alt=""
 					aria-hidden="true"
-					class="absolute top-[7%] left-[9.3%] hidden w-[calc(90.7%+50vw)] max-w-none lg:block"
+					class="absolute top-[7%] left-[5.8%] hidden w-[90.7%] lg:block"
 				/>
 				<img
 					src="/images/phone-profile.webp"

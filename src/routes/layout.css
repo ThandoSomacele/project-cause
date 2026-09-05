@@ -46,7 +46,11 @@
 	/* Fluid scale: floor at 390px, ceiling at 1440px. */
 	/* The hero headline runs much larger than the section headings: ~73px at the
 	   design's 1425px frame, measured off the render. */
-	--text-hero: clamp(2.25rem, 1.3675rem + 3.62vw, 4.625rem); /* 36 → 74 */
+	/* Caps at 1346px viewport — the same width container-wide caps at — so the
+	   headline stops growing exactly where the layout locks. That keeps the
+	   bracket arrow on the "t" and the pole through the "d" at every width
+	   above the cap, instead of drifting a few px as the type kept scaling. */
+	--text-hero: clamp(2.3125rem, 1.328rem + 4.038vw, 4.725rem); /* 37 → 75.6 */
 	--text-hero--line-height: 1.02;
 	--text-hero--letter-spacing: -0.01em;
 
