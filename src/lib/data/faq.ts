@@ -23,8 +23,9 @@ export const faq = {
 	items: [
 		{
 			question: 'Can I use Cause for free?',
+			// Supplied verbatim by the client.
 			answer:
-				'Browsing the platform is free. To appear in client searches and receive leads you need an active subscription at R95 per month — there are no credits to buy and no commission taken on the work you win.'
+				"Yes. You'll still appear in the search results with a free account, you just can't appear above people with more verified projects, higher client rating or paid membership."
 		},
 		{
 			question: 'How do I register to join Cause?',

@@ -63,16 +63,16 @@
 					'transition-colors sm:px-5 sm:text-[17px]',
 					selected === tab.id
 						? 'bg-ink font-medium text-white'
-						: 'bg-white/45 text-ink/45 hover:bg-white/70'
+						: 'bg-white text-ink/70 hover:bg-white hover:text-ink'
 				]}
 			>
 				<img
 					src="/icons/{tab.id === 'credits' ? 'credits' : tab.id === 'jobs' ? 'jobs' : 'support'}.svg"
 					alt=""
 					aria-hidden="true"
-					width="24"
-					height="24"
-					class={['hidden h-6 w-6 shrink-0 object-contain sm:block', selected === tab.id && 'invert']}
+					width="32"
+					height="32"
+					class={['hidden h-8 w-8 shrink-0 object-contain sm:block', selected === tab.id && 'invert']}
 				/>
 				{tab.label}
 			</button>

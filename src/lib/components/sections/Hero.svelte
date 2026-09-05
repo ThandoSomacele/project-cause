@@ -45,7 +45,7 @@
 			class="relative -mx-5 mt-4 md:-mx-8
 			       lg:absolute lg:-top-6 lg:-right-[46px] lg:mx-0 lg:mt-0 lg:w-[717px]"
 		>
-			<div class="relative mx-auto aspect-[700/783] w-full max-w-[560px] lg:max-w-none">
+			<div class="relative mx-auto aspect-[420/560] w-full max-w-[340px] sm:max-w-[380px] lg:aspect-[700/783] lg:max-w-none">
 				<img
 					src="/icons/hero-frame.svg"
 					alt=""
@@ -58,7 +58,7 @@
 					aria-hidden="true"
 					width="277"
 					height="700"
-					class="absolute top-[22.7%] left-[19.7%] w-[23.1%]"
+					class="absolute top-[22.7%] left-[19.7%] hidden w-[23.1%] lg:block"
 				/>
 				<img
 					src="/images/phone-results.webp"
@@ -66,7 +66,7 @@
 					aria-hidden="true"
 					width="274"
 					height="700"
-					class="absolute top-[21.1%] left-[69.3%] w-[26.1%]"
+					class="absolute top-[21.1%] left-[69.3%] hidden w-[26.1%] lg:block"
 				/>
 				<img
 					src="/images/phone-search.webp"
@@ -74,13 +74,13 @@
 					width="347"
 					height="700"
 					fetchpriority="high"
-					class="absolute top-[10.9%] left-[35.7%] w-[40.7%]"
+					class="absolute top-[6%] left-1/2 w-[58%] -translate-x-1/2 lg:top-[10.9%] lg:left-[35.7%] lg:w-[40.7%] lg:translate-x-0"
 				/>
 				<img
 					src="/images/mascot-pole.svg"
 					alt=""
 					aria-hidden="true"
-					class="absolute top-[43.4%] left-[2.9%] w-[44.3%]"
+					class="absolute top-[43.4%] left-[2.9%] hidden w-[44.3%] lg:block"
 				/>
 			</div>
 		</div>

@@ -11,8 +11,27 @@
 
 	let index = $state(0);
 	let dots: HTMLButtonElement[] = $state([]);
+	// Pauses autoplay while someone is reading or interacting.
+	let held = $state(false);
+	// Set once a dot is used, which retires the timer for good.
+	let taken = $state(false);
+
+	// The client asked for the slides to cycle on their own. Honour
+	// prefers-reduced-motion, stop while hovered/focused, and stop once a dot has
+	// been used — taking control should not fight the timer.
+	$effect(() => {
+		if (held || taken) return;
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+		const id = setInterval(() => {
+			index = (index + 1) % count;
+		}, 6000);
+
+		return () => clearInterval(id);
+	});
 
 	function go(next: number, focus = false) {
+		taken = true;
 		index = (next + count) % count;
 		if (focus) dots[index]?.focus();
 	}
@@ -32,7 +51,15 @@
 	}
 </script>
 
-<div role="group" aria-roledescription="carousel" aria-label={label}>
+<div
+	role="group"
+	aria-roledescription="carousel"
+	aria-label={label}
+	onmouseenter={() => (held = true)}
+	onmouseleave={() => (held = false)}
+	onfocusin={() => (held = true)}
+	onfocusout={() => (held = false)}
+>
 	<div aria-live="polite">
 		{#each { length: count } as _, i (i)}
 			<div

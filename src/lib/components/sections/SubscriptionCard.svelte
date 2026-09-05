@@ -5,22 +5,15 @@
 
 <section data-section="subscription" class="bg-surface pb-16 lg:pb-[104px]">
 	<div class="container-page">
-		<div class="relative grid overflow-hidden rounded-[16px] lg:grid-cols-[57.5%_42.5%]">
+		<div class="relative grid overflow-hidden rounded-[16px] lg:grid-cols-[52.4%_47.6%]">
 			<div class="relative bg-ink px-8 py-12 text-white sm:px-12 lg:py-[70px] lg:pr-10 lg:pl-[95px]">
-				<!-- Mascot climbs the card's left edge, clipped by the card in the design. -->
-				<img
-					src="/images/mascot-pole.svg"
-					alt=""
-					aria-hidden="true"
-					class="pointer-events-none absolute -bottom-4 left-2 hidden w-[310px] lg:block"
-				/>
 
-				<p class="relative text-[clamp(3.5rem,2.6rem+3.7vw,6.1875rem)] leading-none font-bold">
+				<p class="relative text-[clamp(3rem,2.3rem+2.9vw,5rem)] leading-none font-bold">
 					{subscription.price}
 				</p>
 				<p class="relative mt-3 text-[22px] text-mint">{subscription.period}</p>
 
-				<div class="relative lg:pl-[61px]">
+				<div class="relative">
 					<h3 class="mt-8 text-[clamp(1.375rem,1.1rem+1.1vw,1.875rem)] leading-tight font-normal">
 						{#each subscription.title as segment, i (i)}
 							<span class="block"><RichText segments={[segment]} /></span>
@@ -43,7 +36,7 @@
 						{/each}
 					</ul>
 
-					<p class="mt-14 max-w-[20rem] text-[11px] leading-5 text-white/70 italic lg:ml-12">
+					<p class="mt-14 max-w-[20rem] text-[11px] leading-5 text-white/70 italic">
 						<span class="font-bold not-italic">please note:</span>
 						{subscription.note}
 					</p>

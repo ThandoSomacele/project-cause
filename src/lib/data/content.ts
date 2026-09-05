@@ -40,7 +40,7 @@ export const valueOffering = {
 	tabs: [
 		{
 			id: 'credits',
-			label: 'Credits',
+			label: 'No Credits',
 			title: [{ text: 'No Credits', weight: 'strong' as const }, { text: ' Required Here!' }],
 			body: "Access job opportunities from a feed tailored to your profile. Once you're verified, we'll send leads your way, that simple.",
 			image: 'credits'
@@ -82,8 +82,8 @@ export const comparison = {
 		title: "How We're Better",
 		items: [
 			'No credit system',
-			'Single fixed fee',
-			'Transparent review process',
+			// Client consolidated "Single fixed fee" + "Transparent review process".
+			'Transparent fees and review process',
 			'Simple, intuitive platform'
 		],
 		cta: { label: 'Join waitlist', href: '#waitlist' }
@@ -125,14 +125,13 @@ export const getPaid = {
 };
 
 export const subscription = {
-	price: 'R95',
+	// Revised Figma (node 4679:13736) replaced the R95 subscription with a free
+	// tier. Copy and bullets taken from that section.
+	price: 'Free',
 	period: '/mnth',
-	title: [
-		{ text: 'A subscription that puts' },
-		{ text: 'control back in your hands', weight: 'strong' as const }
-	],
+	title: [{ text: 'Get discovered by new clients' }],
 	items: [
-		'Get found through search by clients',
+		'Appear in search with Basic rank',
 		'Receive your project payments as cash OR',
 		'Receive your payments as instant EFT *'
 	],
@@ -203,7 +202,7 @@ export const calculator = {
 		'Payments on the platform have a maximum transaction fee of 4.8% Inclusive of VAT.',
 	labels: {
 		feeEstimate: 'PLATFORM FEE ESTIMATE',
-		deduction: 'DEDUCTION ESTIMATE',
+		deduction: 'AMOUNT ESTIMATE',
 		invoice: 'your invoice estimate',
 		payout: 'paid out to you'
 	}

@@ -23,7 +23,7 @@
 		width="2200"
 		height="1020"
 		loading="lazy"
-		class="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
+		class="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover object-[center_top]"
 	/>
 
 	<!-- The art is laid out for a wide band. On narrow viewports object-cover
@@ -31,7 +31,7 @@
 	     ground behind the text until there is room for the full composition. -->
 	<div class="pointer-events-none absolute inset-0 -z-10 bg-amber/80 md:hidden" aria-hidden="true"></div>
 
-	<div class="container-page w-full py-20 text-center lg:pt-0 lg:pb-16">
+	<div class="container-page w-full py-20 text-center lg:pt-0 lg:pb-24">
 		<h2 class="text-h2 mx-auto max-w-[70rem] font-light text-ink">
 			{#each finalCta.heading as line, i (i)}
 				<span class="block"><RichText segments={line} /></span>

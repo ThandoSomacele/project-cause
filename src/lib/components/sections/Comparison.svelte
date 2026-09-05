@@ -28,7 +28,7 @@
 							height="55"
 							class="h-11 w-11 shrink-0 object-contain"
 						/>
-						<h3 class="text-h3 font-bold text-ink/55">{comparison.alternatives.title}</h3>
+						<h3 class="text-h3 font-bold text-ink/70">{comparison.alternatives.title}</h3>
 					</div>
 
 					<ul class="mt-8 flex flex-col gap-4 lg:pl-14">
@@ -65,7 +65,7 @@
 							aria-hidden="true"
 							width="55"
 							height="55"
-							class="h-11 w-11 shrink-0 object-contain invert"
+							class="h-12 w-12 shrink-0 object-contain brightness-0 invert"
 						/>
 						<h3 class="text-h3 font-bold">{comparison.better.title}</h3>
 					</div>
