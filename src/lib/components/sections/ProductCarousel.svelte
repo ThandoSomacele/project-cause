@@ -74,13 +74,13 @@
 						</div>
 
 						<img
-							src="/images/mascot-wave.webp"
+							src="/images/mascot-wave.svg"
 							alt=""
 							aria-hidden="true"
-							width="412"
-							height="380"
+							width="591"
+							height="622"
 							loading="lazy"
-							class="pointer-events-none absolute bottom-0 left-[36.6%] hidden w-[34.3%] lg:block"
+							class="pointer-events-none absolute bottom-0 left-[33%] hidden w-[28%] lg:block"
 						/>
 					</div>
 				{/snippet}

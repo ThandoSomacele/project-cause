@@ -10,7 +10,28 @@ Pulled from Figma node `4612:24010` (Arcterio → Service Provider Section, 1425
 
 Nothing here ships. Curated, optimised copies live in `static/`.
 
-## Assets still needed from Figma
+## Brand assets (supplied)
+
+The client's asset pack lives outside the repo at `~/Downloads/Graphic Assets`.
+Working copies are staged in `design/incoming/` (gitignored). What is used:
+
+| source | shipped as | replaces |
+|---|---|---|
+| `Eli Character File/Focus _Mascot_right.svg` | `static/images/mascot-thumbsup.svg` | a soft 1x crop |
+| `Eli Character File/Mascot_right.svg` | `static/images/mascot-wave.svg` | a soft 1x crop |
+| `Cause Logo/SVG/Cause White.svg` | `static/brand/logo-white.svg` | wordmark set in Geist |
+| `Cause Logo/SVG/Cause Blue.svg` | `static/brand/logo-navy.svg` | — |
+
+The mascot SVGs arrive on a 1305x819 canvas that the artwork only fills 38-45%
+of. Their viewBoxes are tightened to the measured content box so sizing in CSS
+is predictable — re-tighten if you drop in new versions.
+
+The pack also contains **Kross Neue Grotesk** (`Font/`). The site does not use
+it: the Figma file specifies Inter and Geist, and every measurement was taken
+against those metrics. Switching would reflow the page — worth confirming with
+the client which is correct.
+
+## Assets still needed
 
 The Figma MCP caps `download_assets` at 20 images + 20 SVGs per node, and this
 page has more than that, so three assets were never returned. They are currently

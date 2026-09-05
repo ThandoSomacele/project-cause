@@ -3,6 +3,7 @@
 /* Two typefaces are used in the design: Geist for the newer sections
    (FAQ, fee calculator) and Inter for the marketing sections. */
 @import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
 @import '@fontsource-variable/geist/wght-italic.css';
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/inter/wght-italic.css';
@@ -15,7 +16,7 @@
 	--color-ink-800: #141d3d; /* hero backdrop */
 	--color-ink-700: #182344; /* inputs on navy */
 	--color-ink-600: #232d4c; /* raised chips on navy */
-	--color-ink-500: #2d3654; /* unfilled slider track, hairlines on navy */
+	--color-ink-500: #2d3654; /* hairlines on navy */
 
 	--color-accent: #ff8404; /* orange: highlight words, primary CTA */
 	--color-accent-dark: #e67300; /* orange hover/pressed */
@@ -39,6 +40,8 @@
 	/* ---- Type ------------------------------------------------------- */
 	--font-display: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
 	--font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+	/* The calculator's stat labels are set in Geist Mono in the design. */
+	--font-mono: 'Geist Mono Variable', ui-monospace, monospace;
 
 	/* Fluid scale: floor at 390px, ceiling at 1440px. */
 	/* The hero headline runs much larger than the section headings: ~73px at the

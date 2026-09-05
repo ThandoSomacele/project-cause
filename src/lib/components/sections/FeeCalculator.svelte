@@ -57,7 +57,7 @@
 						<!-- Value bubble tracks the handle. -->
 						<div class="relative h-10">
 							<span
-								class="fee-bubble absolute -translate-x-1/2 rounded-lg bg-ink-600 px-4 py-2 text-[15px] whitespace-nowrap"
+								class="fee-bubble absolute -translate-x-1/2 rounded-[12px] border border-white/15 bg-white/10 px-4 py-2 text-[18px] font-semibold whitespace-nowrap"
 							>
 								Current: {formatZar(amount)}
 							</span>
@@ -83,7 +83,7 @@
 					</div>
 
 					<fieldset class="mt-9">
-						<legend class="text-[13px] text-white/60">{calculator.quickSelectLabel}</legend>
+						<legend class="text-[13px] font-semibold text-[#94a3b8]">{calculator.quickSelectLabel}</legend>
 						<div class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
 							{#each QUICK_AMOUNTS as value (value)}
 								<button
@@ -97,7 +97,7 @@
 										'rounded-full border px-4 py-2.5 text-[14px] transition-colors',
 										amount === value
 											? 'border-accent bg-accent text-white'
-											: 'border-white/25 hover:border-white/60'
+											: 'border-white/15 hover:border-white/45'
 									]}
 								>
 									{formatZarWhole(value)}
@@ -107,7 +107,7 @@
 					</fieldset>
 
 					<div class="mt-7">
-						<label for="fee-exact" class="text-[13px] text-white/60">{calculator.exactLabel}</label>
+						<label for="fee-exact" class="text-[13px] font-semibold text-[#94a3b8]">{calculator.exactLabel}</label>
 						<input
 							id="fee-exact"
 							type="text"
@@ -129,8 +129,8 @@
 						<p class="flex items-center gap-4 rounded-lg bg-cream py-4 pr-8 pl-5 text-ink">
 							<span class="h-10 w-1 shrink-0 rounded bg-accent"></span>
 							<span>
-								<span class="block text-[22px] font-medium">{formatPct(fees.ratePct)} %</span>
-								<span class="block text-[11px] tracking-[0.14em] text-ink/70">
+								<span class="block text-[24px] font-semibold">{formatPct(fees.ratePct)} %</span>
+								<span class="font-mono block text-[11px] tracking-[0.1em] text-muted">
 									{calculator.labels.feeEstimate}
 								</span>
 							</span>
@@ -138,8 +138,8 @@
 						<p class="flex items-center gap-4 rounded-lg bg-white py-4 pr-8 pl-5 text-ink">
 							<span class="h-10 w-1 shrink-0 rounded bg-ink"></span>
 							<span>
-								<span class="block text-[22px] font-medium">{formatZar(fees.fee)}</span>
-								<span class="block text-[11px] tracking-[0.14em] text-ink/70">
+								<span class="block text-[24px] font-semibold">{formatZar(fees.fee)}</span>
+								<span class="font-mono block text-[11px] tracking-[0.1em] text-muted">
 									{calculator.labels.deduction}
 								</span>
 							</span>
@@ -150,12 +150,12 @@
 				<!-- Results -->
 				<div class="flex flex-col gap-10 lg:border-l lg:border-white/20 lg:pl-14">
 					<div>
-						<p class="text-stat font-medium">{formatZar(fees.invoice)}</p>
-						<p class="mt-3 text-[15px] text-white/70">{calculator.labels.invoice}</p>
+						<p class="text-[clamp(2.25rem,1.9rem+1.4vw,2.8125rem)] leading-none font-semibold tracking-[-0.06em] text-[#f7f4ee]">{formatZar(fees.invoice)}</p>
+						<p class="mt-3 text-[14px] text-[#f4f2ec]/70">{calculator.labels.invoice}</p>
 					</div>
 					<div class="lg:mt-14">
-						<p class="text-stat font-medium">{formatZar(fees.payout)}</p>
-						<p class="mt-3 text-[15px] text-white/70">{calculator.labels.payout}</p>
+						<p class="text-[clamp(2.5rem,2rem+2vw,3.75rem)] leading-none font-semibold tracking-[-0.045em] text-[#f7f4ee]">{formatZar(fees.payout)}</p>
+						<p class="mt-3 text-[14px] text-[#f4f2ec]/70">{calculator.labels.payout}</p>
 					</div>
 				</div>
 			</div>
@@ -192,14 +192,14 @@
 		background: linear-gradient(
 			to right,
 			var(--color-mint) 0 var(--progress),
-			var(--color-ink-500) var(--progress) 100%
+			rgb(255 255 255 / 0.14) var(--progress) 100%
 		);
 	}
 
 	.fee-slider::-moz-range-track {
 		height: var(--track);
 		border-radius: 999px;
-		background: var(--color-ink-500);
+		background: rgb(255 255 255 / 0.14);
 	}
 
 	.fee-slider::-moz-range-progress {

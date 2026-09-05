@@ -19,6 +19,7 @@ blob-report
 
 # Local design reference — 38MB of raw Figma pulls, not needed to build
 design/raw/
+design/incoming/
 design/build-*.png
 
 # Local Netlify folder

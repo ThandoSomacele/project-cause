@@ -50,7 +50,7 @@
 					src="/icons/hero-frame.svg"
 					alt=""
 					aria-hidden="true"
-					class="absolute top-[7%] left-[9.3%] hidden w-[90.7%] lg:block"
+					class="absolute top-[7%] left-[9.3%] hidden w-[calc(90.7%+50vw)] max-w-none lg:block"
 				/>
 				<img
 					src="/images/phone-profile.webp"
