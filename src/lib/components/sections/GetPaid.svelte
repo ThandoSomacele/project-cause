@@ -15,7 +15,7 @@
 
 <section data-section="get-paid" class="bg-surface pt-16 lg:pt-[104px]">
 	<div class="container-page">
-		<SectionHeading lines={getPaid.heading} indents={[8, 42.8]} />
+		<SectionHeading lines={getPaid.heading} indents={['lg:pl-[8%]', 'lg:pl-[42.8%]']} />
 
 		<ul class="mt-7 flex flex-wrap items-center gap-x-10 gap-y-3 lg:justify-center">
 			{#each getPaid.chips as chip (chip.label)}

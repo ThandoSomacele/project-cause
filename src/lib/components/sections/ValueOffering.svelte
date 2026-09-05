@@ -23,7 +23,7 @@
 			<span class="absolute -top-[3px] -right-1 h-2 w-2 rounded-full bg-ink"></span>
 		</div>
 
-		<SectionHeading lines={valueOffering.heading} indents={[0.6, 26.3, 51.4]} />
+		<SectionHeading lines={valueOffering.heading} indents={['lg:pl-[0.6%]', 'lg:pl-[26.3%]', 'lg:pl-[51.4%]']} />
 
 		<div class="mt-12 lg:mt-16">
 			<Tabs tabs={valueOffering.tabs} label="What Cause gives you">

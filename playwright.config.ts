@@ -6,7 +6,11 @@ export default defineConfig({
 	webServer: {
 		command: 'pnpm run build && pnpm run preview --port 4173',
 		port: 4173,
-		reuseExistingServer: !process.env.CI
+		// Deliberately NOT reusing an existing server. The command above includes
+		// the build, so reusing a running one silently skips it and tests then run
+		// against stale output — which shows up as mysterious hydration failures
+		// when the server bundle and the client chunks disagree.
+		reuseExistingServer: false
 	},
 	use: { baseURL: 'http://localhost:4173' },
 	projects: [

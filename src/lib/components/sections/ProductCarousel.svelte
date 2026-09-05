@@ -15,7 +15,7 @@
 <section data-section="carousel" class="relative overflow-hidden bg-surface py-16 lg:py-[104px]">
 	<div class="container-page relative">
 		<div class="relative">
-			<SectionHeading lines={carousel.heading} indents={[7.5, 42.5, 52.3]} />
+			<SectionHeading lines={carousel.heading} indents={['lg:pl-[7.5%]', 'lg:pl-[42.5%]', 'lg:pl-[52.3%]']} />
 			<div
 				class="pointer-events-none absolute bottom-[26px] left-[-50vw] hidden h-px w-[50vw] bg-accent lg:block"
 				aria-hidden="true"

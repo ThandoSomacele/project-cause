@@ -6,11 +6,14 @@
 		/** One entry per rendered line. */
 		lines: readonly Line[];
 		/**
-		 * Per-line left indent as a percentage of the container, matching the
-		 * staggered headings in the design. Applied from `lg` up only — below that
-		 * the lines sit flush so they stay readable when they wrap.
+		 * Per-line indent class, matching the staggered headings in the design.
+		 * Passed as literal Tailwind classes (rather than numbers fed into a
+		 * `style` attribute) so the stagger survives a strict CSP — and so
+		 * Tailwind can see the arbitrary values at build time. Prefix them with
+		 * `lg:` at the call site; below that the lines sit flush so they stay
+		 * readable when they wrap.
 		 */
-		indents?: readonly number[];
+		indents?: readonly string[];
 		class?: string;
 		id?: string;
 	}
@@ -20,7 +23,7 @@
 
 <h2 {id} class={['text-h2 font-light text-ink', className]}>
 	{#each lines as line, i (i)}
-		<span class="block lg:[padding-left:var(--indent)]" style="--indent:{indents[i] ?? 0}%">
+		<span class={['block', indents[i]]}>
 			<RichText segments={line} />
 		</span>
 	{/each}

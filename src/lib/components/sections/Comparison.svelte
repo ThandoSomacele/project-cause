@@ -7,7 +7,7 @@
 <section data-section="comparison" class="relative overflow-hidden bg-surface py-16 lg:py-[104px]">
 	<div class="container-page relative">
 		<div class="relative">
-			<SectionHeading lines={comparison.heading} indents={[10.4, 44]} />
+			<SectionHeading lines={comparison.heading} indents={['lg:pl-[10.4%]', 'lg:pl-[44%]']} />
 			<!-- Rule running off the right edge, as in the design. -->
 			<div
 				class="pointer-events-none absolute right-[-50vw] bottom-[10px] hidden h-px w-[50vw] bg-accent lg:block"

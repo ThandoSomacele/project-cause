@@ -11,11 +11,8 @@
 	<!-- The design's backdrop is a mottled navy with soft circular washes.
 	     Two radial gradients read the same at a fraction of the weight. -->
 	<div
-		class="pointer-events-none absolute inset-0 -z-10"
+		class="hero-backdrop pointer-events-none absolute inset-0 -z-10"
 		aria-hidden="true"
-		style="background:
-			radial-gradient(120% 90% at 8% 18%, #1e2848 0%, transparent 55%),
-			radial-gradient(80% 70% at 78% 92%, #060e2b 0%, transparent 60%)"
 	></div>
 
 	<div class="container-wide relative">
@@ -31,7 +28,7 @@
 			<ul class="mt-4 flex flex-wrap items-center gap-x-8 gap-y-3">
 				{#each hero.chips as chip (chip.label)}
 					<li class="flex items-center gap-2.5 text-[15px] text-white/90">
-						<Icon name={chip.icon} size={20} />
+						<Icon name={chip.icon} class="h-5 w-5" width={20} height={20} />
 						{chip.label}
 					</li>
 				{/each}

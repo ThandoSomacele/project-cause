@@ -14,7 +14,7 @@
 	<div class="container-page py-14">
 		<div class="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
 			<div class="flex flex-col items-center gap-5 text-center md:items-start md:text-left">
-				<Logo size={40} wordmark class="text-[#e8e8ee]" />
+				<Logo size="md" wordmark class="text-[#e8e8ee]" />
 				<p class="text-sm leading-6 text-white/65">
 					{#each footer.address as line (line)}
 						{line}<br />

@@ -8,10 +8,10 @@ import type { Handle } from '@sveltejs/kit';
  * function and was missing them. Doing it in the hook also means the headers
  * travel with the app if it ever moves off Netlify.
  *
- * No Content-Security-Policy yet: the page uses inline `style` attributes for
- * the hero gradient and the positioned device cluster, so a strict policy needs
- * either SvelteKit's `kit.csp` nonce support or those styles moved into classes.
- * Shipping a broken CSP would be worse than shipping none.
+ * The Content-Security-Policy is NOT set here — it is configured under
+ * `kit.csp` in vite.config.ts, because SvelteKit has to inject a per-response
+ * nonce into the script tags it generates. These are the headers it does not
+ * manage.
  */
 const SECURITY_HEADERS: Record<string, string> = {
 	'x-content-type-options': 'nosniff',

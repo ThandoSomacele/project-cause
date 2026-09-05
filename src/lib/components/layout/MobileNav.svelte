@@ -87,7 +87,7 @@
 		       px-6 py-6 shadow-2xl lg:hidden"
 	>
 		<div class="flex items-center justify-between">
-			<Logo size={36} class="text-ink" />
+			<Logo size="sm" class="text-ink" />
 			<button
 				type="button"
 				onclick={onclose}

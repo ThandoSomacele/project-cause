@@ -78,6 +78,30 @@ action and are told apart by a `source` field. A honeypot field is included.
 persisting them, and logs a redacted address. Swap in a real provider there and
 read credentials from `$env/dynamic/private`; never commit keys.
 
+## Security headers
+
+`src/hooks.server.ts` sets the non-CSP headers. The Content-Security-Policy is
+configured under `kit.csp` in `vite.config.ts`, because SvelteKit injects a
+per-response nonce into the scripts it generates.
+
+The policy is strict — `script-src 'self' 'nonce-…'`, `style-src 'self'`,
+`object-src 'none'`, `base-uri 'self'`, `form-action 'self'` — with no
+`unsafe-inline` for scripts or stylesheets. To keep `style-src` strict the app
+carries **no inline `style` attributes**; anything static lives in
+`src/routes/layout.css` and the staggered heading indents are passed as literal
+Tailwind classes. Adding a `style="…"` attribute will break the policy — put it
+in a class instead.
+
+The one relaxation is `style-src-attr 'unsafe-inline'`, which permits style
+attributes and CSSOM writes but **not** injected `<style>` elements or external
+stylesheets. Two things need it: the fee slider writes a `--progress` custom
+property through the CSSOM, and SvelteKit's own screen-reader announcer sets
+inline styles — so the directive would be required even with zero inline styles
+of our own.
+
+`e2e/security.e2e.ts` locks this in, including a test that fails if the policy
+ever gains `unsafe-inline` for scripts or stylesheets.
+
 ## Known gaps
 
 See [`design/README.md`](design/README.md) for the three assets Figma's export

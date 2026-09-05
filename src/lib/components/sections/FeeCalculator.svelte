@@ -18,6 +18,19 @@
 	const progress = $derived(((amount - MIN_INVOICE) / (MAX_INVOICE - MIN_INVOICE)) * 100);
 	const fieldValue = $derived(typed ?? formatZar(amount));
 
+	let scope = $state<HTMLElement | null>(null);
+
+	// The slider fill and the value bubble both read --progress. It is written
+	// through the CSSOM rather than a `style` attribute because a strict CSP
+	// cannot allow-list inline style attributes — a nonce or hash only covers
+	// style and script elements. CSSOM writes are not policed by CSP, so this
+	// keeps the policy strict. The stylesheet below carries a 50% default,
+	// matching the initial R10 000 of R20 000, so the server-rendered paint is
+	// already correct before hydration.
+	$effect(() => {
+		scope?.style.setProperty('--progress', `${progress}%`);
+	});
+
 	function onSlider(event: Event) {
 		amount = Number((event.currentTarget as HTMLInputElement).value);
 		typed = null;
@@ -40,12 +53,11 @@
 						{calculator.title}
 					</h2>
 
-					<div class="mt-8">
+					<div class="fee-scope mt-8" bind:this={scope}>
 						<!-- Value bubble tracks the handle. -->
 						<div class="relative h-10">
 							<span
-								class="absolute -translate-x-1/2 rounded-lg bg-ink-600 px-4 py-2 text-[15px] whitespace-nowrap"
-								style="left:clamp(6rem, {progress}%, calc(100% - 6rem))"
+								class="fee-bubble absolute -translate-x-1/2 rounded-lg bg-ink-600 px-4 py-2 text-[15px] whitespace-nowrap"
 							>
 								Current: {formatZar(amount)}
 							</span>
@@ -62,7 +74,6 @@
 							oninput={onSlider}
 							aria-valuetext={formatZar(amount)}
 							class="fee-slider"
-							style="--progress:{progress}%"
 						/>
 
 						<div class="mt-3 flex justify-between text-[15px]">
@@ -153,6 +164,16 @@
 </section>
 
 <style>
+	/* Default matches the initial amount (R10 000 of R20 000) so the server-
+	   rendered markup paints correctly before hydration sets the real value. */
+	.fee-scope {
+		--progress: 50%;
+	}
+
+	.fee-bubble {
+		left: clamp(6rem, var(--progress), calc(100% - 6rem));
+	}
+
 	/* The forms plugin strips the native control, so the track and handle are
 	   rebuilt here. The filled portion is a gradient driven by --progress. */
 	.fee-slider {

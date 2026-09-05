@@ -114,6 +114,44 @@
 /* The design uses two grid widths inside its 1425px frame: sections sit on a
    1200px column, the nav and hero on a wider 1282px one. Max-widths include the
    gutters so both resolve to those exact content widths at 1425px. */
+/* ---------------------------------------------------------------------------
+   Classes that exist so no component needs a `style` attribute.
+
+   A strict Content-Security-Policy has no way to allow-list inline style
+   attributes — nonces and hashes only apply to <style> elements and <script>,
+   not to `style="..."`. Allowing them means `style-src-attr 'unsafe-inline'`,
+   which we would rather not ship. Anything static or drawn from a fixed set of
+   values therefore lives here instead.
+   --------------------------------------------------------------------------- */
+
+/* Hero backdrop: the design's mottled navy, approximated with two soft washes. */
+.hero-backdrop {
+	background:
+		radial-gradient(120% 90% at 8% 18%, #1e2848 0%, transparent 55%),
+		radial-gradient(80% 70% at 78% 92%, #060e2b 0%, transparent 60%);
+}
+
+/* The brand mark ships as a flat #0a1538 silhouette with transparent cut-outs.
+   Masking it lets one file take the surrounding text colour. */
+.logo-mark {
+	background-color: currentColor;
+	mask-image: url('/brand/logo-mark.png');
+	mask-size: contain;
+	mask-repeat: no-repeat;
+	mask-position: center;
+	-webkit-mask-image: url('/brand/logo-mark.png');
+	-webkit-mask-size: contain;
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+}
+
+/* The subscription card's photo carries a strong teal cast in the design. */
+.photo-duotone {
+	filter: grayscale(1) contrast(1.05);
+	mix-blend-mode: luminosity;
+	opacity: 0.92;
+}
+
 @utility container-page {
 	margin-inline: auto;
 	width: 100%;

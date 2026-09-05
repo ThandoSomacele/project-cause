@@ -58,8 +58,7 @@
 					width="1400"
 					height="930"
 					loading="lazy"
-					class="absolute inset-0 h-full w-full object-cover"
-					style="filter:grayscale(1) contrast(1.05); mix-blend-mode:luminosity; opacity:.92"
+					class="photo-duotone absolute inset-0 h-full w-full object-cover"
 				/>
 				<div class="absolute inset-0 bg-mint/35" aria-hidden="true"></div>
 			</div>

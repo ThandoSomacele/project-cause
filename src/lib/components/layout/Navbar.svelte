@@ -10,7 +10,7 @@
 <header class="sticky top-0 z-30 bg-white">
 	<div class="container-wide flex h-[84px] items-center gap-10">
 		<a href="/" class="text-ink" aria-label="Cause — home">
-			<Logo size={42} />
+			<Logo size="lg" />
 		</a>
 
 		<nav aria-label="Primary" class="hidden lg:block">
