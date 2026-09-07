@@ -14,17 +14,33 @@
 		 * readable when they wrap.
 		 */
 		indents?: readonly string[];
+		/**
+		 * Index of the line that carries a rule running from the end of its text
+		 * out past the right edge. It flows from the text rather than being
+		 * positioned, so it always starts exactly where the words stop however
+		 * the heading reflows.
+		 */
+		ruleAfter?: number;
 		class?: string;
 		id?: string;
 	}
 
-	let { lines, indents = [], class: className = '', id }: Props = $props();
+	let { lines, indents = [], ruleAfter, class: className = '', id }: Props = $props();
 </script>
 
 <h2 {id} class={['text-h2 font-light text-ink', className]}>
 	{#each lines as line, i (i)}
 		<span class={['block', indents[i]]}>
-			<RichText segments={line} />
+			{#if ruleAfter === i}
+				<span class="flex items-baseline">
+					<span class="shrink-0"><RichText segments={line} /></span>
+					<!-- Sits on the baseline and runs off-canvas, as in the design. -->
+					<span class="-mr-[50vw] hidden h-[2px] flex-1 bg-accent lg:block" aria-hidden="true"
+					></span>
+				</span>
+			{:else}
+				<RichText segments={line} />
+			{/if}
 		</span>
 	{/each}
 </h2>

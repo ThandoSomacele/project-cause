@@ -4,15 +4,14 @@
 	import Button from '$lib/components/ui/Button.svelte';
 </script>
 
-<section data-section="comparison" class="relative overflow-hidden bg-surface py-16 lg:py-[104px]">
+<section data-section="comparison" class="relative overflow-hidden bg-surface py-16 lg:pt-[129px] lg:pb-[104px]">
 	<div class="container-page relative">
 		<div class="relative">
-			<SectionHeading lines={comparison.heading} indents={['lg:pl-[10.4%]', 'lg:pl-[44%]']} />
-			<!-- Rule running off the right edge, as in the design. -->
-			<div
-				class="pointer-events-none absolute right-[-50vw] bottom-[10px] hidden h-px w-[50vw] bg-accent lg:block"
-				aria-hidden="true"
-			></div>
+			<SectionHeading
+				lines={comparison.heading}
+				indents={['lg:pl-[10.4%]', 'lg:pl-[44%]']}
+				ruleAfter={1}
+			/>
 		</div>
 
 		<div class="relative mt-12 lg:mt-16">

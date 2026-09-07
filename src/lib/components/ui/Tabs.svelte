@@ -63,16 +63,18 @@
 					'transition-colors sm:px-5 sm:text-[17px]',
 					selected === tab.id
 						? 'bg-ink font-medium text-white'
-						: 'bg-white text-ink/70 hover:bg-white hover:text-ink'
+						: 'border border-[#c4c4c4] bg-[#cfcfcf] text-ink/75 hover:bg-[#c6c6c6] hover:text-ink'
 				]}
 			>
+				<!-- The design draws the active icon in #DBDBDB on the navy pill, so
+				     it is a separate two-tone variant rather than a filtered copy. -->
 				<img
-					src="/icons/{tab.id === 'credits' ? 'credits' : tab.id === 'jobs' ? 'jobs' : 'support'}.svg"
+					src="/icons/{tab.id}{selected === tab.id ? '-active' : ''}.svg"
 					alt=""
 					aria-hidden="true"
 					width="32"
 					height="32"
-					class={['hidden h-8 w-8 shrink-0 object-contain sm:block', selected === tab.id && 'invert']}
+					class="hidden h-8 w-8 shrink-0 object-contain sm:block"
 				/>
 				{tab.label}
 			</button>
