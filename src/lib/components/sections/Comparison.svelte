@@ -14,7 +14,7 @@
 			/>
 		</div>
 
-		<div class="relative mt-12 lg:mt-16">
+		<div class="relative mt-12 lg:mt-[93px]">
 			<div class="grid overflow-hidden rounded-[16px] lg:grid-cols-[42.9%_57.1%]">
 				<!-- The alternatives -->
 				<div class="bg-line p-8 sm:p-10 lg:min-h-[400px]">
@@ -35,7 +35,7 @@
 							<circle cx="7.2" cy="15.4" r="1.25" fill="currentColor" />
 							<path d="M10.8 8.6h6.4M10.8 12h6.4M10.8 15.4h6.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
 						</svg>
-						<h3 class="text-h3 font-bold text-ink/70">{comparison.alternatives.title}</h3>
+						<h3 class="text-h3 font-bold text-muted-dark">{comparison.alternatives.title}</h3>
 					</div>
 
 					<ul class="mt-8 flex flex-col gap-4 lg:pl-14">
@@ -82,7 +82,7 @@
 							<path d="M12 15v3M8.5 20h7M9.5 18h5l.6 2h-6.2l.6-2Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
 							<path d="m12 6.2.85 1.72 1.9.28-1.37 1.34.32 1.89L12 10.54l-1.7.89.33-1.89-1.38-1.34 1.9-.28L12 6.2Z" fill="currentColor" />
 						</svg>
-						<h3 class="text-h3 font-bold">{comparison.better.title}</h3>
+						<h3 class="text-h3 font-bold text-accent-dark">{comparison.better.title}</h3>
 					</div>
 
 					<ul class="mt-7 flex flex-col gap-3.5 lg:pl-14">
@@ -112,10 +112,10 @@
 				src="/images/mascot-thumbsup.svg"
 				alt=""
 				aria-hidden="true"
-				width="508"
-				height="629"
+				width="505"
+				height="489"
 				loading="lazy"
-				class="pointer-events-none absolute -top-[104px] right-[-3%] hidden w-[19%] lg:block"
+				class="pointer-events-none absolute -top-[56px] left-[79.2%] hidden w-[28.3%] lg:block"
 			/>
 		</div>
 	</div>

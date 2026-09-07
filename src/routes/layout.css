@@ -31,6 +31,7 @@
 
 	/* ---- Neutrals --------------------------------------------------- */
 	--color-surface: #fafafa; /* page background */
+	--color-steel: #8289a3; /* the get-paid section's own ground */
 	--color-cream: #fbf9f4; /* calculator stat cards */
 	--color-line: #dbdbdb; /* alternatives panel, dividers */
 	--color-line-strong: #d1d1d1; /* tab bar ground */

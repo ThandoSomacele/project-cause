@@ -13,13 +13,22 @@
 	};
 </script>
 
-<section data-section="get-paid" class="bg-surface pt-16 lg:pt-[104px]">
-	<div class="container-page">
+<section data-section="get-paid" class="bg-steel pt-16 lg:pt-[104px]">
+	<div class="container-page relative">
+		<!-- Navy rule running in from the left edge to a dot, level with the second
+		     heading line — the same decorative treatment the design uses elsewhere. -->
+		<div
+			class="pointer-events-none absolute top-[134px] right-[58%] left-[-50vw] hidden h-[2px] bg-ink lg:block"
+			aria-hidden="true"
+		>
+			<span class="absolute -top-[3px] -right-[3px] h-2 w-2 rounded-full bg-ink"></span>
+		</div>
+
 		<SectionHeading lines={getPaid.heading} indents={['lg:pl-[8%]', 'lg:pl-[42.8%]']} />
 
 		<ul class="mt-7 flex flex-wrap items-center gap-x-10 gap-y-3 lg:justify-center">
 			{#each getPaid.chips as chip (chip.label)}
-				<li class="flex items-center gap-2.5 text-[17px] text-ink/85">
+				<li class="flex items-center gap-2.5 text-[17px] text-ink">
 					<img
 						src="/icons/{icons[chip.icon]}.svg"
 						alt=""
@@ -48,7 +57,7 @@
 							/>
 							<div>
 								<h3 class="text-[17px] font-bold text-ink">{benefit.title}</h3>
-								<p class="mt-1.5 text-[13.5px] leading-6 text-ink/70">{benefit.body}</p>
+								<p class="mt-1.5 text-[13.5px] leading-6 text-ink">{benefit.body}</p>
 							</div>
 						</li>
 					{/each}

@@ -3,7 +3,7 @@
 	import RichText from '$lib/components/ui/RichText.svelte';
 </script>
 
-<section data-section="subscription" class="bg-surface pb-16 lg:pb-[104px]">
+<section data-section="subscription" class="bg-steel pb-16 lg:pb-[104px]">
 	<div class="container-page">
 		<div class="relative grid overflow-hidden rounded-[16px] lg:grid-cols-[52.4%_47.6%]">
 			<div class="relative bg-ink px-8 py-12 text-white sm:px-12 lg:py-[70px] lg:pr-10 lg:pl-[95px]">
