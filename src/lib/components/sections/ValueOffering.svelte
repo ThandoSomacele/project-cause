@@ -12,15 +12,46 @@
 	};
 </script>
 
-<section data-section="value" class="relative overflow-hidden bg-surface py-16 lg:py-[104px]">
-	<div class="container-page relative">
+<section data-section="value" class="relative overflow-hidden bg-white py-16 lg:pt-[15.44vw] lg:pb-[104px]">
+	<!-- The tools artwork spans the page behind the hero and only its lower band
+	     shows here. 100vw wide at its natural 2.157:1, offset so its top lands
+	     where the design places it (y549) while this section starts at y843 —
+	     the hero covers the rest. Everything in vw so the band scales. -->
+	<img
+		src="/images/tools-flatlay.webp"
+		alt=""
+		aria-hidden="true"
+		width="2200"
+		height="1020"
+		class="pointer-events-none absolute top-[-20.6vw] left-1/2 w-screen max-w-none -translate-x-1/2"
+	/>
+	<div class="container-page relative z-10">
 		<!-- Decorative rules that run off-canvas in the design. Large screens only:
 		     below that they collide with the wrapped heading. -->
+		<!-- Decorative rules either side of the heading, matching the design:
+		     a navy rule running in from the left edge to a dot, and an orange one
+		     running out past the right edge from the icon. -->
 		<div
-			class="pointer-events-none absolute top-[92px] left-[-50vw] hidden h-px w-[50vw] bg-ink lg:block"
+			class="pointer-events-none absolute top-[129px] right-[74.4%] left-[-50vw] hidden h-[2px] bg-ink lg:block"
 			aria-hidden="true"
 		>
-			<span class="absolute -top-[3px] -right-1 h-2 w-2 rounded-full bg-ink"></span>
+			<span class="absolute -top-[3px] -right-[3px] h-2 w-2 rounded-full bg-ink"></span>
+		</div>
+
+		<img
+			src="/icons/reach-clients.svg"
+			alt=""
+			aria-hidden="true"
+			width="63"
+			height="63"
+			class="pointer-events-none absolute top-[136px] left-[83.6%] hidden w-[63px] lg:block"
+		/>
+
+		<div
+			class="pointer-events-none absolute top-[209px] right-[-50vw] left-[85.5%] hidden h-[2px] bg-accent lg:block"
+			aria-hidden="true"
+		>
+			<span class="absolute -top-[3px] -left-[3px] h-2 w-2 rounded-full bg-accent"></span>
 		</div>
 
 		<SectionHeading lines={valueOffering.heading} indents={['lg:pl-[0.6%]', 'lg:pl-[26.3%]', 'lg:pl-[51.4%]']} />

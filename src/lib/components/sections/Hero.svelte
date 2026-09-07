@@ -100,4 +100,11 @@
 		</div>
 
 	</div>
+
+	<!-- Mint rule closing the hero (Figma "Vector 24"): 5px, inset ~2.2% each
+	     side, sitting on the section's bottom edge. -->
+	<span
+		class="pointer-events-none absolute right-[2.3%] bottom-0 left-[2.2%] h-[5px] bg-mint"
+		aria-hidden="true"
+	></span>
 </section>
