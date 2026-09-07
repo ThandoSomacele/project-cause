@@ -4,7 +4,7 @@
 	import Accordion from '$lib/components/ui/Accordion.svelte';
 </script>
 
-<section data-section="faq" class="font-display bg-surface py-16 lg:py-[104px]">
+<section data-section="faq" class="font-display bg-surface py-16 lg:py-[min(7.3vw,104px)]">
 	<div class="container-page">
 		<div class="text-center">
 			<h2 class="text-h2-alt font-semibold text-ink">

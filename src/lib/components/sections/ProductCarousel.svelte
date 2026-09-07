@@ -12,14 +12,14 @@
 	};
 </script>
 
-<section data-section="carousel" class="relative overflow-hidden bg-white py-16 lg:py-[104px]">
+<section data-section="carousel" class="relative overflow-hidden bg-white py-16 lg:py-[min(7.3vw,104px)]">
 	<div class="container-page relative">
 		<div class="relative">
 			<SectionHeading lines={carousel.heading} indents={['lg:pl-[7.5%]', 'lg:pl-[42.5%]', 'lg:pl-[52.3%]']} />
 
 			<!-- Rule running in from the page edge, stopping at "talk" with a dot. -->
 			<div
-				class="pointer-events-none absolute top-[174px] right-[48.2%] left-[-50vw] hidden h-[2px] bg-accent lg:block"
+				class="pointer-events-none absolute top-[min(12.21vw,174px)] right-[48.2%] left-[-50vw] hidden h-[2px] bg-accent md:block"
 				aria-hidden="true"
 			>
 				<span class="absolute -top-[5px] -right-[6px] h-3 w-3 rounded-full bg-accent"></span>
@@ -27,7 +27,7 @@
 
 			<!-- Circle closing the heading, after "clients". -->
 			<span
-				class="pointer-events-none absolute top-[137px] left-[90.9%] hidden h-[18px] w-[18px] rounded-full bg-accent lg:block"
+				class="pointer-events-none absolute top-[min(9.61vw,137px)] left-[90.9%] hidden h-[18px] w-[18px] rounded-full bg-accent lg:block"
 				aria-hidden="true"
 			></span>
 		</div>
@@ -36,8 +36,8 @@
 			<Carousel count={carousel.slides.length} label="How Cause works for service providers">
 				{#snippet slide(i)}
 					{@const item = carousel.slides[i]}
-					<div class="relative grid overflow-hidden rounded-[16px] bg-ink lg:min-h-[593px] lg:grid-cols-[45%_55%]">
-						<div class="relative z-10 px-8 py-12 text-white sm:px-12 lg:py-[130px] lg:pl-14">
+					<div class="relative grid overflow-hidden rounded-[16px] bg-ink lg:min-h-[min(41.61vw,593px)] lg:grid-cols-[45%_55%]">
+						<div class="relative z-10 px-8 py-12 text-white sm:px-12 lg:py-[min(9.12vw,130px)] lg:pl-14">
 							<h3 class="max-w-[28rem] text-[clamp(1.75rem,1.35rem+1.6vw,2.875rem)] leading-[1.12] font-normal">
 								<RichText segments={item.title} accentClass="text-accent" />
 							</h3>
@@ -72,7 +72,7 @@
 							</div>
 						</div>
 
-						<div class="relative min-h-[240px] bg-[#f1f1f3]">
+						<div class="relative min-h-[min(16.84vw,240px)] bg-[#f1f1f3]">
 							<img
 								src={shots[item.image]}
 								alt="The Cause dashboard"

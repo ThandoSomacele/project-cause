@@ -13,12 +13,12 @@
 	};
 </script>
 
-<section data-section="get-paid" class="bg-steel pt-16 pb-16 lg:pt-[104px] lg:pb-16">
+<section data-section="get-paid" class="bg-steel pt-16 pb-16 lg:pt-[min(7.3vw,104px)] lg:pb-16">
 	<div class="container-page relative">
 		<!-- Navy rule running in from the left edge to a dot, level with the second
 		     heading line — the same decorative treatment the design uses elsewhere. -->
 		<div
-			class="pointer-events-none absolute top-[134px] right-[58%] left-[-50vw] hidden h-[2px] bg-ink lg:block"
+			class="pointer-events-none absolute top-[min(9.4vw,134px)] right-[58%] left-[-50vw] hidden h-[2px] bg-ink md:block"
 			aria-hidden="true"
 		>
 			<span class="absolute -top-[3px] -right-[3px] h-2 w-2 rounded-full bg-ink"></span>

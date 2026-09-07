@@ -43,14 +43,14 @@
 	}
 </script>
 
-<section id="fees" class="relative scroll-mt-24 bg-white py-16 lg:pt-[223px] lg:pb-[104px]">
+<section id="fees" class="relative scroll-mt-24 bg-white py-16 lg:pt-[min(15.65vw,223px)] lg:pb-[min(7.3vw,104px)]">
 	<!-- The connector the design draws between the carousel and this card
 	     (Figma "Vector 22"): a dot, down, across to the left, then down into the
 	     card. Drawn rather than shipped as an asset so it stays crisp and takes
 	     the ink token. Desktop only — below lg the sections stack too tightly for
 	     it to read. -->
 	<svg
-		class="pointer-events-none absolute -top-[55px] left-[46.3%] hidden w-[300px] lg:block"
+		class="pointer-events-none absolute -top-[min(3.86vw,55px)] left-[46.3%] hidden w-[min(21.05vw,300px)] lg:block"
 		viewBox="0 0 300 286"
 		fill="none"
 		aria-hidden="true"
@@ -64,7 +64,7 @@
 	</svg>
 
 	<div class="container-wide">
-		<div class="font-display rounded-[24px] bg-ink px-6 py-10 text-white sm:px-10 lg:px-[119px] lg:py-[77px]">
+		<div class="font-display rounded-[24px] bg-ink px-6 py-10 text-white sm:px-10 lg:px-[min(8.35vw,119px)] lg:py-[min(5.4vw,77px)]">
 			<div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_324px] lg:gap-0">
 				<!-- Controls -->
 				<div class="lg:pr-16">

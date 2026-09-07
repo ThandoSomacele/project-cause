@@ -7,7 +7,11 @@
 	let { form = null }: { form?: WaitlistResult | null } = $props();
 </script>
 
-<section data-section="hero" class="relative isolate overflow-hidden bg-ink text-white lg:min-h-[759px]">
+<!-- The device cluster is absolutely positioned, so the section needs its own
+     height. That height tracks the cluster rather than the viewport: the
+     cluster scales with the container, which carries fixed gutters, so a plain
+     vw value drifts and the artwork overflows on narrower screens. -->
+<section data-section="hero" class="relative isolate overflow-hidden bg-ink text-white lg:min-h-[min(calc(57.1vw-11px),759px)]">
 	<!-- The design's backdrop is a mottled navy with soft circular washes.
 	     Two radial gradients read the same at a fraction of the weight. -->
 	<div
@@ -16,7 +20,7 @@
 	></div>
 
 	<div class="container-wide relative">
-		<div class="relative z-10 max-w-[780px] pt-10 pb-12 lg:pt-[54px] lg:pb-24">
+		<div class="relative z-10 max-w-[780px] pt-10 pb-12 lg:pt-[min(3.79vw,54px)] lg:pb-24">
 			<h1 class="text-hero font-light">
 				{#each hero.headline as line, i (i)}
 					<span class="block"><RichText segments={line} /></span>
@@ -43,7 +47,7 @@
 		     come from measuring the 1:1 Figma render. -->
 		<div
 			class="relative -mx-5 mt-4 md:-mx-8
-			       lg:absolute lg:-top-6 lg:-right-[46px] lg:mx-0 lg:mt-0 lg:w-[717px]"
+			       lg:absolute lg:-top-6 lg:-right-[min(3.23vw,46px)] lg:mx-0 lg:mt-0 lg:w-[min(50.32vw,717px)]"
 		>
 			<div class="relative mx-auto aspect-[420/560] w-full max-w-[340px] sm:max-w-[380px] lg:aspect-[700/783] lg:max-w-none">
 				<!-- Positioned so the bracket's arrowhead lands on the "t" of

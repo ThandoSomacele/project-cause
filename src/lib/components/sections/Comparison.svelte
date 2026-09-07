@@ -4,7 +4,7 @@
 	import Button from '$lib/components/ui/Button.svelte';
 </script>
 
-<section data-section="comparison" class="relative overflow-hidden bg-surface py-16 lg:pt-[129px] lg:pb-[104px]">
+<section data-section="comparison" class="relative overflow-hidden bg-surface py-16 lg:pt-[min(9.05vw,129px)] lg:pb-[min(7.3vw,104px)]">
 	<div class="container-page relative">
 		<div class="relative">
 			<SectionHeading
@@ -14,10 +14,10 @@
 			/>
 		</div>
 
-		<div class="relative mt-12 lg:mt-[93px]">
+		<div class="relative mt-12 lg:mt-[min(6.53vw,93px)]">
 			<div class="grid overflow-hidden rounded-[16px] lg:grid-cols-[42.9%_57.1%]">
 				<!-- The alternatives -->
-				<div class="bg-line p-8 sm:p-10 lg:min-h-[400px]">
+				<div class="bg-line p-8 sm:p-10 lg:min-h-[min(28.07vw,400px)]">
 					<div class="flex items-center gap-4">
 						<!-- A list mark, matching the design. Inline so it takes the panel's
 						     muted ink rather than shipping another flat asset. -->
@@ -64,7 +64,7 @@
 				</div>
 
 				<!-- How we're better -->
-				<div class="relative bg-ink p-8 text-white sm:p-10 lg:min-h-[400px]">
+				<div class="relative bg-ink p-8 text-white sm:p-10 lg:min-h-[min(28.07vw,400px)]">
 					<div class="flex items-center gap-4">
 						<!-- Trophy, per the design. Inline and in brand orange: the flat
 						     asset had to be inverted to show on navy, which flattened it to a
@@ -115,7 +115,7 @@
 				width="505"
 				height="489"
 				loading="lazy"
-				class="pointer-events-none absolute -top-[56px] left-[79.2%] hidden w-[28.3%] lg:block"
+				class="pointer-events-none absolute -top-[min(3.93vw,56px)] left-[79.2%] hidden w-[28.3%] lg:block"
 			/>
 		</div>
 	</div>

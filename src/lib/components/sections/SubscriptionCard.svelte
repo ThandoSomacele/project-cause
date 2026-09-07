@@ -3,7 +3,7 @@
 	import RichText from '$lib/components/ui/RichText.svelte';
 </script>
 
-<section data-section="subscription" class="relative overflow-hidden bg-steel pb-16 lg:pb-[104px]">
+<section data-section="subscription" class="relative overflow-hidden bg-steel pb-16 lg:pb-[min(7.3vw,104px)]">
 	<!-- Tools artwork sitting in the section's bottom-left corner, mostly
 	     off-canvas, as in the design. -->
 	<img
@@ -22,10 +22,10 @@
 			{#each pricing.tiers as tier (tier.id)}
 				<div
 					class={[
-						'relative px-8 py-12 sm:px-12 lg:py-[70px]',
+						'relative px-8 py-12 sm:px-12 lg:py-[min(4.91vw,70px)]',
 						tier.id === 'paid'
-							? 'bg-ink text-white lg:pr-10 lg:pl-[76px]'
-							: 'bg-cream text-ink lg:px-[60px]'
+							? 'bg-ink text-white lg:pr-10 lg:pl-[min(5.33vw,76px)]'
+							: 'bg-cream text-ink lg:px-[min(4.21vw,60px)]'
 					]}
 				>
 					{#if tier.id === 'paid'}
@@ -34,7 +34,7 @@
 							src="/images/mascot-pole.svg"
 							alt=""
 							aria-hidden="true"
-							class="pointer-events-none absolute -bottom-10 -left-1 hidden w-[160px] lg:block"
+							class="pointer-events-none absolute -bottom-10 -left-1 hidden w-[min(11.23vw,160px)] lg:block"
 						/>
 					{/if}
 
@@ -55,7 +55,7 @@
 						{tier.period}
 					</p>
 
-					<div class={['relative', tier.id === 'paid' && 'lg:pl-[52px]']}>
+					<div class={['relative', tier.id === 'paid' && 'lg:pl-[min(3.65vw,52px)]']}>
 						<h3 class="mt-8 text-[clamp(1.375rem,1.1rem+1.1vw,1.875rem)] leading-tight font-normal">
 							{#each tier.title as segment, i (i)}
 								<span class="block"><RichText segments={[segment]} /></span>

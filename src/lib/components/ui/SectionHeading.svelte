@@ -35,7 +35,7 @@
 				<span class="flex items-baseline">
 					<span class="shrink-0"><RichText segments={line} /></span>
 					<!-- Sits on the baseline and runs off-canvas, as in the design. -->
-					<span class="-mr-[50vw] hidden h-[2px] flex-1 bg-accent lg:block" aria-hidden="true"
+					<span class="-mr-[50vw] h-[2px] flex-1 bg-accent" aria-hidden="true"
 					></span>
 				</span>
 			{:else}

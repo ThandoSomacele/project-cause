@@ -12,7 +12,7 @@
 	};
 </script>
 
-<section data-section="value" class="relative overflow-hidden bg-white py-16 lg:pt-[15.44vw] lg:pb-[104px]">
+<section data-section="value" class="relative overflow-hidden bg-white pt-[15.44vw] pb-16 lg:pb-[min(7.3vw,104px)]">
 	<!-- The tools artwork spans the page behind the hero and only its lower band
 	     shows here. 100vw wide at its natural 2.157:1, offset so its top lands
 	     where the design places it (y549) while this section starts at y843 —
@@ -32,7 +32,7 @@
 		     a navy rule running in from the left edge to a dot, and an orange one
 		     running out past the right edge from the icon. -->
 		<div
-			class="pointer-events-none absolute top-[129px] right-[74.4%] left-[-50vw] hidden h-[2px] bg-ink lg:block"
+			class="pointer-events-none absolute top-[min(9.05vw,129px)] right-[74.4%] left-[-50vw] hidden h-[2px] bg-ink md:block"
 			aria-hidden="true"
 		>
 			<span class="absolute -top-[3px] -right-[3px] h-2 w-2 rounded-full bg-ink"></span>
@@ -44,11 +44,11 @@
 			aria-hidden="true"
 			width="63"
 			height="63"
-			class="pointer-events-none absolute top-[136px] left-[83.6%] hidden w-[63px] lg:block"
+			class="pointer-events-none absolute top-[min(9.54vw,136px)] left-[83.6%] hidden w-[63px] lg:block"
 		/>
 
 		<div
-			class="pointer-events-none absolute top-[209px] right-[-50vw] left-[85.5%] hidden h-[2px] bg-accent lg:block"
+			class="pointer-events-none absolute top-[min(14.67vw,209px)] right-[-50vw] left-[85.5%] hidden h-[2px] bg-accent md:block"
 			aria-hidden="true"
 		>
 			<span class="absolute -top-[3px] -left-[3px] h-2 w-2 rounded-full bg-accent"></span>
@@ -62,7 +62,7 @@
 					{@const tab = valueOffering.tabs.find((t) => t.id === id)!}
 					<div
 						class="mt-6 grid gap-8 rounded-[24px] bg-amber p-6 sm:p-10
-						       lg:grid-cols-[43.6%_1fr] lg:gap-x-[6.6%] lg:p-[80px]"
+						       lg:grid-cols-[43.6%_1fr] lg:gap-x-[6.6%] lg:p-[min(5.61vw,80px)]"
 					>
 						<img
 							src={images[id]}

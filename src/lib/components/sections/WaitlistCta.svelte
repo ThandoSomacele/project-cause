@@ -8,7 +8,7 @@
 
 <section
 	data-section="cta"
-	class="relative isolate overflow-hidden bg-amber lg:min-h-[625px]"
+	class="relative isolate overflow-hidden bg-amber lg:min-h-[min(43.86vw,625px)]"
 >
 	<!-- The tools artwork rings a clear centre. The design offsets it so only the
 	     band of tools sits along this section's top edge, leaving the rest clear
@@ -31,7 +31,7 @@
 		aria-hidden="true"
 	></div>
 
-	<div class="container-page w-full py-20 text-center lg:pt-[165px] lg:pb-16">
+	<div class="container-page w-full py-20 text-center lg:pt-[min(11.58vw,165px)] lg:pb-16">
 		<h2 class="text-h2 mx-auto max-w-[70rem] font-light text-ink">
 			{#each finalCta.heading as line, i (i)}
 				<span class="block"><RichText segments={line} /></span>
