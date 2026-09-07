@@ -53,8 +53,15 @@
 					src="/icons/hero-frame.svg"
 					alt=""
 					aria-hidden="true"
-					class="absolute top-[7%] left-[5.8%] hidden w-[90.7%] lg:block"
+					class="absolute top-[7%] left-[5.8%] hidden w-[93.4%] lg:block"
 				/>
+				<!-- The bracket exits its own artwork at 65.5% of the cluster height.
+				     This continues that stroke to beyond the viewport so the line runs
+				     off-screen instead of stopping in open canvas on wide displays. -->
+				<span
+					class="pointer-events-none absolute top-[65.5%] left-[96.4%] right-[-100vw] hidden h-[3px] bg-accent lg:block"
+					aria-hidden="true"
+				></span>
 				<img
 					src="/images/phone-profile.webp"
 					alt=""
@@ -87,7 +94,7 @@
 					src="/images/mascot-pole.svg"
 					alt=""
 					aria-hidden="true"
-					class="absolute top-[41.9%] left-[1.7%] hidden w-[41.8%] -scale-x-100 lg:block"
+					class="absolute top-[41.9%] left-[2.43%] hidden w-[41.8%] -scale-x-100 lg:block"
 				/>
 			</div>
 		</div>
