@@ -124,18 +124,41 @@ export const getPaid = {
 	cta: { label: 'Join waitlist', href: '#waitlist' }
 };
 
-export const subscription = {
-	// Revised Figma (node 4679:13736) replaced the R95 subscription with a free
-	// tier. Copy and bullets taken from that section.
-	price: 'Free',
-	period: '/mnth',
-	title: [{ text: 'Get discovered by new clients' }],
-	items: [
-		'Appear in search with Basic rank',
-		'Receive your project payments as cash OR',
-		'Receive your payments as instant EFT *'
-	],
-	note: 'Instant EFT payments will have a 4.8% transaction cost, inclusive of VAT, refer to calculator.*'
+export const pricing = {
+	/**
+	 * The revised Figma (node 4679:13736) splits this into two panels — 643px
+	 * and 585px of a 1228px row — with the right one holding the free tier. The
+	 * paid tier keeps the copy from the earlier design.
+	 */
+	tiers: [
+		{
+			id: 'paid',
+			price: 'R95',
+			period: '/mnth',
+			title: [
+				{ text: 'A subscription that puts' },
+				{ text: 'control back in your hands', weight: 'strong' as const }
+			],
+			items: [
+				'Get found through search by clients',
+				'Receive your project payments as cash OR',
+				'Receive your payments as instant EFT *'
+			],
+			note: 'Instant EFT payments will have a 4.8% transaction cost, inclusive of VAT, refer to calculator.*'
+		},
+		{
+			id: 'free',
+			price: 'Free',
+			period: '/mnth',
+			title: [{ text: 'Get discovered by new clients' }],
+			items: [
+				'Appear in search with Basic rank',
+				'Receive your project payments as cash OR',
+				'Receive your payments as instant EFT *'
+			],
+			note: null
+		}
+	]
 };
 
 export const carousel = {

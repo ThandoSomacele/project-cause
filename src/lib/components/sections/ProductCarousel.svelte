@@ -12,14 +12,24 @@
 	};
 </script>
 
-<section data-section="carousel" class="relative overflow-hidden bg-surface py-16 lg:py-[104px]">
+<section data-section="carousel" class="relative overflow-hidden bg-white py-16 lg:py-[104px]">
 	<div class="container-page relative">
 		<div class="relative">
 			<SectionHeading lines={carousel.heading} indents={['lg:pl-[7.5%]', 'lg:pl-[42.5%]', 'lg:pl-[52.3%]']} />
+
+			<!-- Rule running in from the page edge, stopping at "talk" with a dot. -->
 			<div
-				class="pointer-events-none absolute bottom-[26px] left-[-50vw] hidden h-px w-[50vw] bg-accent lg:block"
+				class="pointer-events-none absolute top-[174px] right-[48.2%] left-[-50vw] hidden h-[2px] bg-accent lg:block"
 				aria-hidden="true"
-			></div>
+			>
+				<span class="absolute -top-[5px] -right-[6px] h-3 w-3 rounded-full bg-accent"></span>
+			</div>
+
+			<!-- Circle closing the heading, after "clients". -->
+			<span
+				class="pointer-events-none absolute top-[137px] left-[90.9%] hidden h-[18px] w-[18px] rounded-full bg-accent lg:block"
+				aria-hidden="true"
+			></span>
 		</div>
 
 		<div class="mt-12 lg:mt-20">
@@ -77,10 +87,10 @@
 							src="/images/mascot-wave.svg"
 							alt=""
 							aria-hidden="true"
-							width="591"
-							height="622"
+							width="629"
+							height="608"
 							loading="lazy"
-							class="pointer-events-none absolute bottom-0 left-[33%] hidden w-[28%] lg:block"
+							class="pointer-events-none absolute top-[40.6%] left-[32.3%] hidden w-[37.5%] lg:block"
 						/>
 					</div>
 				{/snippet}

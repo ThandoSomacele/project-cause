@@ -6,16 +6,15 @@
 	let { form = null }: { form?: WaitlistResult | null } = $props();
 </script>
 
-<!-- The tools artwork puts its hardware along the top edge and sides, leaving the
-     lower half clear. Showing it at its natural 2.157:1 aspect and seating the
-     copy in that clear band keeps the text legible; centring it instead lands
-     the headline straight on the tape roll and hammer. -->
 <section
 	data-section="cta"
-	class="relative isolate flex items-end overflow-hidden bg-amber lg:min-h-[660px]"
+	class="relative isolate overflow-hidden bg-amber lg:min-h-[625px]"
 >
-	<!-- Tools sit on a transparent ground in the source art, so the amber comes
-	     from the section itself. -->
+	<!-- The tools artwork rings a clear centre. The design offsets it so only the
+	     band of tools sits along this section's top edge, leaving the rest clear
+	     amber for the copy — the same placement used under the hero. Anchored at
+	     its natural aspect rather than object-cover, which scaled it up and put
+	     the hardware straight over the headline. -->
 	<img
 		src="/images/tools-flatlay.webp"
 		alt=""
@@ -23,15 +22,16 @@
 		width="2200"
 		height="1020"
 		loading="lazy"
-		class="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover object-[center_top]"
+		class="pointer-events-none absolute top-[-20.6vw] left-0 -z-10 w-screen max-w-none"
 	/>
 
-	<!-- The art is laid out for a wide band. On narrow viewports object-cover
-	     zooms into the middle of it and the tools swamp the copy, so soften the
-	     ground behind the text until there is room for the full composition. -->
-	<div class="pointer-events-none absolute inset-0 -z-10 bg-amber/80 md:hidden" aria-hidden="true"></div>
+	<!-- On narrow viewports the band is short and the tools crowd the copy. -->
+	<div
+		class="pointer-events-none absolute inset-0 -z-10 bg-amber/80 md:hidden"
+		aria-hidden="true"
+	></div>
 
-	<div class="container-page w-full py-20 text-center lg:pt-0 lg:pb-24">
+	<div class="container-page w-full py-20 text-center lg:pt-[165px] lg:pb-16">
 		<h2 class="text-h2 mx-auto max-w-[70rem] font-light text-ink">
 			{#each finalCta.heading as line, i (i)}
 				<span class="block"><RichText segments={line} /></span>

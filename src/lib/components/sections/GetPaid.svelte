@@ -13,7 +13,7 @@
 	};
 </script>
 
-<section data-section="get-paid" class="bg-steel pt-16 lg:pt-[104px]">
+<section data-section="get-paid" class="bg-steel pt-16 pb-16 lg:pt-[104px] lg:pb-16">
 	<div class="container-page relative">
 		<!-- Navy rule running in from the left edge to a dot, level with the second
 		     heading line — the same decorative treatment the design uses elsewhere. -->
@@ -42,7 +42,7 @@
 			{/each}
 		</ul>
 
-		<div class="mt-12 grid items-center gap-10 lg:mt-20 lg:mb-16 lg:grid-cols-[minmax(0,48%)_minmax(0,40%)] lg:justify-between lg:gap-16">
+		<div class="mt-12 grid items-center gap-10 lg:mt-20 lg:grid-cols-[minmax(0,48%)_minmax(0,40%)] lg:justify-between lg:gap-16">
 			<div>
 				<ul class="flex flex-col gap-7">
 					{#each getPaid.benefits as benefit (benefit.title)}
