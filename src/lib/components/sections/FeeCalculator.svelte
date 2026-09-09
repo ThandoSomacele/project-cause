@@ -50,8 +50,8 @@
 	     the ink token. Desktop only — below lg the sections stack too tightly for
 	     it to read. -->
 	<svg
-		class="pointer-events-none absolute -top-[min(3.86vw,55px)] left-[46.3%] hidden w-[min(21.05vw,300px)] lg:block"
-		viewBox="0 0 300 286"
+		class="pointer-events-none absolute -top-[min(3.86vw,55px)] left-[46.3%] hidden w-[min(21.4vw,305px)] overflow-visible lg:block"
+		viewBox="0 0 305 286"
 		fill="none"
 		aria-hidden="true"
 	>

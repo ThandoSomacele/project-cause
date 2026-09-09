@@ -28,14 +28,16 @@
 	<div class="container-page relative z-10">
 		<!-- Decorative rules that run off-canvas in the design. Large screens only:
 		     below that they collide with the wrapped heading. -->
-		<!-- Decorative rules either side of the heading, matching the design:
-		     a navy rule running in from the left edge to a dot, and an orange one
-		     running out past the right edge from the icon. -->
+		<!-- Decorative rules either side of the heading, matching the design: a
+		     navy rule running in from the left screen edge and ending in a 10px
+		     dot, and an orange one starting at a 16px dot directly beneath the
+		     icon and running out past the right edge. The two dots are different
+		     sizes in the design — measured at 10px and 16px on the 1:1 render. -->
 		<div
 			class="pointer-events-none absolute top-[min(9.05vw,129px)] right-[74.4%] left-[-50vw] hidden h-[2px] bg-ink md:block"
 			aria-hidden="true"
 		>
-			<span class="absolute -top-[3px] -right-[3px] h-2 w-2 rounded-full bg-ink"></span>
+			<span class="absolute -top-[4px] -right-[3px] h-[10px] w-[10px] rounded-full bg-ink"></span>
 		</div>
 
 		<img
@@ -51,10 +53,14 @@
 			class="pointer-events-none absolute top-[min(14.67vw,209px)] right-[-50vw] left-[85.5%] hidden h-[2px] bg-accent md:block"
 			aria-hidden="true"
 		>
-			<span class="absolute -top-[3px] -left-[3px] h-2 w-2 rounded-full bg-accent"></span>
+			<span class="absolute -top-[7px] left-0 h-4 w-4 rounded-full bg-accent"></span>
 		</div>
 
-		<SectionHeading lines={valueOffering.heading} indents={['lg:pl-[0.6%]', 'lg:pl-[26.3%]', 'lg:pl-[51.4%]']} />
+		<SectionHeading
+			lines={valueOffering.heading}
+			weight="font-normal"
+			indents={['lg:pl-[0.6%]', 'lg:pl-[26.3%]', 'lg:pl-[51.4%]']}
+		/>
 
 		<div class="mt-12 lg:mt-16">
 			<Tabs tabs={valueOffering.tabs} label="What Cause gives you">

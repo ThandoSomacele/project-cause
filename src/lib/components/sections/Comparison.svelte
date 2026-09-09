@@ -9,6 +9,7 @@
 		<div class="relative">
 			<SectionHeading
 				lines={comparison.heading}
+				weight="font-bold"
 				indents={['lg:pl-[10.4%]', 'lg:pl-[44%]']}
 				ruleAfter={1}
 			/>
