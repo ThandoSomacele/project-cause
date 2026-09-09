@@ -3,6 +3,131 @@
  * Kept as data so wording changes never mean touching component markup.
  */
 
+/**
+ * The selector that opens the page (Figma node 4612:24601), measured off the
+ * screenshot of that frame at 1425.
+ *
+ * It shares the hero's frame exactly: the 84px navbar, a 759px navy body, and
+ * the mint rule on its base. Heading line 1 sits at y146, the same as the hero;
+ * the subhead at y390 and the chips at y437. The orange runs on lines 2 and 3
+ * were read off the pixels (x160..447 and x140..516 respectively).
+ *
+ * The design fills the right half with a photograph collage and drops the
+ * mascot into the bottom-left. Those photographs are not in the asset pack, so
+ * the collage is composed from the images the project already has.
+ */
+export const audience = {
+	heading: [
+		// Heavy in the design: ~11.9px stems against ~6.3px on the connective words.
+		[{ text: 'A Marketplace', weight: 'strong' as const }],
+		[
+			{ text: 'to ' },
+			{ text: 'connect', tone: 'accent' as const, weight: 'strong' as const },
+			{ text: ' clients' }
+		],
+		[
+			{ text: '& ' },
+			{ text: 'vetted providers', tone: 'accent' as const, weight: 'strong' as const }
+		]
+	],
+	subhead: 'Select your user option to continue',
+	chips: [
+		{ label: 'Secure', icon: 'check-circle' as const },
+		{ label: 'Reliable', icon: 'check-circle' as const },
+		{ label: 'Vetted', icon: 'check-circle' as const }
+	],
+	options: [
+		{
+			id: 'service-providers',
+			title: 'Service Provider',
+			// Read verbatim off the screenshot.
+			body: 'Join a community where your talent is valued. Highlight your expertise and connect with clients seeking your skills.',
+			href: '#service-providers'
+		},
+		{
+			id: 'clients',
+			title: 'Client',
+			// The screenshot only shows the service-provider option's copy; this
+			// mirrors it for the client side until the second one is legible.
+			body: 'Find vetted providers for the job at hand. Compare profiles, request a quote, and get the work done.',
+			href: '#clients'
+		}
+	]
+};
+
+/**
+ * The client-facing section that closes the page (Figma node 4612:24352).
+ *
+ * It is the service-provider hero mirrored for clients: the screenshot measures
+ * the same 759px body under the navbar, the bracket rail at the same y113, the
+ * same three device mockups and the same mint base rule at x28..1394. Only the
+ * copy, the chips and the mascot pose differ, so it renders through the shared
+ * AudienceHero. Copy read off the screenshot; heading line 3 carries the accent
+ * run, matching the orange that starts at x429 on that line.
+ */
+export const clients = {
+	heading: [
+		[{ text: 'The simple way' }],
+		[{ text: 'to connect with a' }],
+		[
+			{ text: 'verified ' },
+			{ text: 'carpenter...', tone: 'accent' as const, weight: 'strong' as const }
+		]
+	],
+	body: [
+		'Find a service provider near you in 3 steps.',
+		'Pick from qualified & experienced providers.',
+		'Easily send a quote request from your phone.'
+	],
+	chips: [
+		{ label: 'Experienced', icon: 'check-circle' as const },
+		{ label: 'Qualified', icon: 'check-circle' as const },
+		{ label: 'Vetted', icon: 'check-circle' as const }
+	]
+};
+
+/**
+ * The "Process" section that follows the client section. Measured against its
+ * screenshot at 1425: heading lines at y1094 / 1171 / 1248 on 77px leading, so
+ * it runs at the hero's size; the "Process" label at y1376; the three step
+ * columns starting at x143, x562 and x982. It reuses the value-offering
+ * section's rule treatment — an ink rule in from the left edge ending in a dot
+ * (y1217, x..406) and an orange one running out past the right (y1296,
+ * x1162..1423). The accent runs are a best reading of where the orange falls.
+ */
+export const process = {
+	heading: [
+		[{ text: 'Reliably,' }],
+		[
+			{ text: 'Hire ' },
+			{ text: 'Vetted', tone: 'accent' as const, weight: 'strong' as const },
+			{ text: ' Providers' }
+		],
+		[
+			{ text: '& ' },
+			{ text: 'Get It Done', tone: 'accent' as const, weight: 'strong' as const }
+		]
+	],
+	label: 'Process',
+	steps: [
+		{
+			step: 'STEP 1',
+			title: [{ text: 'ENTER ', weight: 'strong' as const }, { text: 'Your Fix Details' }],
+			body: 'Enter details to search for relevant vetted service providers in your area'
+		},
+		{
+			step: 'STEP 2',
+			title: [{ text: 'CHOOSE ', weight: 'strong' as const }, { text: 'A Service Provider' }],
+			body: 'Select a service provider from your list of results to review their profile'
+		},
+		{
+			step: 'STEP 3',
+			title: [{ text: 'GET ', weight: 'strong' as const }, { text: 'A Quote' }],
+			body: 'Request a quote from your chosen provider and pay to get started'
+		}
+	]
+};
+
 export const hero = {
 	// Rendered as three lines; `accent` words are orange, `strong` is heavier.
 	headline: [
@@ -144,7 +269,7 @@ export const pricing = {
 				'Receive your project payments as cash OR',
 				'Receive your payments as instant EFT *'
 			],
-			note: 'Instant EFT payments will have a 4.8% transaction cost, inclusive of VAT, refer to calculator.*'
+			note: 'Instant EFT payments will have a transaction cost of up to 5%, excluding VAT, refer to calculator.*'
 		},
 		{
 			id: 'free',
@@ -222,7 +347,7 @@ export const calculator = {
 	exactLabel: 'Enter exact invoice amount',
 	feesTitle: 'Platform fees',
 	feesBody:
-		'Payments on the platform have a maximum transaction fee of 4.8% Inclusive of VAT.',
+		'Payments on the platform have a maximum transaction fee of 5% excluding VAT.',
 	labels: {
 		feeEstimate: 'PLATFORM FEE ESTIMATE',
 		deduction: 'AMOUNT ESTIMATE',

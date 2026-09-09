@@ -9,6 +9,7 @@ test.beforeEach(async ({ page }) => {
 
 test('renders every section of the landing page', async ({ page }) => {
 	for (const name of [
+		'audience',
 		'hero',
 		'value',
 		'comparison',
@@ -16,11 +17,111 @@ test('renders every section of the landing page', async ({ page }) => {
 		'subscription',
 		'carousel',
 		'cta',
-		'faq'
+		'faq',
+		'clients',
+		'process'
 	]) {
 		await expect(page.locator(`[data-section="${name}"]`)).toBeAttached();
 	}
-	await expect(page.getByRole('heading', { level: 1 })).toContainText('The only platform');
+	// The selector opens the page, so it owns the single h1; the service-provider
+	// headline sits below it as an h2.
+	await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
+	await expect(page.getByRole('heading', { level: 1 })).toContainText('A Marketplace');
+	await expect(page.getByRole('heading', { level: 2, name: /The only platform/ })).toBeVisible();
+});
+
+test.describe('audience selector', () => {
+	test('is the first section on the page', async ({ page }) => {
+		const sections = await page.locator('[data-section]').evaluateAll((els) =>
+			els.map((e) => (e as HTMLElement).dataset.section)
+		);
+		expect(sections[0]).toBe('audience');
+		expect(sections[1]).toBe('hero');
+	});
+
+	test('the service-provider option jumps down the same page, without navigating', async ({
+		page
+	}) => {
+		let loads = 0;
+		page.on('load', () => loads++);
+
+		await page.click('[data-section="audience"] a[href="#service-providers"]');
+		await expect(page).toHaveURL(/#service-providers$/);
+
+		// The target must come to rest directly under the sticky navbar, not
+		// beneath it, and the page must not have been replaced.
+		await expect
+			.poll(async () =>
+				page.evaluate(() => {
+					const t = document.getElementById('service-providers')!.getBoundingClientRect();
+					const nav = document.querySelector('header')!.getBoundingClientRect();
+					return Math.abs(t.top - nav.bottom);
+				})
+			)
+			.toBeLessThan(1);
+		expect(loads).toBe(0);
+		expect(new URL(page.url()).pathname).toBe('/');
+	});
+
+	test('the client option jumps to the client section at the end of the page', async ({
+		page
+	}) => {
+		let loads = 0;
+		page.on('load', () => loads++);
+
+		await page.click('[data-section="audience"] a[href="#clients"]');
+		await expect(page).toHaveURL(/#clients$/);
+		await expect
+			.poll(async () =>
+				page.evaluate(() => {
+					const t = document.getElementById('clients')!.getBoundingClientRect();
+					const nav = document.querySelector('header')!.getBoundingClientRect();
+					return Math.abs(t.top - nav.bottom);
+				})
+			)
+			.toBeLessThan(1);
+		expect(loads).toBe(0);
+	});
+
+	test('the client section closes the page, with the process section after it', async ({
+		page
+	}) => {
+		const sections = await page.locator('[data-section]').evaluateAll((els) =>
+			els.map((e) => (e as HTMLElement).dataset.section)
+		);
+		expect(sections.slice(-2)).toEqual(['clients', 'process']);
+	});
+});
+
+test.describe('primary nav', () => {
+	test('both audience links jump within the page', async ({ page }) => {
+		// The inline nav is hidden below lg — the drawer covers that path, and
+		// mobile-nav.e2e.ts exercises it there.
+		test.skip((page.viewportSize()?.width ?? 0) < 1024, 'inline nav is lg and up');
+
+		let loads = 0;
+		page.on('load', () => loads++);
+
+		for (const [label, id] of [
+			['Service Providers', 'service-providers'],
+			['Clients', 'clients']
+		] as const) {
+			await page.locator('header nav').getByRole('link', { name: label }).click();
+			await expect(page).toHaveURL(new RegExp(`#${id}$`));
+			await expect
+				.poll(async () =>
+					page.evaluate((target) => {
+						const t = document.getElementById(target)!.getBoundingClientRect();
+						const nav = document.querySelector('header')!.getBoundingClientRect();
+						return Math.abs(t.top - nav.bottom);
+					}, id)
+				)
+				.toBeLessThan(1);
+		}
+
+		expect(loads).toBe(0);
+		expect(new URL(page.url()).pathname).toBe('/');
+	});
 });
 
 test('page does not scroll horizontally', async ({ page }) => {
@@ -36,15 +137,16 @@ test.describe('fee calculator', () => {
 	const exact = (page: Page) => page.locator('#fee-exact');
 	const payout = (page: Page) => page.locator('[data-section] >> text=paid out to you').locator('..');
 
-	test('applies a flat 4.8% and derives the payout', async ({ page }) => {
+	test('applies the banded rate and derives the payout', async ({ page }) => {
 		await slider(page).fill('10000');
 
-		await expect(page.getByText('4.8 %')).toBeVisible();
+		// R10 000 sits in the Medium band (up to R11 000) at 4%.
+		await expect(page.getByText('4.0 %')).toBeVisible();
 		expect(plain(await exact(page).inputValue())).toBe('R 10 000.00');
 
 		const section = page.locator('#fees');
-		await expect(section).toContainText('480.00'); // deduction
-		await expect(section).toContainText('9 520.00'.replace(/ /g, ' ')); // payout
+		await expect(section).toContainText('400.00'); // deduction
+		await expect(section).toContainText('9 600.00'); // payout
 	});
 
 	test('zero invoice yields a zero fee and a 0.0% rate', async ({ page }) => {
@@ -53,11 +155,30 @@ test.describe('fee calculator', () => {
 		await expect(page.locator('#fees')).toContainText('R 0.00');
 	});
 
-	test('the maximum invoice resolves correctly', async ({ page }) => {
+	test('the maximum invoice resolves at the Large band', async ({ page }) => {
 		await slider(page).fill('20000');
 		const section = page.locator('#fees');
-		await expect(section).toContainText('960.00'); // 4.8% of 20 000
-		await expect(section).toContainText('19 040.00'); // payout
+		await expect(page.getByText('3.0 %')).toBeVisible();
+		await expect(section).toContainText('600.00'); // 3% of 20 000
+		await expect(section).toContainText('19 400.00'); // payout
+	});
+
+	// Band edges are where a tiered model most easily regresses: a tier owns its
+	// own upper bound, and the next rand crosses into the band below it. Driven
+	// through the exact-amount field because the slider steps in hundreds and
+	// cannot express a one-rand crossing.
+	test('each band claims its own upper bound', async ({ page }) => {
+		for (const [amount, rate] of [
+			['2000', '5.0 %'],
+			['2001', '4.5 %'],
+			['4000', '4.5 %'],
+			['4001', '4.0 %'],
+			['11000', '4.0 %'],
+			['11001', '3.0 %']
+		] as const) {
+			await exact(page).fill(amount);
+			await expect(page.getByText(rate)).toBeVisible();
+		}
 	});
 
 	test('quick-select, slider and text field stay in sync', async ({ page }) => {
@@ -133,10 +254,24 @@ test.describe('waitlist', () => {
 		await expect(page.locator('#hero-message')).toContainText("You're on the list");
 	});
 
-	test('the two forms report independently', async ({ page }) => {
+	test('the three forms report independently', async ({ page }) => {
 		await page.locator('#cta-email').fill('thabo@example.com');
-		await page.getByRole('button', { name: 'Join Waitlist' }).last().click();
+		await page
+			.locator('[data-section="cta"]')
+			.getByRole('button', { name: /Join Waitlist/i })
+			.click();
 		await expect(page.locator('#cta-message')).toContainText("You're on the list");
+		await expect(page.locator('#hero-message')).toHaveText('');
+		await expect(page.locator('#clients-message')).toHaveText('');
+	});
+
+	test('the client section carries its own waitlist form', async ({ page }) => {
+		await page.locator('#clients-email').fill('lerato@example.com');
+		await page
+			.locator('[data-section="clients"]')
+			.getByRole('button', { name: /Join Waitlist/i })
+			.click();
+		await expect(page.locator('#clients-message')).toContainText("You're on the list");
 		await expect(page.locator('#hero-message')).toHaveText('');
 	});
 });

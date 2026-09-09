@@ -7,8 +7,10 @@ export const site = {
 };
 
 export const nav = [
-	{ label: 'Service Providers', href: '/' },
-	{ label: 'Clients', href: '/clients' },
+	// Jumps to the service-provider block on the landing page rather than
+	// loading a route. Rooted at "/" so it still resolves from other pages.
+	{ label: 'Service Providers', href: '/#service-providers' },
+	{ label: 'Clients', href: '/#clients' },
 	{ label: 'About Cause', href: '/about' }
 ];
 
@@ -17,10 +19,14 @@ export const footer = {
 	address: ['Khowa, Elliot,', 'Eastern Cape', '5460', 'South Africa'],
 	legal: '© All rights reserved 2026',
 	privacy: { label: 'Privacy NOTE', href: '/privacy' },
-	// The design carries Facebook and Instagram. The handles themselves are not
-	// in the file — these point at the bare platforms until the real URLs land.
+	// Instagram is held back until the account is live — the design carries it,
+	// so it is commented out rather than deleted, ready to switch back on.
 	socials: [
-		{ label: 'Cause on Facebook', href: 'https://facebook.com', icon: 'facebook' as const },
-		{ label: 'Cause on Instagram', href: 'https://instagram.com', icon: 'instagram' as const }
+		{
+			label: 'Cause on Facebook',
+			href: 'https://www.facebook.com/profile.php?id=61592719810744',
+			icon: 'facebook' as const
+		}
+		// { label: 'Cause on Instagram', href: '…', icon: 'instagram' as const }
 	]
 };

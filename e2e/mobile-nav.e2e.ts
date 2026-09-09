@@ -29,4 +29,37 @@ test('a drawer link navigates and closes the drawer', async ({ page }) => {
 	const drawer = page.getByRole('dialog', { name: 'Site menu' });
 	await drawer.getByRole('link', { name: 'Service Providers' }).click();
 	await expect(drawer).toBeHidden();
+
+	// Same behaviour as on desktop: it jumps to the service-provider block on
+	// this page rather than loading a route.
+	await expect(page).toHaveURL(/#service-providers$/);
+	await expect
+		.poll(async () =>
+			page.evaluate(() => {
+				const t = document.getElementById('service-providers')!.getBoundingClientRect();
+				const nav = document.querySelector('header')!.getBoundingClientRect();
+				return Math.abs(t.top - nav.bottom);
+			})
+		)
+		.toBeLessThan(1);
+});
+
+test('the drawer reaches the client section too', async ({ page }) => {
+	await page.goto('/');
+	await page.getByRole('button', { name: 'Open menu' }).click();
+
+	const drawer = page.getByRole('dialog', { name: 'Site menu' });
+	await drawer.getByRole('link', { name: 'Clients' }).click();
+	await expect(drawer).toBeHidden();
+
+	await expect(page).toHaveURL(/#clients$/);
+	await expect
+		.poll(async () =>
+			page.evaluate(() => {
+				const t = document.getElementById('clients')!.getBoundingClientRect();
+				const nav = document.querySelector('header')!.getBoundingClientRect();
+				return Math.abs(t.top - nav.bottom);
+			})
+		)
+		.toBeLessThan(1);
 });

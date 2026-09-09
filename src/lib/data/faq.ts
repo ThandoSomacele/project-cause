@@ -2,7 +2,8 @@
  * The six questions come from the design (node 4612:24300). Every row is
  * collapsed in the Figma frame, so the answers are NOT in the design — they are
  * drafted here from the claims the rest of the page makes (R95/mnth, no credit
- * system, 4.8% incl. VAT on instant EFT, cash payments not charged).
+ * system, banded rates topping out at 5% excl. VAT on instant EFT, cash
+ * payments not charged).
  *
  * These need a review pass from whoever owns the product copy before launch.
  */
@@ -18,7 +19,7 @@ export const faq = {
 		'Everything you need to know about finding, hiring, and working with verified top-tier artisans on our platform.',
 	footer: {
 		text: 'Still have questions? We are here to help.',
-		link: { label: 'Contact Support', href: '/support' }
+		link: { label: 'Contact Support', href: 'mailto:support@causeafrica.co.za' }
 	},
 	items: [
 		{
@@ -40,7 +41,7 @@ export const faq = {
 		{
 			question: 'Do I get charged for cash payments?',
 			answer:
-				'No. If you and the client settle in cash, Cause takes nothing. The transaction fee of up to 4.8% including VAT applies only to instant EFT payments processed through the platform.'
+				'No. If you and the client settle in cash, Cause takes nothing. The transaction fee of up to 5% excluding VAT applies only to instant EFT payments processed through the platform.'
 		},
 		{
 			question: 'What do I need to register?',

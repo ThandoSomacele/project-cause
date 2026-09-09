@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { site } from '$lib/data/site';
+	import AudienceSelector from '$lib/components/sections/AudienceSelector.svelte';
 	import Hero from '$lib/components/sections/Hero.svelte';
 	import ValueOffering from '$lib/components/sections/ValueOffering.svelte';
 	import Comparison from '$lib/components/sections/Comparison.svelte';
@@ -9,6 +10,8 @@
 	import FeeCalculator from '$lib/components/sections/FeeCalculator.svelte';
 	import WaitlistCta from '$lib/components/sections/WaitlistCta.svelte';
 	import Faq from '$lib/components/sections/Faq.svelte';
+	import ClientsSection from '$lib/components/sections/ClientsSection.svelte';
+	import ProcessSteps from '$lib/components/sections/ProcessSteps.svelte';
 
 	let { form } = $props();
 </script>
@@ -21,12 +24,25 @@
 	<meta property="og:type" content="website" />
 </svelte:head>
 
-<Hero {form} />
-<ValueOffering />
-<Comparison />
-<GetPaid />
-<SubscriptionCard />
-<ProductCarousel />
-<FeeCalculator />
-<WaitlistCta {form} />
-<Faq />
+<AudienceSelector />
+
+<!-- Everything below is the service-provider side of the product. It is grouped
+     under one id so the selector above and the primary nav can both jump
+     straight to it without leaving the page. scroll-mt clears the 84px sticky
+     navbar so the section's top edge is not hidden under it on arrival. -->
+<div id="service-providers" class="scroll-mt-[84px]">
+	<Hero {form} />
+	<ValueOffering />
+	<Comparison />
+	<GetPaid />
+	<SubscriptionCard />
+	<ProductCarousel />
+	<FeeCalculator />
+	<WaitlistCta {form} />
+	<Faq />
+</div>
+
+<!-- The client side of the product, closing the page. Carries its own id so the
+     nav and the selector jump straight to it. -->
+<ClientsSection {form} />
+<ProcessSteps />

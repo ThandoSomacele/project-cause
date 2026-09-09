@@ -34,3 +34,6 @@ design/tools-corner.png
 
 # Local Netlify folder
 .netlify
+design/join-*.png
+design/render-*.png
+design/frame-1x.png
