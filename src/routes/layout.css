@@ -47,25 +47,27 @@
 	/* Fluid scale: floor at 390px, ceiling at 1440px. */
 	/* The hero headline runs much larger than the section headings: ~73px at the
 	   design's 1425px frame, measured off the render. */
-	/* Caps at 1346px viewport — the same width container-wide caps at — so the
-	   headline stops growing exactly where the layout locks. That keeps the
-	   bracket arrow on the "t" and the pole through the "d" at every width
-	   above the cap, instead of drifting a few px as the type kept scaling. */
-	--text-hero: clamp(2.3125rem, 1.328rem + 4.038vw, 4.725rem); /* 37 → 75.6 */
+	/* Strictly proportional (75.6/1425 = 5.305vw) rather than linearly
+	   interpolated, then capped at the design's own size. The pole and the
+	   bracket arrow are positioned against the container, so the headline has to
+	   scale on exactly the same ratio the container does or they drift apart —
+	   a linear ramp is off by ~1px per 100px of viewport. Floors at 37px, which
+	   takes effect below 697px where the artwork is hidden anyway. */
+	--text-hero: clamp(2.3125rem, 5.305vw, 4.725rem); /* 37 → 75.6 */
 	--text-hero--line-height: 1.02;
 	--text-hero--letter-spacing: -0.01em;
 
-	--text-display: clamp(2rem, 1.443rem + 2.286vw, 3.5rem); /* 32 → 56 */
+	--text-display: clamp(2rem, 1.4348rem + 2.3188vw, 3.5rem); /* 32 → 56 @1425 */
 	--text-display--line-height: 0.96;
 	--text-display--letter-spacing: -0.02em;
 
 	/* Marketing section headings run at 56px in the design (Inter). The FAQ is a
 	   separate, smaller 48px Geist heading — see --text-h3-alt. */
-	--text-h2: clamp(1.875rem, 1.271rem + 2.476vw, 3.5rem); /* 30 → 56 */
+	--text-h2: clamp(1.875rem, 1.2627rem + 2.5121vw, 3.5rem); /* 30 → 56 @1425 */
 	--text-h2--line-height: 1.03;
 	--text-h2--letter-spacing: -0.02em;
 
-	--text-h2-alt: clamp(1.75rem, 1.353rem + 1.63vw, 3rem); /* 28 → 48, FAQ */
+	--text-h2-alt: clamp(1.75rem, 1.279rem + 1.9324vw, 3rem); /* 28 → 48 @1425, FAQ */
 	--text-h2-alt--line-height: 1.08;
 	--text-h2-alt--letter-spacing: -0.03em;
 
@@ -169,6 +171,17 @@
 	@media (width >= 48rem) {
 		padding-inline: 2rem;
 	}
+
+	/* From lg up the desktop composition applies, and it is the only place the
+	   design's absolute artwork lives. Track the design's own 1264/1425 ratio so
+	   the box scales with the viewport instead of hitting a fixed cap: every
+	   %-positioned decoration resolves against this padding box, and every
+	   vw-positioned one is written on the same 1425 basis, so the two stay in
+	   register at any width. Both cap at the design's width. */
+	@media (width >= 64rem) {
+		max-width: min(1264px, 88.702vw);
+		padding-inline: min(2.246vw, 2rem);
+	}
 }
 
 @utility container-wide {
@@ -179,5 +192,13 @@
 
 	@media (width >= 48rem) {
 		padding-inline: 2rem;
+	}
+
+	/* Same rule as container-page — 1346/1425 here. This is the box the hero
+	   headline and the device cluster both hang off, so it is what keeps the
+	   pole on the "d" and the arrow on the "t" at every desktop width. */
+	@media (width >= 64rem) {
+		max-width: min(1346px, 94.456vw);
+		padding-inline: min(2.246vw, 2rem);
 	}
 }
