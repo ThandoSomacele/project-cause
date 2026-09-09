@@ -3,13 +3,18 @@
 	import SectionHeading from '$lib/components/ui/SectionHeading.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 
+	// Icons for this section, taken from the Figma render rather than reused from
+	// elsewhere: the earlier 'jobs' and headset 'support' stand-ins belong to the
+	// tab bar. The eye and the burst are lifted from the 1:1 render at 2x for
+	// their 26px slot — they are too intricate to redraw faithfully by hand, and
+	// the file's SVG export is rate-limited. Values include the extension.
 	const icons: Record<string, string> = {
-		'no-hidden-fees': 'banknote',
-		'no-surprises': 'no-confusion',
-		'cha-ching': 'banknote',
-		pricing: 'banknote',
-		control: 'jobs',
-		support: 'support'
+		'no-hidden-fees': 'fees-eye.png',
+		'no-surprises': 'no-surprises.png',
+		'cha-ching': 'banknote.svg',
+		pricing: 'banknote.svg',
+		control: 'control-panel.svg',
+		support: 'chat-smile.svg'
 	};
 </script>
 
@@ -24,13 +29,17 @@
 			<span class="absolute -top-[3px] -right-[3px] h-2 w-2 rounded-full bg-ink"></span>
 		</div>
 
-		<SectionHeading lines={getPaid.heading} indents={['lg:pl-[8%]', 'lg:pl-[42.8%]']} />
+		<SectionHeading
+			lines={getPaid.heading}
+			weight="font-normal"
+			indents={['lg:pl-[8%]', 'lg:pl-[42.8%]']}
+		/>
 
 		<ul class="mt-7 flex flex-wrap items-center gap-x-10 gap-y-3 lg:justify-center">
 			{#each getPaid.chips as chip (chip.label)}
 				<li class="flex items-center gap-2.5 text-[17px] text-ink">
 					<img
-						src="/icons/{icons[chip.icon]}.svg"
+						src="/icons/{icons[chip.icon]}"
 						alt=""
 						aria-hidden="true"
 						width="26"
@@ -48,7 +57,7 @@
 					{#each getPaid.benefits as benefit (benefit.title)}
 						<li class="flex gap-5">
 							<img
-								src="/icons/{icons[benefit.icon]}.svg"
+								src="/icons/{icons[benefit.icon]}"
 								alt=""
 								aria-hidden="true"
 								width="34"
@@ -64,7 +73,7 @@
 				</ul>
 
 				<div class="mt-9">
-					<Button href={getPaid.cta.href}>{getPaid.cta.label}</Button>
+					<Button href={getPaid.cta.href} variant="accent-ink">{getPaid.cta.label}</Button>
 				</div>
 			</div>
 

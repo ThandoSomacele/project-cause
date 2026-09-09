@@ -4,43 +4,37 @@
 </script>
 
 <section data-section="subscription" class="relative overflow-hidden bg-steel pb-16 lg:pb-[min(7.3vw,104px)]">
-	<!-- Tools artwork sitting in the section's bottom-left corner, mostly
-	     off-canvas, as in the design. -->
+	<!-- Scattered tools in the section's bottom-left corner, behind the card and
+	     bleeding off the left edge. A transparent asset in the design, not the
+	     opaque flatlay used higher up the page; the file's own export is
+	     rate-limited, so it is keyed out of the current node render. Taken from
+	     that render specifically because the older page export still carried the
+	     mascot in this corner. Starts 185px below the card top. -->
 	<img
-		src="/images/tools-flatlay.webp"
+		src="/images/tools-corner.webp"
 		alt=""
 		aria-hidden="true"
-		width="2200"
-		height="1020"
+		width="322"
+		height="515"
 		loading="lazy"
-		class="pointer-events-none absolute -bottom-[6vw] -left-[38vw] hidden w-[55vw] max-w-none lg:block"
+		class="pointer-events-none absolute top-[min(12.98vw,185px)] left-0 hidden w-[min(25.26vw,360px)] max-w-none lg:block"
 	/>
 
-	<div class="container-page relative">
-		<!-- 643 / 585 of a 1228px row in the design. -->
+	<div class="relative mx-auto w-full max-w-[1228px] px-5 md:px-8 lg:max-w-[min(86.18vw,1228px)] lg:px-0">
+		<!-- 643 / 585 of a 1228px row, measured on the current Figma node. -->
 		<div class="grid overflow-hidden rounded-[16px] lg:grid-cols-[52.4%_47.6%]">
 			{#each pricing.tiers as tier (tier.id)}
 				<div
 					class={[
-						'relative px-8 py-12 sm:px-12 lg:py-[min(4.91vw,70px)]',
+						'relative px-8 py-12 sm:px-12 lg:pt-[min(4.07vw,58px)] lg:pb-[min(2.88vw,41px)]',
 						tier.id === 'paid'
-							? 'bg-ink text-white lg:pr-10 lg:pl-[min(5.33vw,76px)]'
-							: 'bg-cream text-ink lg:px-[min(4.21vw,60px)]'
+							? 'bg-ink text-white lg:pr-10 lg:pl-[min(6.74vw,96px)]'
+							: 'bg-line text-ink lg:pr-[min(4.21vw,60px)] lg:pl-[min(2.95vw,42px)]'
 					]}
 				>
-					{#if tier.id === 'paid'}
-						<!-- Mascot climbs the card's left edge, clipped by the card. -->
-						<img
-							src="/images/mascot-pole.svg"
-							alt=""
-							aria-hidden="true"
-							class="pointer-events-none absolute -bottom-10 -left-1 hidden w-[min(11.23vw,160px)] lg:block"
-						/>
-					{/if}
-
 					<p
 						class={[
-							'relative text-[clamp(3rem,2.3rem+2.9vw,5rem)] leading-none font-bold',
+							'relative text-[clamp(3rem,1.775rem+5.024vw,6.25rem)] leading-none font-bold',
 							tier.id === 'free' && 'text-ink'
 						]}
 					>
@@ -55,14 +49,19 @@
 						{tier.period}
 					</p>
 
-					<div class={['relative', tier.id === 'paid' && 'lg:pl-[min(3.65vw,52px)]']}>
-						<h3 class="mt-8 text-[clamp(1.375rem,1.1rem+1.1vw,1.875rem)] leading-tight font-normal">
+					<div
+						class={[
+							'relative',
+							tier.id === 'paid' ? 'lg:pl-[min(6.88vw,98px)]' : 'lg:pl-[min(7.23vw,103px)]'
+						]}
+					>
+						<h3 class="mt-8 text-[clamp(1.375rem,1.1rem+1.1vw,1.875rem)] leading-tight font-normal lg:mt-2">
 							{#each tier.title as segment, i (i)}
 								<span class="block"><RichText segments={[segment]} /></span>
 							{/each}
 						</h3>
 
-						<ul class="mt-7 flex flex-col gap-4">
+						<ul class="mt-7 flex flex-col gap-4 lg:-ml-[37px]">
 							{#each tier.items as item (item)}
 								<li class="flex items-start gap-4 text-[15px] leading-6">
 									<img
@@ -81,8 +80,8 @@
 						{#if tier.note}
 							<p
 								class={[
-									'mt-14 max-w-[20rem] text-[11px] leading-5 italic',
-									tier.id === 'paid' ? 'text-white/70 lg:ml-12' : 'text-ink/70'
+									'mt-14 max-w-[20rem] text-[11px] leading-5 italic lg:mt-[min(11.3vw,161px)]',
+									tier.id === 'paid' ? 'text-white/70' : 'text-ink/70'
 								]}
 							>
 								<span class="font-bold not-italic">please note:</span>

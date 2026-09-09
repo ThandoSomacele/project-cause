@@ -5,7 +5,7 @@
 		/** Renders an anchor when set, a button otherwise. */
 		href?: string;
 		type?: 'button' | 'submit';
-		variant?: 'primary' | 'dark' | 'white' | 'outline';
+		variant?: 'primary' | 'accent-ink' | 'dark' | 'white' | 'outline';
 		size?: 'md' | 'lg';
 		disabled?: boolean;
 		class?: string;
@@ -28,6 +28,9 @@
 
 	const variants = {
 		primary: 'bg-accent text-white hover:bg-accent-dark',
+		// The get-paid CTA sets its label in ink on the orange, not white —
+		// sampled #0A1538 on #FF8404 off the Figma render.
+		'accent-ink': 'bg-accent text-ink hover:bg-accent-dark hover:text-white',
 		dark: 'bg-ink text-white hover:bg-ink-800',
 		white: 'bg-white text-ink hover:bg-cream',
 		// The nav CTA is the one pill-shaped button in the design.
