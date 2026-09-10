@@ -83,13 +83,20 @@ test.describe('audience selector', () => {
 		expect(loads).toBe(0);
 	});
 
-	test('the client section closes the page, with the process section after it', async ({
+	test('the client half runs to the end of the page, mirroring the provider half', async ({
 		page
 	}) => {
-		const sections = await page.locator('[data-section]').evaluateAll((els) =>
-			els.map((e) => (e as HTMLElement).dataset.section)
-		);
-		expect(sections.slice(-2)).toEqual(['clients', 'process']);
+		const sections = await page
+			.locator('[data-section]')
+			.evaluateAll((els) => els.map((e) => (e as HTMLElement).dataset.section));
+		expect(sections.slice(sections.indexOf('clients'))).toEqual([
+			'clients',
+			'process',
+			'client-comparison',
+			'client-benefits',
+			'client-cta',
+			'client-faq'
+		]);
 	});
 });
 
@@ -197,24 +204,43 @@ test.describe('fee calculator', () => {
 });
 
 test.describe('FAQ accordion', () => {
+	// Panels are reached through each button's own aria-controls rather than a
+	// literal id: the page mounts two accordions, so the ids are per-instance.
+	const panelOf = (page: Page, name: string) =>
+		page
+			.getByRole('button', { name })
+			.getAttribute('aria-controls')
+			.then((id) => page.locator(`#${id}`));
+
 	test('opens and closes an answer', async ({ page }) => {
 		const question = page.getByRole('button', { name: 'Can I use Cause for free?' });
+		const panel = await panelOf(page, 'Can I use Cause for free?');
 		await expect(question).toHaveAttribute('aria-expanded', 'false');
 
 		await question.click();
 		await expect(question).toHaveAttribute('aria-expanded', 'true');
-		await expect(page.locator('#faq-panel-0')).toBeVisible();
+		await expect(panel).toBeVisible();
 
 		await question.click();
 		await expect(question).toHaveAttribute('aria-expanded', 'false');
-		await expect(page.locator('#faq-panel-0')).toBeHidden();
+		await expect(panel).toBeHidden();
 	});
 
 	test('only one answer is open at a time', async ({ page }) => {
+		const first = await panelOf(page, 'Can I use Cause for free?');
+		const third = await panelOf(page, 'Do I pay to chat to clients?');
 		await page.getByRole('button', { name: 'Can I use Cause for free?' }).click();
 		await page.getByRole('button', { name: 'Do I pay to chat to clients?' }).click();
-		await expect(page.locator('#faq-panel-0')).toBeHidden();
-		await expect(page.locator('#faq-panel-2')).toBeVisible();
+		await expect(first).toBeHidden();
+		await expect(third).toBeVisible();
+	});
+
+	test('every panel id on the page is unique', async ({ page }) => {
+		const ids = await page
+			.locator('[role="region"][aria-labelledby]')
+			.evaluateAll((els) => els.map((e) => e.id));
+		expect(ids.length).toBeGreaterThan(6);
+		expect(new Set(ids).size).toBe(ids.length);
 	});
 });
 

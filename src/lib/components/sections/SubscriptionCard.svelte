@@ -43,7 +43,7 @@
 					<p
 						class={[
 							'relative mt-3 text-[22px]',
-							tier.id === 'paid' ? 'text-mint' : 'text-accent-dark'
+							tier.id === 'paid' ? 'text-mint' : 'text-ink'
 						]}
 					>
 						{tier.period}
@@ -56,23 +56,23 @@
 						]}
 					>
 						<h3 class="mt-8 text-[clamp(1.375rem,1.1rem+1.1vw,1.875rem)] leading-tight font-normal lg:mt-2">
-							{#each tier.title as segment, i (i)}
-								<span class="block"><RichText segments={[segment]} /></span>
-							{/each}
+							<RichText segments={tier.title} />
 						</h3>
 
 						<ul class="mt-7 flex flex-col gap-4 lg:-ml-[37px]">
-							{#each tier.items as item (item)}
-								<li class="flex items-start gap-4 text-[15px] leading-6">
+							{#each tier.items as item, i (i)}
+								<!-- Same outlined mint check the How We're Better panel uses,
+								     at the 22px the design measures here against its 24px. -->
+								<li class="flex items-start gap-4 text-[15px] leading-6 font-semibold">
 									<img
-										src="/icons/check-circle.svg"
+										src="/icons/better-check.svg"
 										alt=""
 										aria-hidden="true"
-										width="21"
-										height="21"
-										class="mt-0.5 h-[21px] w-[21px] shrink-0"
+										width="24"
+										height="24"
+										class="mt-0.5 h-[22px] w-[22px] shrink-0"
 									/>
-									{item}
+									<span><RichText segments={item} /></span>
 								</li>
 							{/each}
 						</ul>
@@ -84,7 +84,7 @@
 									tier.id === 'paid' ? 'text-white/70' : 'text-ink/70'
 								]}
 							>
-								<span class="font-bold not-italic">please note:</span>
+								<span class="font-bold not-italic">Disclaimer:</span>
 								{tier.note}
 							</p>
 						{/if}

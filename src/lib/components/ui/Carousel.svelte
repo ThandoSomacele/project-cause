@@ -60,13 +60,24 @@
 	onfocusin={() => (held = true)}
 	onfocusout={() => (held = false)}
 >
-	<div aria-live="polite">
+	<!--
+		All slides stack in one grid cell, so the track is always as tall as the
+		tallest slide and the section keeps its height when the dots are used.
+		`hidden` was removing the inactive slides from layout, which let the height
+		jump between slides of different copy lengths.
+
+		`invisible` is visibility:hidden, not display:none — the box still reserves
+		its space but leaves the accessibility tree and the tab order, and `inert`
+		makes that explicit for anything the CSS alone would miss.
+	-->
+	<div class="grid" aria-live="polite">
 		{#each { length: count } as _, i (i)}
 			<div
 				role="group"
 				aria-roledescription="slide"
 				aria-label="Slide {i + 1} of {count}"
-				hidden={i !== index}
+				class={['col-start-1 row-start-1', i !== index && 'invisible']}
+				inert={i !== index}
 			>
 				{@render slide(i)}
 			</div>

@@ -3,6 +3,22 @@
 	import SectionHeading from '$lib/components/ui/SectionHeading.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 
+	/** Same composition on both halves of the page; only the copy and the photo
+	 *  change, so both arrive as props. */
+	let {
+		data = getPaid,
+		name = 'get-paid',
+		photo = '/images/worker-phone.webp',
+		indents = ['lg:pl-[8%]', 'lg:pl-[42.8%]'],
+		ruleStop = 'right-[58%]'
+	}: {
+		data?: typeof getPaid;
+		name?: string;
+		photo?: string;
+		indents?: [string, string];
+		ruleStop?: string;
+	} = $props();
+
 	// Icons for this section, taken from the Figma render rather than reused from
 	// elsewhere: the earlier 'jobs' and headset 'support' stand-ins belong to the
 	// tab bar. The eye and the burst are lifted from the 1:1 render at 2x for
@@ -18,33 +34,37 @@
 	};
 </script>
 
-<section data-section="get-paid" class="bg-steel pt-16 pb-16 lg:pt-[min(7.3vw,104px)] lg:pb-16">
+<section data-section={name} class="bg-steel pt-16 pb-16 lg:pt-[min(7.3vw,104px)] lg:pb-16">
 	<div class="container-page relative">
 		<!-- Navy rule running in from the left edge to a dot, level with the second
 		     heading line — the same decorative treatment the design uses elsewhere. -->
 		<div
-			class="pointer-events-none absolute top-[min(9.4vw,134px)] right-[58%] left-[-50vw] hidden h-[2px] bg-ink md:block"
+			class="pointer-events-none absolute top-[min(9.4vw,134px)] {ruleStop} left-[-50vw] hidden h-[2px] bg-ink md:block"
 			aria-hidden="true"
 		>
 			<span class="absolute -top-[3px] -right-[3px] h-2 w-2 rounded-full bg-ink"></span>
 		</div>
 
 		<SectionHeading
-			lines={getPaid.heading}
+			lines={data.heading}
 			weight="font-normal"
-			indents={['lg:pl-[8%]', 'lg:pl-[42.8%]']}
+			{indents}
 		/>
 
-		<ul class="mt-7 flex flex-wrap items-center gap-x-10 gap-y-3 lg:justify-center">
-			{#each getPaid.chips as chip (chip.label)}
-				<li class="flex items-center gap-2.5 text-[17px] text-ink">
+		<!-- Sized off the design rather than by eye: the chip cap height runs 45.5%
+		     of the heading's and each icon is ~2.5x that cap, which at the 56px
+		     heading works out to a 25px face with 46px icons. Fluid so the row keeps
+		     that relationship below the design width, with a smaller mobile base. -->
+		<ul class="mt-7 flex flex-wrap items-center gap-x-10 gap-y-3 lg:gap-x-[min(1.965vw,28px)] lg:justify-center">
+			{#each data.chips as chip (chip.label)}
+				<li class="flex items-center gap-2.5 text-[17px] text-ink lg:text-[min(1.754vw,25px)]">
 					<img
 						src="/icons/{icons[chip.icon]}"
 						alt=""
 						aria-hidden="true"
-						width="26"
-						height="26"
-						class="h-[26px] w-[26px] shrink-0 object-contain"
+						width="46"
+						height="46"
+						class="h-[26px] w-[26px] shrink-0 object-contain lg:h-[min(3.228vw,46px)] lg:w-[min(3.228vw,46px)]"
 					/>
 					{chip.label}
 				</li>
@@ -54,7 +74,7 @@
 		<div class="mt-12 grid items-center gap-10 lg:mt-20 lg:grid-cols-[minmax(0,48%)_minmax(0,40%)] lg:justify-between lg:gap-16">
 			<div>
 				<ul class="flex flex-col gap-7">
-					{#each getPaid.benefits as benefit (benefit.title)}
+					{#each data.benefits as benefit (benefit.title)}
 						<li class="flex gap-5">
 							<img
 								src="/icons/{icons[benefit.icon]}"
@@ -62,7 +82,7 @@
 								aria-hidden="true"
 								width="34"
 								height="34"
-								class="mt-0.5 h-[34px] w-[34px] shrink-0 object-contain"
+								class="mt-0.5 h-[34px] w-[34px] shrink-0 object-contain lg:h-10 lg:w-10"
 							/>
 							<div>
 								<h3 class="text-[17px] font-bold text-ink">{benefit.title}</h3>
@@ -73,12 +93,12 @@
 				</ul>
 
 				<div class="mt-9">
-					<Button href={getPaid.cta.href} variant="accent-ink">{getPaid.cta.label}</Button>
+					<Button href={data.cta.href} variant="accent-ink">{data.cta.label}</Button>
 				</div>
 			</div>
 
 			<img
-				src="/images/worker-phone.webp"
+				src={photo}
 				alt="A service provider checking job leads on his phone"
 				width="1400"
 				height="1050"

@@ -12,6 +12,8 @@
 	import Faq from '$lib/components/sections/Faq.svelte';
 	import ClientsSection from '$lib/components/sections/ClientsSection.svelte';
 	import ProcessSteps from '$lib/components/sections/ProcessSteps.svelte';
+	import { clientComparison, clientBenefits, clientCta } from '$lib/data/content';
+	import { clientFaq } from '$lib/data/faq';
 
 	let { form } = $props();
 </script>
@@ -43,6 +45,14 @@
 </div>
 
 <!-- The client side of the product, closing the page. Carries its own id so the
-     nav and the selector jump straight to it. -->
+     nav and the selector jump straight to it.
+
+     It mirrors the provider half section for section, as the design does: the
+     same Comparison, GetPaid, WaitlistCta and Faq components render again with
+     client copy, which is what keeps the two halves visually identical. -->
 <ClientsSection {form} />
 <ProcessSteps />
+<Comparison data={clientComparison} name="client-comparison" />
+<GetPaid data={clientBenefits} name="client-benefits" photo="/images/kitchen-consult.webp" />
+<WaitlistCta {form} data={clientCta} name="client-cta" source="client-cta" />
+<Faq data={clientFaq} name="client-faq" />

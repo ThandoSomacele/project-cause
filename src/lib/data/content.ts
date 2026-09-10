@@ -249,11 +249,86 @@ export const getPaid = {
 	cta: { label: 'Join waitlist', href: '#waitlist' }
 };
 
+/**
+ * The client half of the page mirrors the service-provider half section for
+ * section — same components, different copy — which is how the design lays it
+ * out. Headings are read off the supplied full-page screenshot; the body copy
+ * is adapted from the provider side into the client voice and needs a review
+ * pass from whoever owns the product copy.
+ */
+export const clientComparison = {
+	heading: [
+		[{ text: 'From ' }, { text: 'repair headache', style: 'italic' as const }],
+		[
+			{ text: 'to, ' },
+			{ text: 'peace of mind....', tone: 'accent' as const, weight: 'strong' as const }
+		]
+	],
+	alternatives: {
+		title: 'The Alternatives',
+		items: [
+			'Chasing quotes that never arrive',
+			'Unvetted strangers turning up at your door',
+			'No recourse when the work goes wrong'
+		]
+	},
+	better: {
+		title: "How We're Better",
+		items: [
+			'Every provider vetted before they list',
+			'A clear quote before any work starts',
+			'A review process that protects you'
+		],
+		cta: { label: 'Join waitlist', href: '#waitlist' }
+	}
+};
+
+export const clientBenefits = {
+	heading: [
+		[{ text: 'From chaotic ' }, { text: 'guessing,', weight: 'strong' as const }],
+		[{ text: 'to simple ' }, { text: 'convenience', weight: 'strong' as const }]
+	],
+	chips: [
+		{ label: 'No Hidden Fees', icon: 'no-hidden-fees' as const },
+		{ label: 'No Surprises', icon: 'no-surprises' as const },
+		{ label: 'Just Done Right', icon: 'cha-ching' as const }
+	],
+	benefits: [
+		{
+			title: 'Predictable pricing, no surprises',
+			body: 'See the fee before you commit. What you agree to is what you pay, with nothing added once the job is done.',
+			icon: 'pricing' as const
+		},
+		{
+			title: 'Control how you choose a provider',
+			body: 'Compare profiles, ratings and vetted job history, then decide who comes to your door and when they arrive.',
+			icon: 'control' as const
+		},
+		{
+			title: 'Support you can rely on',
+			body: 'Have peace of mind from our comprehensive processes that ensure issues are handled openly & fairly.',
+			icon: 'support' as const
+		}
+	],
+	cta: { label: 'Join waitlist', href: '#waitlist' }
+};
+
+export const clientCta = {
+	heading: [
+		[{ text: 'Risky DIY?... Or a trusted & vetted' }],
+		[{ text: 'service provider?', weight: 'strong' as const }]
+	],
+	subhead: 'Join the waitlist and get early access to a new era'
+};
+
 export const pricing = {
 	/**
 	 * The revised Figma (node 4679:13736) splits this into two panels — 643px
-	 * and 585px of a 1228px row — with the right one holding the free tier. The
-	 * paid tier keeps the copy from the earlier design.
+	 * and 585px of a 1228px row — with the right one holding the free tier.
+	 *
+	 * Titles and list items are segment arrays because the design emphasises one
+	 * run in each: the panel copy sits at semibold with the differentiating word
+	 * — "ranking", "Prioritized", "Basic" — a step heavier.
 	 */
 	tiers: [
 		{
@@ -261,31 +336,43 @@ export const pricing = {
 			price: 'R95',
 			period: '/mnth',
 			title: [
-				{ text: 'A subscription that puts' },
-				{ text: 'control back in your hands', weight: 'strong' as const }
+				{ text: 'Stand out in the results ' },
+				{ text: 'ranking', weight: 'strong' as const }
 			],
 			items: [
-				'Get found through search by clients',
-				'Receive your project payments as cash OR',
-				'Receive your payments as instant EFT *'
+				[
+					{ text: 'Get found through ' },
+					{ text: 'Prioritized', weight: 'strong' as const },
+					{ text: ' search rank' }
+				],
+				[{ text: 'Receive your project payments as cash OR' }],
+				[{ text: 'Receive your payments as instant EFT *' }]
 			],
-			note: 'Instant EFT payments will have a transaction cost of up to 5%, excluding VAT, refer to calculator.*'
+			// The design reads "inclusive of VAT"; kept as exclusive per the brief,
+			// which changed that wording after the frame was drawn.
+			note: 'Payments on the platform have a maximum transaction fee of 5% exclusive of VAT and payment gateway costs, refer to calculator.*'
 		},
 		{
 			id: 'free',
 			price: 'Free',
 			period: '/mnth',
-			title: [{ text: 'Get discovered by new clients' }],
+			title: [
+				{ text: 'Get discovered by ' },
+				{ text: 'new clients', weight: 'strong' as const }
+			],
 			items: [
-				'Appear in search with Basic rank',
-				'Receive your project payments as cash OR',
-				'Receive your payments as instant EFT *'
+				[
+					{ text: 'Appear in search with ' },
+					{ text: 'Basic', weight: 'strong' as const },
+					{ text: ' rank' }
+				],
+				[{ text: 'Receive your project payments as cash OR' }],
+				[{ text: 'Receive your payments as instant EFT *' }]
 			],
 			note: null
 		}
 	]
 };
-
 export const carousel = {
 	heading: [
 		[{ text: 'A platform that simply,' }],

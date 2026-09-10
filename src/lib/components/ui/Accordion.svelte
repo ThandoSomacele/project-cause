@@ -4,6 +4,12 @@
 	let { items }: { items: readonly FaqItem[] } = $props();
 
 	let open = $state<number | null>(null);
+
+	// The page renders this component twice — once per audience — so the ids have
+	// to be unique per instance. `$props.id()` gives each mount its own prefix and
+	// stays stable across SSR and hydration, which a counter or a random value
+	// would not.
+	const uid = $props.id();
 </script>
 
 <ul class="rounded-[16px] bg-[#f7f6f2] px-6 py-2 sm:px-12">
@@ -14,8 +20,8 @@
 					type="button"
 					onclick={() => (open = open === i ? null : i)}
 					aria-expanded={open === i}
-					aria-controls="faq-panel-{i}"
-					id="faq-button-{i}"
+					aria-controls="{uid}-panel-{i}"
+					id="{uid}-button-{i}"
 					class="flex w-full items-center justify-between gap-6 py-6 text-left"
 				>
 					<span class="text-[16px] font-medium text-ink">{item.question}</span>
@@ -43,9 +49,9 @@
 			</h3>
 
 			<div
-				id="faq-panel-{i}"
+				id="{uid}-panel-{i}"
 				role="region"
-				aria-labelledby="faq-button-{i}"
+				aria-labelledby="{uid}-button-{i}"
 				hidden={open !== i}
 				class="pb-6"
 			>

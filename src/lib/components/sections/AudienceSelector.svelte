@@ -101,6 +101,18 @@
 				</span>
 			</span>
 		</a>
+
+		<!-- The design's frame shows only the service-provider option, but the
+		     client half of the page still has to be reachable from here — the
+		     brief asks for both the selector and the nav to jump to it. It sits
+		     as a plain link on the chip row's baseline rather than as an invented
+		     second panel. -->
+		<a
+			href={audience.options[1].href}
+			class="relative z-10 mt-6 inline-flex items-center gap-1.5 text-[15px] font-medium text-accent hover:underline lg:mt-0"
+		>
+			Looking for a provider? Go to {audience.options[1].title}s
+		</a>
 	</div>
 
 	<!-- Full-figure mascot, not the cropped `mascot-wave` variant: the design

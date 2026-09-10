@@ -10,7 +10,11 @@ export default defineConfig({
 		// the build, so reusing a running one silently skips it and tests then run
 		// against stale output — which shows up as mysterious hydration failures
 		// when the server bundle and the client chunks disagree.
-		reuseExistingServer: false
+		reuseExistingServer: false,
+		// The command builds before serving, and the build alone now runs past
+		// Playwright's 60s default as the page has grown. Without this the suite
+		// fails on "Timed out waiting 60000ms" before a single test runs.
+		timeout: 180_000
 	},
 	use: { baseURL: 'http://localhost:4173' },
 	projects: [

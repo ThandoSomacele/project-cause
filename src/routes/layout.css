@@ -202,3 +202,33 @@
 		padding-inline: min(2.246vw, 2rem);
 	}
 }
+
+/* Watermark on the final CTA's amber field: large discs and a sweeping ring,
+   one tone lighter than the ground. Sampled off the design at #F2C66C base
+   against #F7CD7C marks — a delta of (5, 7, 16), which is white at ~14% over
+   the amber token, so it is painted as white alpha and tracks the token if it
+   ever changes.
+
+   This is an approximation of hand-drawn artwork. If the shapes are exported
+   from Figma as SVG they should replace it wholesale — see the geometry notes
+   in WaitlistCta.svelte. */
+.cta-watermark {
+	/* Every stop list closes on `transparent 100%`: a radial gradient extends its
+	   last colour to the edges of its box, so a ring that ends on white floods the
+	   whole field instead of drawing a ring. */
+	background:
+		radial-gradient(circle 19.5vw at 67.1% 113%, rgb(255 255 255 / 0.14) 99%, transparent 100%),
+		radial-gradient(circle 17.5vw at 7% 102%, rgb(255 255 255 / 0.14) 99%, transparent 100%),
+		radial-gradient(
+			circle 23vw at 53% 6%,
+			transparent 0 90%,
+			rgb(255 255 255 / 0.14) 90.5% 99.5%,
+			transparent 100%
+		),
+		radial-gradient(
+			circle 31vw at 30% 96%,
+			transparent 0 92%,
+			rgb(255 255 255 / 0.14) 92.5% 99.5%,
+			transparent 100%
+		);
+}
