@@ -62,57 +62,64 @@
 			</ul>
 		</div>
 
-		<!-- The right half is a photograph panel with a centred caption beneath —
-		     no card, no border: the navy runs uninterrupted behind it (sampled
-		     #0C142F either side of the caption). Two tall portraits side by side,
-		     not a grid: there is a single 9px navy gutter and no horizontal one.
-		     The exports carry their own rounded corners in the alpha channel, so
-		     no CSS radius is applied over them. Panel and caption are one link:
-		     the service-provider option. -->
-		<a
-			href={audience.options[0].href}
-			class="group relative z-10 mt-8 block lg:absolute lg:top-[min(5.12vw,73px)] lg:left-[53.53%] lg:mt-0 lg:w-[40.12%]"
+		<!-- The right half is the audience selector proper: two photographs, one
+		     per option, with a caption and a pair of dots beneath. No card and no
+		     border — the navy runs uninterrupted behind them (sampled #0C142F
+		     either side of the caption). The exports carry their own rounded
+		     corners in the alpha channel, so no CSS radius goes over them.
+
+		     Service Provider reads as active at rest; hovering or focusing the
+		     client tile hands it the active state and swaps the caption and dots
+		     with it. The motion is in `.option-pair` / `.option-group` in
+		     layout.css, driven by `:has()` so it needs no scripting. -->
+		<div
+			class="option-group relative z-10 mt-8 lg:absolute lg:top-[min(5.12vw,73px)] lg:left-[53.53%] lg:mt-0 lg:w-[40.12%]"
 		>
-			<span class="grid grid-cols-2 gap-3 lg:gap-[min(0.63vw,9px)]" aria-hidden="true">
-				{#each ['/images/select-provider-a.webp', '/images/select-provider-b.webp'] as src (src)}
-					<img
-						{src}
-						alt=""
-						width="266"
-						height="529"
-						loading="eager"
-						class="aspect-[266/529] w-full object-cover transition-opacity group-hover:opacity-90"
-					/>
+			<div
+				class="option-pair grid grid-cols-2 gap-3 lg:flex lg:h-[min(37.12vw,529px)] lg:items-start lg:gap-[min(0.63vw,9px)]"
+			>
+				{#each audience.options as option, i (option.id)}
+					<a
+						href={option.href}
+						class="option block overflow-hidden rounded-[14px] lg:rounded-none"
+					>
+						<img
+							src={i === 0 ? '/images/select-provider-a.webp' : '/images/select-provider-b.webp'}
+							alt=""
+							width="266"
+							height="529"
+							loading="eager"
+							class="aspect-[266/529] w-full object-cover lg:h-full lg:aspect-auto"
+						/>
+						<span class="sr-only">{option.title}</span>
+					</a>
 				{/each}
-			</span>
+			</div>
 
-			<span class="mt-2 block text-center lg:mt-[min(2.035vw,29px)]">
-				<span class="block text-[17px] font-bold group-hover:text-accent">
-					{audience.options[0].title}
-				</span>
-				<!-- Measure capped at `lg` so the copy sits under the middle of the
-				     panel rather than running its full width; below that the panel is
-				     already narrow, so the text takes the full width and wraps
-				     naturally rather than into a column of two-word lines. -->
-				<span
-					class="mx-auto mt-0 block max-w-full pb-8 text-[13px] leading-[1.65] text-white/75 lg:max-w-[74.6%] lg:pb-8"
-				>
-					{audience.options[0].body}
-				</span>
-			</span>
-		</a>
+			<!-- Which option is active. Indicators, not controls: the tiles above
+			     are the real controls, and a dot that looked clickable but did
+			     nothing would be worse than none. -->
+			<div class="mt-4 flex items-center justify-center gap-2" aria-hidden="true">
+				<span class="option-dot h-2 w-2 rounded-full bg-accent"></span>
+				<span class="option-dot h-2 w-2 rounded-full bg-mint/35"></span>
+			</div>
 
-		<!-- The design's frame shows only the service-provider option, but the
-		     client half of the page still has to be reachable from here — the
-		     brief asks for both the selector and the nav to jump to it. It sits
-		     as a plain link on the chip row's baseline rather than as an invented
-		     second panel. -->
-		<a
-			href={audience.options[1].href}
-			class="relative z-10 mt-6 inline-flex items-center gap-1.5 text-[15px] font-medium text-accent hover:underline lg:mt-0"
-		>
-			Looking for a provider? Go to {audience.options[1].title}s
-		</a>
+			<!-- Both captions occupy one grid cell, so swapping between them cannot
+			     move anything below. -->
+			<div class="mt-3 grid text-center">
+				{#each audience.options as option (option.id)}
+					<span class="option-caption col-start-1 row-start-1 block">
+						<span class="block text-[17px] font-bold">{option.title}</span>
+						<span
+							class="mx-auto mt-1.5 block max-w-full pb-8 text-[13px] leading-[1.65] text-white/75 lg:max-w-[74.6%]"
+						>
+							{option.body}
+						</span>
+					</span>
+				{/each}
+			</div>
+		</div>
+
 	</div>
 
 	<!-- Full-figure mascot, not the cropped `mascot-wave` variant: the design

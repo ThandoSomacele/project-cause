@@ -47,9 +47,9 @@ export const audience = {
 		{
 			id: 'clients',
 			title: 'Client',
-			// The screenshot only shows the service-provider option's copy; this
-			// mirrors it for the client side until the second one is legible.
-			body: 'Find vetted providers for the job at hand. Compare profiles, request a quote, and get the work done.',
+			// Read off the supplied caption crop, upscaled and run through Vision
+			// OCR three times for agreement — the crop is only 278x129.
+			body: 'Join a marketplace where your peace of mind is valued. Connect with trusted, vetted service providers in your area',
 			href: '#clients'
 		}
 	]
