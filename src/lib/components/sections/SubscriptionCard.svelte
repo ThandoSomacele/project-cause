@@ -11,19 +11,22 @@
 	     that render specifically because the older page export still carried the
 	     mascot in this corner.
 
-	     Anchored flush to the section's bottom-left, with no gap on either edge:
-	     measured on the Figma render of node 4612:24013, the artwork's bounding
-	     box is x0..640, y1100..1787 in a 1425x1788 frame, so it touches both the
-	     left edge and the base. It used to be pinned 185px from the top at 360px
-	     wide, which left a gap on both. -->
+	     The supplied export, used as-is. Its 539x749 canvas carries the artwork
+	     flush to its own left and bottom edges with the transparent margin on the
+	     top and right, so it is a corner piece: dropping the canvas at bottom-0
+	     left-0 puts the ink in the corner with no gap on either side.
+
+	     Sized by the ink rather than the canvas. The ink is 351 of 539 wide, so a
+	     985px canvas renders it at the 641px the design shows, and its height
+	     follows at ~1052. -->
 	<img
 		src="/images/tools-corner.webp"
 		alt=""
 		aria-hidden="true"
-		width="322"
-		height="515"
+		width="539"
+		height="749"
 		loading="lazy"
-		class="pointer-events-none absolute bottom-0 left-0 hidden w-[min(44.98vw,641px)] max-w-none lg:block"
+		class="pointer-events-none absolute bottom-0 left-0 hidden w-[min(69.12vw,985px)] max-w-none lg:block"
 	/>
 
 	<div class="relative mx-auto w-full max-w-[1228px] px-5 md:px-8 lg:max-w-[min(86.18vw,1228px)] lg:px-0">

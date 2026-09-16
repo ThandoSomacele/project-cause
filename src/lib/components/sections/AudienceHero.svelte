@@ -127,29 +127,6 @@
 					aria-hidden="true"
 					class="absolute top-[6.75%] left-[5.8%] hidden w-[93.4%] lg:block"
 				/>
-				<!-- The join between the bracket and the pipe the mascot holds. Measured
-				     on the Figma render of 4612:24221, which is 1:1 with the 1425 frame —
-				     body coordinates, i.e. frame rows less the 84px navbar:
-
-				       knob   15px circle centred on x761, y284
-				       line   3px wide at x760..762, running y292 down to y320
-				       pipe   15px wide at x751..765, starting y321
-
-				     So it is a knob with a hairline dropping out of it, not the solid bar
-				     this used to be — the line is a fifth the pipe's width, which is what
-				     makes the pipe read as something the bracket plugs into.
-
-				     Percentages are of the cluster box (717px wide at 1425, starting 24px
-				     above the section), itself a percentage of the viewport, so the join
-				     holds at every width. -->
-				<span
-					class="pointer-events-none absolute top-[37.469%] left-[5.4394%] hidden h-[1.8703%] w-[2.0921%] rounded-full bg-accent lg:block"
-					aria-hidden="true"
-				></span>
-				<span
-					class="pointer-events-none absolute top-[39.40%] left-[6.346%] hidden h-[3.49%] w-[0.4184%] bg-accent lg:block"
-					aria-hidden="true"
-				></span>
 				<!-- The bracket's horizontal exit stops at the artwork's own edge. It
 				     used to carry a `-100vw` continuation so the stroke ran off-screen,
 				     but the design turns the line down into the frame's right vertical
