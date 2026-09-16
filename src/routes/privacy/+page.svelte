@@ -54,7 +54,6 @@
 	that token currently reads #F7CD7C — see the note in the handover; the two
 	disagree and the token should not be moved on the strength of this page alone.
 -->
-<main id="main">
 	<section data-section="privacy-intro" class="bg-[#FECA6E] py-16 lg:py-[min(7.3vw,104px)]">
 		<div class="container-page text-center">
 			<h1 class="text-h2 font-bold text-ink">Cause Terms and Conditions</h1>
@@ -129,4 +128,3 @@
 			</p>
 		</div>
 	</section>
-</main>

@@ -26,7 +26,7 @@
 		width="539"
 		height="749"
 		loading="lazy"
-		class="pointer-events-none absolute bottom-0 left-0 hidden w-[min(69.12vw,985px)] max-w-none lg:block"
+		class="pointer-events-none absolute bottom-0 left-0 hidden w-[min(24.56vw,350px)] max-w-none lg:block"
 	/>
 
 	<div class="relative mx-auto w-full max-w-[1228px] px-5 md:px-8 lg:max-w-[min(86.18vw,1228px)] lg:px-0">

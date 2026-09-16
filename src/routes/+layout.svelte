@@ -2,6 +2,7 @@
 	import './layout.css';
 	import Navbar from '$lib/components/layout/Navbar.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
+	import ScrollToTop from '$lib/components/ui/ScrollToTop.svelte';
 
 	let { children } = $props();
 </script>
@@ -25,3 +26,5 @@
 	</main>
 	<Footer />
 </div>
+
+<ScrollToTop />

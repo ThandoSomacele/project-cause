@@ -61,7 +61,12 @@
 
 		       knob        ~12px, centred x933, top on the button's base at y408
 		       drop        3px at x933, y419..473
-		       horizontal  3px at y473, running from x933 to the screen edge
+		       horizontal  3px at y473, running left from x933 to x710
+		       fall        3px at x710, from y473 to the section's base
+
+		     The run turns down at x710 and leaves through the bottom edge — it does
+		     not carry on to the left edge, which is what an earlier reading of the
+		     crop had it doing.
 
 		     The knob sits ~8px right of the button's centre, which is what the
 		     design shows rather than a true centre. Percentages of the section, so
@@ -75,7 +80,11 @@
 			aria-hidden="true"
 		></span>
 		<span
-			class="pointer-events-none absolute top-[75.68%] right-[34.53%] left-0 hidden h-[3px] bg-ink lg:block"
+			class="pointer-events-none absolute top-[75.68%] right-[34.53%] left-[49.82%] hidden h-[3px] bg-ink lg:block"
+			aria-hidden="true"
+		></span>
+		<span
+			class="pointer-events-none absolute top-[75.68%] bottom-0 left-[49.75%] hidden w-[3px] bg-ink lg:block"
 			aria-hidden="true"
 		></span>
 	{/if}

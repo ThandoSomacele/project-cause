@@ -11,7 +11,39 @@
 	as the page scales, and the rules only appear from md up — below that the
 	heading wraps and they would cut through it.
 -->
-<section data-section="process" class="relative overflow-hidden bg-white py-16 lg:pt-[min(16.70vw,238px)] lg:pb-[min(7.3vw,104px)]">
+<section
+	data-section="process"
+	class="relative isolate overflow-hidden bg-white py-16 lg:pt-[min(16.70vw,238px)] lg:pb-[min(7.3vw,104px)]"
+>
+	<!-- The supplied band, used as-is. Its 1422x659 canvas is effectively the
+	     1425 design frame's width, opaque along the top and transparent toward
+	     the bottom, so it is a top piece: full-bleed at top-0 with the artwork
+	     running off both side edges the way the design has it. Behind the
+	     content, and hidden below lg where the heading wraps under it. -->
+	<img
+		src="/images/tools-band.webp"
+		alt=""
+		aria-hidden="true"
+		width="1422"
+		height="659"
+		loading="lazy"
+		class="pointer-events-none absolute top-0 left-0 -z-10 hidden h-[min(21vw,300px)] w-full max-w-none object-cover object-top lg:block"
+	/>
+
+	<!-- The right-edge piece, used as supplied. Its 374x939 canvas carries the ink
+	     flush to its own right edge (margins L170 T68 R0 B63), so right-0 puts the
+	     tools against the screen edge the way the reference does, starting about
+	     17% down the section. -->
+	<img
+		src="/images/tools-right.webp"
+		alt=""
+		aria-hidden="true"
+		width="374"
+		height="939"
+		loading="lazy"
+		class="pointer-events-none absolute top-[17.3%] right-0 -z-10 hidden w-[min(26.25vw,374px)] max-w-none lg:block"
+	/>
+
 	<div class="container-page relative">
 		<!-- Ink rule in from the left edge, ending in a 10px dot just before the
 		     second line begins (x406 of 1425 in the design). -->

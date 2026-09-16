@@ -22,13 +22,14 @@
 			/>
 
 			<!-- Rule running in from the page edge, stopping at "talk" with a dot.
-			     Measured off the design at y443..445 against a line-3 baseline of
-			     y431.6, so its centre sits 8.5px below that baseline. Line 3's
+			     Measured against the design by pixel-scanning both: the rule's centre
+			     sits 0.1259em below the line-3 baseline there. An earlier reading put
+			     it at 0.1715em, which rendered 2.5px low. Line 3's
 			     baseline is 2L + (L - 1.21em)/2 + 0.9688em = 2.9388em at L = 1.03em,
 			     which puts the 3px rule's top at 2.9388em + 7px. Derived from the
 			     heading's own token so it tracks the clamp instead of drifting. -->
 			<div
-				class="pointer-events-none absolute top-[calc(2.9388*var(--text-h2)_+_7px)] right-[48.2%] left-[-50vw] hidden h-[3px] bg-accent md:block"
+				class="pointer-events-none absolute top-[calc(2.9388*var(--text-h2)_+_4.5px)] right-[48.2%] left-[-50vw] hidden h-[3px] bg-accent md:block"
 				aria-hidden="true"
 			>
 				<span class="absolute -top-[5px] -right-[6px] h-3 w-3 rounded-full bg-accent"></span>
