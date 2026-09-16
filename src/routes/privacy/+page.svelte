@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { site } from '$lib/data/site';
 	import { faq } from '$lib/data/faq';
-	import Button from '$lib/components/ui/Button.svelte';
 
 	/**
 	 * The four documents the design offers, in its own order: privacy and terms
@@ -84,8 +83,34 @@
 				{#each documents as doc (doc.label)}
 					<li class="flex flex-col rounded-[16px] bg-[#EFEFEE] p-8 lg:p-10">
 						<p class="flex-1 text-[15px] leading-7 text-ink/80">{doc.body}</p>
+						<!-- The design draws these as navy text with a trailing arrow, not
+						     filled pills: the whole crop carries only ~340 navy pixels, and
+						     mapping the label's region shows no fill and no border — just
+						     the words and an arrowhead about 20px past them. -->
 						<div class="mt-8">
-							<Button href={doc.file} variant="dark">{doc.label}</Button>
+							<a
+								href={doc.file}
+								class="group inline-flex items-center gap-3 text-[17px] font-medium text-ink
+								       underline-offset-4 hover:underline"
+							>
+								{doc.label}
+								<svg
+									width="18"
+									height="18"
+									viewBox="0 0 24 24"
+									fill="none"
+									aria-hidden="true"
+									class="transition-transform group-hover:translate-x-0.5"
+								>
+									<path
+										d="M4 12h15m0 0-6-6m6 6-6 6"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									/>
+								</svg>
+							</a>
 						</div>
 					</li>
 				{/each}
