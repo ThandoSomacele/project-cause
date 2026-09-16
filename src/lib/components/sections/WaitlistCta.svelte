@@ -54,39 +54,21 @@
 	></div>
 
 	{#if connector}
-		<!-- The rule hanging off the submit button: a knob at the button's base, a
-		     drop, then a turn out to the left screen edge. Measured on the design
-		     crop and scaled by the button (128 crop px against 134.9 here, so
-		     0.949); in section coordinates at 1425x625 that gives
-
-		       knob        ~12px, centred x933, top on the button's base at y408
-		       drop        3px at x933, y419..473
-		       horizontal  3px at y473, running left from x933 to x710
-		       fall        3px at x710, from y473 to the section's base
-
-		     The run turns down at x710 and leaves through the bottom edge — it does
-		     not carry on to the left edge, which is what an earlier reading of the
-		     crop had it doing.
-
-		     The knob sits ~8px right of the button's centre, which is what the
-		     design shows rather than a true centre. Percentages of the section, so
-		     the run holds as the panel scales. -->
-		<span
-			class="pointer-events-none absolute top-[65.12%] left-[65.05%] hidden h-[1.92%] w-[0.842%] rounded-full bg-ink lg:block"
+		<!-- The supplied connector, used as-is rather than drawn from three spans:
+		     308x197 with the knob at its top-right and the path dropping, turning
+		     left and falling away. Anchored so the knob's top meets the submit
+		     button's base — the knob centres 8.5px in from the asset's right edge,
+		     which puts that edge at x941.5 of the 1425 frame, and its top at y408.
+		     Percentages of the section, so it holds as the panel scales. -->
+		<img
+			src="/images/cta-connector.png"
+			alt=""
 			aria-hidden="true"
-		></span>
-		<span
-			class="pointer-events-none absolute top-[67.04%] left-[65.37%] hidden h-[8.64%] w-[3px] bg-ink lg:block"
-			aria-hidden="true"
-		></span>
-		<span
-			class="pointer-events-none absolute top-[75.68%] right-[34.53%] left-[49.82%] hidden h-[3px] bg-ink lg:block"
-			aria-hidden="true"
-		></span>
-		<span
-			class="pointer-events-none absolute top-[75.68%] bottom-0 left-[49.75%] hidden w-[3px] bg-ink lg:block"
-			aria-hidden="true"
-		></span>
+			width="308"
+			height="197"
+			loading="lazy"
+			class="pointer-events-none absolute top-[65.28%] left-[44.46%] hidden w-[min(21.61vw,308px)] max-w-none lg:block"
+		/>
 	{/if}
 
 	<div class="container-page w-full py-20 text-center lg:pt-[min(11.58vw,165px)] lg:pb-16">

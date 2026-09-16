@@ -29,7 +29,7 @@
 			     which puts the 3px rule's top at 2.9388em + 7px. Derived from the
 			     heading's own token so it tracks the clamp instead of drifting. -->
 			<div
-				class="pointer-events-none absolute top-[calc(2.9388*var(--text-h2)_+_4.5px)] right-[48.2%] left-[-50vw] hidden h-[3px] bg-accent md:block"
+				class="pointer-events-none absolute top-[calc(2.9388*var(--text-h2)_+_2.3px)] right-[48.2%] left-[-50vw] hidden h-[3px] bg-accent md:block"
 				aria-hidden="true"
 			>
 				<span class="absolute -top-[5px] -right-[6px] h-3 w-3 rounded-full bg-accent"></span>

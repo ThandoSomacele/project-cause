@@ -27,7 +27,7 @@
 		width="1422"
 		height="659"
 		loading="lazy"
-		class="pointer-events-none absolute top-0 left-0 -z-10 hidden h-[min(21vw,300px)] w-full max-w-none object-cover object-top lg:block"
+		class="pointer-events-none absolute -top-[70px] left-0 -z-10 hidden h-[min(21vw,300px)] w-full max-w-none object-cover object-top lg:block"
 	/>
 
 	<!-- The right-edge piece, used as supplied. Its 374x939 canvas carries the ink
@@ -48,15 +48,20 @@
 		<!-- Ink rule in from the left edge, ending in a 10px dot just before the
 		     second line begins (x406 of 1425 in the design). -->
 		<div
-			class="pointer-events-none absolute top-[calc(1.8938*var(--text-hero)_-_2px)] right-[74.25%] left-[-50vw] hidden h-[2px] bg-ink md:block"
+			class="pointer-events-none absolute top-[calc(1.8938*var(--text-hero)_-_10.1px)] right-[74.25%] left-[-50vw] hidden h-[2px] bg-ink md:block"
 			aria-hidden="true"
 		>
 			<span class="absolute -top-[4px] -right-[3px] h-[10px] w-[10px] rounded-full bg-ink"></span>
 		</div>
 
-		<!-- Orange rule level with the third line, running off the right edge. -->
+		<!-- Orange rule level with the third line, running off the right edge.
+		     Read off the 1:1 wrapper export: with the heading's cap top at y48, the
+		     line-3 baseline falls at y257 and the rule's centre sits at y251.5 —
+		     5.7px ABOVE that baseline, not below it as an earlier screenshot
+		     reading had it. The navy rule is likewise 8px above the line-2
+		     baseline rather than sitting on it. -->
 		<div
-			class="pointer-events-none absolute top-[calc(3.079*var(--text-hero)_-_1.5px)] right-[-50vw] left-[85.56%] hidden h-[3px] bg-accent md:block"
+			class="pointer-events-none absolute top-[calc(2.9138*var(--text-hero)_-_7.2px)] right-[-50vw] left-[85.56%] hidden h-[3px] bg-accent md:block"
 			aria-hidden="true"
 		></div>
 
