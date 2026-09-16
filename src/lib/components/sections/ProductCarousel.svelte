@@ -18,6 +18,7 @@
 			<SectionHeading
 				lines={carousel.heading}
 				weight="font-medium"
+				leading="lg:leading-[1.176]"
 				indents={['lg:pl-[7.5%]', 'lg:pl-[42.5%]', 'lg:pl-[52.3%]']}
 			/>
 
@@ -29,7 +30,7 @@
 			     which puts the 3px rule's top at 2.9388em + 7px. Derived from the
 			     heading's own token so it tracks the clamp instead of drifting. -->
 			<div
-				class="pointer-events-none absolute top-[calc(2.9388*var(--text-h2)_+_2.3px)] right-[48.2%] left-[-50vw] hidden h-[3px] bg-accent md:block"
+				class="pointer-events-none absolute top-[calc(2.955*var(--text-h2))] right-[48.2%] left-[-50vw] hidden h-[2px] bg-accent md:block"
 				aria-hidden="true"
 			>
 				<span class="absolute -top-[5px] -right-[6px] h-3 w-3 rounded-full bg-accent"></span>
@@ -38,7 +39,7 @@
 			<!-- Circle closing the heading: sits after "clients" and rides above the
 			     baseline so it reads as raised against the "s", not inline with it. -->
 			<span
-				class="pointer-events-none absolute top-[min(8.7vw,124px)] left-[92.5%] hidden h-[18px] w-[18px] rounded-full bg-accent lg:block"
+				class="pointer-events-none absolute top-[calc(2.313*var(--text-h2))] left-[92.5%] hidden h-[18px] w-[18px] rounded-full bg-accent lg:block"
 				aria-hidden="true"
 			></span>
 		</div>

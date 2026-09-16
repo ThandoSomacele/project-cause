@@ -165,7 +165,18 @@
 						class="absolute top-[6%] left-1/2 w-[58%] -translate-x-1/2 lg:top-[10.9%] lg:left-[35.7%] lg:w-[40.7%] lg:translate-x-0"
 					/>
 				</div>
-				<!-- Mirrored: the exported artwork carries the pole on its right, but
+				<!-- Placed off the hero-wrapper export by isolating the pole as its own
+				     connected orange region — 15x258 at x680..694, y349..606 in the
+				     export against 14x245 at x715..728, y304..548 here. That is a
+				     1.053x scale and a -35px, +45px move at the export's 1354 width,
+				     which works through the cluster box to 44.02% wide at
+				     left -3.77%, top 48.38%.
+
+				     Measuring the pole as a region rather than scanning for rules is
+				     what makes this reliable: earlier passes kept locking onto the
+				     waitlist input's border instead.
+
+				     Mirrored: the exported artwork carries the pole on its right, but
 				     the design places it on the mascot's left. The pipe runs its own
 				     axis, 3px left of the bracket's — it centres 8.5px right of the
 				     "d" ink centre at 1425, which is what puts it through the letter's
@@ -174,7 +185,7 @@
 					src={mascot}
 					alt=""
 					aria-hidden="true"
-					class="absolute top-[42.5%] left-[1.94%] hidden w-[41.8%] -scale-x-100 lg:block"
+					class="absolute top-[48.38%] left-[-3.77%] hidden w-[44.02%] -scale-x-100 lg:block"
 				/>
 			</div>
 		</div>

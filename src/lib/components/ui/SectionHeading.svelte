@@ -28,6 +28,10 @@
 		 * widths at 56px were 5px, 6px and 8px respectively.
 		 */
 		weight?: string;
+		/** Line-height override. The design is not uniform here either: the
+		 *  carousel's heading runs a 66px pitch on a 56px face — 1.176em —
+		 *  against the 1.03 the token sets for everything else. */
+		leading?: string;
 		class?: string;
 		id?: string;
 	}
@@ -37,12 +41,13 @@
 		indents = [],
 		ruleAfter,
 		weight = 'font-light',
+		leading = '',
 		class: className = '',
 		id
 	}: Props = $props();
 </script>
 
-<h2 {id} class={['text-h2 text-ink', weight, className]}>
+<h2 {id} class={['text-h2 text-ink', weight, leading, className]}>
 	{#each lines as line, i (i)}
 		<span class={['block', indents[i]]}>
 			{#if ruleAfter === i}

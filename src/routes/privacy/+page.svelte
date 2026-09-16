@@ -82,33 +82,20 @@
 				{#each documents as doc (doc.label)}
 					<li class="flex flex-col rounded-[16px] bg-[#EFEFEE] p-8 lg:p-10">
 						<p class="flex-1 text-[15px] leading-7 text-ink/80">{doc.body}</p>
-						<!-- The design draws these as navy text with a trailing arrow, not
-						     filled pills: the whole crop carries only ~340 navy pixels, and
-						     mapping the label's region shows no fill and no border — just
-						     the words and an arrowhead about 20px past them. -->
+						<!-- The supplied button frame settles what these are: a light plate,
+						     not a navy pill and not bare text. Inside the plate the palette is
+						     #FBF9F4 across 41,216px with navy on only 460 — the label. At 1:1
+						     with this page's 17px type the plate measures 404x112 with a ~15px
+						     radius, and both plates in the asset inset their label 34px from
+						     the left and centre it vertically. -->
 						<div class="mt-8">
 							<a
 								href={doc.file}
-								class="group inline-flex items-center gap-3 text-[17px] font-medium text-ink
-								       underline-offset-4 hover:underline"
+								class="flex min-h-[112px] w-full items-center rounded-[15px] bg-[#FBF9F4]
+								       px-[34px] text-[17px] font-medium text-ink transition-colors
+								       hover:bg-white focus-visible:ring-2 focus-visible:ring-ink"
 							>
 								{doc.label}
-								<svg
-									width="18"
-									height="18"
-									viewBox="0 0 24 24"
-									fill="none"
-									aria-hidden="true"
-									class="transition-transform group-hover:translate-x-0.5"
-								>
-									<path
-										d="M4 12h15m0 0-6-6m6 6-6 6"
-										stroke="currentColor"
-										stroke-width="2"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-								</svg>
 							</a>
 						</div>
 					</li>
