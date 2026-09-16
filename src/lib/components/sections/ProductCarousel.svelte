@@ -21,9 +21,14 @@
 				indents={['lg:pl-[7.5%]', 'lg:pl-[42.5%]', 'lg:pl-[52.3%]']}
 			/>
 
-			<!-- Rule running in from the page edge, stopping at "talk" with a dot. -->
+			<!-- Rule running in from the page edge, stopping at "talk" with a dot.
+			     Measured off the design at y443..445 against a line-3 baseline of
+			     y431.6, so its centre sits 8.5px below that baseline. Line 3's
+			     baseline is 2L + (L - 1.21em)/2 + 0.9688em = 2.9388em at L = 1.03em,
+			     which puts the 3px rule's top at 2.9388em + 7px. Derived from the
+			     heading's own token so it tracks the clamp instead of drifting. -->
 			<div
-				class="pointer-events-none absolute top-[min(12.21vw,174px)] right-[48.2%] left-[-50vw] hidden h-[3px] bg-accent md:block"
+				class="pointer-events-none absolute top-[calc(2.9388*var(--text-h2)_+_7px)] right-[48.2%] left-[-50vw] hidden h-[3px] bg-accent md:block"
 				aria-hidden="true"
 			>
 				<span class="absolute -top-[5px] -right-[6px] h-3 w-3 rounded-full bg-accent"></span>
@@ -34,7 +39,14 @@
 			<span
 				class="pointer-events-none absolute top-[min(8.7vw,124px)] left-[92.5%] hidden h-[18px] w-[18px] rounded-full bg-accent lg:block"
 				aria-hidden="true"
-			></span>
+			>
+				<!-- The disc carries the brand mark in white, not a flat fill: sampled
+				     on the design it is 29x29 with 140 white pixels inside, about 17%
+				     of its area, which puts the glyph's box at ~21% inset each side.
+				     `.logo-mark` masks the mark with currentColor, so it takes the
+				     white from this span rather than shipping a second asset. -->
+				<span class="logo-mark absolute inset-[21%] text-white"></span>
+			</span>
 		</div>
 
 		<div class="mt-12 lg:mt-20">

@@ -65,13 +65,21 @@
 		<!-- The right half is the audience selector proper: two photographs, one
 		     per option, with a caption and a pair of dots beneath. No card and no
 		     border — the navy runs uninterrupted behind them (sampled #0C142F
-		     either side of the caption). The exports carry their own rounded
-		     corners in the alpha channel, so no CSS radius goes over them.
+		     either side of the caption). The 11px radius was fitted, not derived:
+		     a corner's first pixel row samples half a pixel below the tangent, so
+		     reading the inset off the design understates it. Rendering 8/10/11/12
+		     and matching the inset profile against the design's 8,5,4,3,2,1,1,1,1
+		     lands on 11. It has to be a CSS radius rather than the one baked into
+		     the exports' alpha, because object-cover crops those corners away as
+		     soon as the tile is taller than the photograph.
 
-		     Service Provider reads as active at rest; hovering or focusing the
-		     client tile hands it the active state and swaps the caption and dots
-		     with it. The motion is in `.option-pair` / `.option-group` in
-		     layout.css, driven by `:has()` so it needs no scripting. -->
+		     At rest both photographs sit equal and untouched. Hovering or focusing
+		     either one starts the motion — it takes the wider column while the
+		     other narrows, shortens, blurs and fades — and the client tile also
+		     swaps the caption and dots to its own. Clicking either jumps to that
+		     audience's half of the page. The motion lives in `.option-pair` /
+		     `.option-group` in layout.css, driven by `:has()` so it needs no
+		     scripting. -->
 		<div
 			class="option-group relative z-10 mt-8 lg:absolute lg:top-[min(5.12vw,73px)] lg:left-[53.53%] lg:mt-0 lg:w-[40.12%]"
 		>
@@ -81,7 +89,7 @@
 				{#each audience.options as option, i (option.id)}
 					<a
 						href={option.href}
-						class="option block overflow-hidden rounded-[14px] lg:rounded-none"
+						class="option block overflow-hidden rounded-[11px]"
 					>
 						<img
 							src={i === 0 ? '/images/select-provider-a.webp' : '/images/select-provider-b.webp'}

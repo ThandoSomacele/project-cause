@@ -36,10 +36,22 @@
 
 <section data-section={name} class="bg-steel pt-16 pb-16 lg:pt-[min(7.3vw,104px)] lg:pb-16">
 	<div class="container-page relative">
-		<!-- Navy rule running in from the left edge to a dot, level with the second
-		     heading line — the same decorative treatment the design uses elsewhere. -->
+		<!-- Navy rule running in from the left screen edge to its dot, sitting on
+		     the baseline of the heading's second line — measured off the design,
+		     where the rule occupies y341..344 against a line-2 baseline of y349.
+
+		     The top is derived from the heading rather than fixed in vw, the same
+		     way the value-offering rule is: for a line box of `line-height` L over
+		     a 1.21em content area, the second baseline falls at
+
+		       L + (L - 1.21em)/2 + 0.9688em  =  1.9088em   (L = 1.03em)
+
+		     so a 2px rule's top is calc(1.9088 x --text-h2 - 2px). Reading the same
+		     token the heading does keeps the two locked together through the clamp;
+		     the old min(9.4vw,134px) sat 33px low at the design width and drifted
+		     at every other. -->
 		<div
-			class="pointer-events-none absolute top-[min(9.4vw,134px)] {ruleStop} left-[-50vw] hidden h-[2px] bg-ink md:block"
+			class="pointer-events-none absolute top-[calc(1.9088*var(--text-h2)_-_2px)] {ruleStop} left-[-50vw] hidden h-[2px] bg-ink md:block"
 			aria-hidden="true"
 		>
 			<span class="absolute -top-[3px] -right-[3px] h-2 w-2 rounded-full bg-ink"></span>

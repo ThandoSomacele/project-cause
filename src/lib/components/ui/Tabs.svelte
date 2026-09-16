@@ -4,6 +4,12 @@
 	interface Tab {
 		id: string;
 		label: string;
+		/** Overrides the `/icons/<id>[-active].svg` convention. The design's
+		 *  selected icons carry brand orange that the flat SVG set does not, and
+		 *  Figma export is unavailable, so they are lifted from the design
+		 *  screenshots as rasters. Their navy ground matches the selected pill
+		 *  exactly, which is what lets an opaque crop sit on it seamlessly. */
+		activeIcon?: string;
 	}
 
 	interface Props {
@@ -69,7 +75,9 @@
 				<!-- The design draws the active icon in #DBDBDB on the navy pill, so
 				     it is a separate two-tone variant rather than a filtered copy. -->
 				<img
-					src="/icons/{tab.id}{selected === tab.id ? '-active' : ''}.svg"
+					src={selected === tab.id
+						? (tab.activeIcon ?? `/icons/${tab.id}-active.svg`)
+						: `/icons/${tab.id}.svg`}
 					alt=""
 					aria-hidden="true"
 					width="32"

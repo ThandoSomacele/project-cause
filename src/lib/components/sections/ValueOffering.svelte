@@ -7,8 +7,8 @@
 
 	const images: Record<string, string> = {
 		credits: '/images/tab-credits.webp',
-		jobs: '/images/worker-phone.webp',
-		support: '/images/electricians.webp'
+		jobs: '/images/tab-jobs.webp',
+		support: '/images/tab-support.webp'
 	};
 </script>
 
@@ -33,19 +33,22 @@
 		     dot, and an orange one starting at a 16px dot directly beneath the
 		     icon and running out past the right edge. The two dots are different
 		     sizes in the design — measured at 10px and 16px on the 1:1 render. -->
-		<!-- The navy rule no longer runs to the screen edge: it starts a quarter of
-		     the way in from it. The dot stays put at `right: 74.4%`, so the gap has
-		     to be derived from where the dot lands rather than set as a flat inset.
+		<!-- The navy rule runs from the left screen edge to its dot, and sits on
+		     the baseline of the heading's second line, which is where the design
+		     puts it — measured off the screenshot, where the rule's lower edge
+		     meets the bottom of "To Reach New Clients".
 
-		       dot_x  = container_left + 0.256W,  container_left = 50vw - W/2
-		       left_x = 0.25 x dot_x
-		       left   = left_x - container_left = 0.439W - 37.5vw
+		     The top is derived from the heading rather than guessed in vw. For a
+		     line box of `line-height` L and a font whose ascent/descent give a
+		     content area of 1.21em, the second baseline sits at
 
-		     which is calc(43.9% - 37.5vw), since 100% here is the container width.
-		     Checked at 1024/1425/1920: the gap is 72.6 / 101.0 / 162.9px against
-		     dots at 290.4 / 404.1 / 651.6 — a quarter of the run at every width. -->
+		       L + (L - 1.21em)/2 + 0.9688em  =  1.9088em   (L = 1.03em here)
+
+		     so the 2px rule's top is calc(1.9088 x --text-h2 - 2px). Because that
+		     reads the same token the heading does, the rule tracks it through the
+		     clamp at every width instead of drifting. -->
 		<div
-			class="pointer-events-none absolute top-[min(9.05vw,129px)] right-[74.4%] left-[calc(43.9%_-_37.5vw)] hidden h-[2px] bg-ink md:block"
+			class="pointer-events-none absolute top-[calc(1.9088*var(--text-h2)_-_2px)] right-[74.4%] left-[-50vw] hidden h-[2px] bg-ink md:block"
 			aria-hidden="true"
 		>
 			<span class="absolute -top-[4px] -right-[3px] h-[10px] w-[10px] rounded-full bg-ink"></span>

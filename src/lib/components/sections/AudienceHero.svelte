@@ -127,26 +127,26 @@
 					aria-hidden="true"
 					class="absolute top-[6.75%] left-[5.8%] hidden w-[93.4%] lg:block"
 				/>
-				<!-- The bracket turns right and exits at SVG y472..474 of 730 — measured
-				     off the rendered artwork, not read off the path data. Every number
-				     here is derived from that so the join holds at any width:
+				<!-- The short run carrying the bracket down into the pipe the mascot
+				     holds. Measured on the Figma render of 4612:24221, which is 1:1
+				     with the 1425 frame: in the pipe's column the design has ink at
+				     body rows 277..315, bridging the bracket's dot to the pipe's top
+				     at 321. Without it the pipe reads as detached from the heading.
 
-				       frame height / cluster height = 93.4% x (730/674.66) / (783/700)
-				                                     = 90.3486%
-				       stroke top  = 6.75% + (472/730) x 90.3486%  = 65.164%
-				       stroke size = (3/730) x 90.3486% x (783/700) x cluster width
-				                   = 0.41534% of the cluster width
-
-				     A flat 3px was the old bug: the SVG's stroke scales with the
-				     cluster (2.98px at 1425, 2.14px at 1024) while the stub did not,
-				     so the two lines met at different thicknesses and 12.9px apart.
-				     Starting at 98.9% rather than the frame's 99.2% right edge laps
-				     the join by ~1.4px, since the artwork's own stroke stops a
-				     fraction short of its viewBox edge. -->
+				     Percentages are of the cluster box, itself a percentage of the
+				     viewport, so the segment holds at every width. The cluster spans
+				     717px at 1425 and starts 24px above the section. -->
 				<span
-					class="pointer-events-none absolute top-[65.164%] right-[-100vw] left-[98.9%] hidden h-[min(0.209vw,2.978px)] bg-accent lg:block"
+					class="pointer-events-none absolute top-[37.53%] left-[5.23%] hidden h-[4.74%] w-[1.81%] bg-accent lg:block"
 					aria-hidden="true"
 				></span>
+				<!-- The bracket's horizontal exit stops at the artwork's own edge. It
+				     used to carry a `-100vw` continuation so the stroke ran off-screen,
+				     but the design turns the line down into the frame's right vertical
+				     instead of bleeding: measured on the reference, the horizontal ends
+				     at x2511 and the vertical picks up at x2522, with navy continuing
+				     ~79px past it to the viewport edge. The continuation was the thin
+				     orange line still showing to the right of the phones. -->
 				<!-- The three mockups move as one unit: the wrapper fills the cluster
 				     box, so every child's percentage still resolves against the same
 				     rectangle it did before, and the group shifts together. 2.789% of

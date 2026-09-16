@@ -165,6 +165,9 @@ export const valueOffering = {
 	tabs: [
 		{
 			id: 'credits',
+			// Lifted from the design screenshot, like the jobs icon: the selected
+			// mark is two-tone (#DBDBDB over #A3A3A3), which the flat SVG is not.
+			activeIcon: '/icons/credits-active.png',
 			label: 'No Credits',
 			title: [{ text: 'No Credits', weight: 'strong' as const }, { text: ' Required Here!' }],
 			body: "Access job opportunities from a feed tailored to your profile. Once you're verified, we'll send leads your way, that simple.",
@@ -172,6 +175,9 @@ export const valueOffering = {
 		},
 		{
 			id: 'jobs',
+			// Lifted from the design screenshot: the selected icon carries brand
+			// orange the flat SVG set has no equivalent for.
+			activeIcon: '/icons/jobs-active.png',
 			label: 'Jobs',
 			title: [{ text: 'Real Jobs', weight: 'strong' as const }, { text: ', Not Just Enquiries' }],
 			body: 'Every lead comes from a client who has described the work and is ready to hire. Review the brief, then decide whether to quote.',
@@ -179,6 +185,9 @@ export const valueOffering = {
 		},
 		{
 			id: 'support',
+			// Lifted from the design screenshot: the selected mark carries brand
+			// orange in its bubble, which the flat SVG has no equivalent for.
+			activeIcon: '/icons/support-active.png',
 			label: 'Support',
 			title: [{ text: 'Support', weight: 'strong' as const }, { text: ' That Answers' }],
 			body: 'Disputes and issues follow a published process with clear timelines, so both sides know where they stand from the start.',

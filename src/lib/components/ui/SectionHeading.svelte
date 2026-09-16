@@ -50,10 +50,17 @@
 					<span class="shrink-0"><RichText segments={line} /></span>
 					<!-- Runs off-canvas, and is centred on the trailing dots rather than
 					     sitting on the baseline: in the design the rule and the four
-					     periods share a centre line (y2344 on the 1:1 render), which puts
-					     it about half a dot above the baseline. The offset is in em so it
-					     tracks the heading as the type scales. -->
-					<span class="-mr-[50vw] mb-[0.114em] h-[3px] flex-1 bg-accent" aria-hidden="true"
+					     periods share a centre line, which puts it about half a dot above
+					     the baseline. The offset is in em so it tracks the heading as the
+					     type scales.
+
+					     The negative left margin closes the last dot's right side bearing.
+					     Without it the rule begins 3.5px clear of the dot; the design has
+					     them touching, so the rule reads as the dots continuing rather
+					     than as a separate stroke. -->
+					<span
+						class="-mr-[50vw] -ml-[0.0625em] mb-[0.114em] h-[3px] flex-1 -translate-y-[0.064em] bg-accent"
+						aria-hidden="true"
 					></span>
 				</span>
 			{:else}

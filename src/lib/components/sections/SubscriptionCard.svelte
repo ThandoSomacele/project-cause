@@ -9,7 +9,13 @@
 	     opaque flatlay used higher up the page; the file's own export is
 	     rate-limited, so it is keyed out of the current node render. Taken from
 	     that render specifically because the older page export still carried the
-	     mascot in this corner. Starts 185px below the card top. -->
+	     mascot in this corner.
+
+	     Anchored flush to the section's bottom-left, with no gap on either edge:
+	     measured on the Figma render of node 4612:24013, the artwork's bounding
+	     box is x0..640, y1100..1787 in a 1425x1788 frame, so it touches both the
+	     left edge and the base. It used to be pinned 185px from the top at 360px
+	     wide, which left a gap on both. -->
 	<img
 		src="/images/tools-corner.webp"
 		alt=""
@@ -17,7 +23,7 @@
 		width="322"
 		height="515"
 		loading="lazy"
-		class="pointer-events-none absolute top-[min(12.98vw,185px)] left-0 hidden w-[min(25.26vw,360px)] max-w-none lg:block"
+		class="pointer-events-none absolute bottom-0 left-0 hidden w-[min(44.98vw,641px)] max-w-none lg:block"
 	/>
 
 	<div class="relative mx-auto w-full max-w-[1228px] px-5 md:px-8 lg:max-w-[min(86.18vw,1228px)] lg:px-0">
