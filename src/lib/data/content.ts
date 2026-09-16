@@ -71,7 +71,16 @@ export const clients = {
 		[{ text: 'to connect with a' }],
 		[
 			{ text: 'verified ' },
-			{ text: 'carpenter...', tone: 'accent' as const, weight: 'strong' as const }
+			// The design rings this word: it is the one the reader swaps for their
+			// own trade, so it is drawn as a field rather than just coloured. The
+			// ellipsis sits outside the box, trailing off after it.
+			{
+				text: 'carpenter',
+				tone: 'accent' as const,
+				weight: 'strong' as const,
+				boxed: true
+			},
+			{ text: '...', tone: 'accent' as const, weight: 'strong' as const }
 		]
 	],
 	body: [

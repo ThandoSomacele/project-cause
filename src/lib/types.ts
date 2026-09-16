@@ -8,6 +8,9 @@ export interface Segment {
 	weight?: 'strong';
 	/** `italic` matches the design's italic runs ("Choose", "Shift", "lets you"). */
 	style?: 'italic';
+	/** `boxed` draws the design's rectangular outline around a run — the client
+	 *  hero rings "carpenter" to mark it as the interchangeable trade. */
+	boxed?: boolean;
 }
 
 export type Line = readonly Segment[];

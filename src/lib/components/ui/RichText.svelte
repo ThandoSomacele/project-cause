@@ -15,6 +15,8 @@
 		class={[
 			segment.tone === 'accent' && accentClass,
 			segment.weight === 'strong' && 'font-bold',
-			segment.style === 'italic' && 'italic'
+			segment.style === 'italic' && 'italic',
+			segment.boxed &&
+				'mx-[0.06em] inline-block rounded-[0.14em] border-[0.055em] border-current px-[0.14em] leading-[0.92]'
 		]}>{segment.text}</span
 	>{/each}

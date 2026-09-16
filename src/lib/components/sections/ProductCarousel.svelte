@@ -39,14 +39,7 @@
 			<span
 				class="pointer-events-none absolute top-[min(8.7vw,124px)] left-[92.5%] hidden h-[18px] w-[18px] rounded-full bg-accent lg:block"
 				aria-hidden="true"
-			>
-				<!-- The disc carries the brand mark in white, not a flat fill: sampled
-				     on the design it is 29x29 with 140 white pixels inside, about 17%
-				     of its area, which puts the glyph's box at ~21% inset each side.
-				     `.logo-mark` masks the mark with currentColor, so it takes the
-				     white from this span rather than shipping a second asset. -->
-				<span class="logo-mark absolute inset-[21%] text-white"></span>
-			</span>
+			></span>
 		</div>
 
 		<div class="mt-12 lg:mt-20">

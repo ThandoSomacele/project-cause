@@ -16,7 +16,7 @@
 		<!-- Ink rule in from the left edge, ending in a 10px dot just before the
 		     second line begins (x406 of 1425 in the design). -->
 		<div
-			class="pointer-events-none absolute top-[min(9.40vw,134px)] right-[74.25%] left-[-50vw] hidden h-[2px] bg-ink md:block"
+			class="pointer-events-none absolute top-[calc(1.8938*var(--text-hero)_-_2px)] right-[74.25%] left-[-50vw] hidden h-[2px] bg-ink md:block"
 			aria-hidden="true"
 		>
 			<span class="absolute -top-[4px] -right-[3px] h-[10px] w-[10px] rounded-full bg-ink"></span>
@@ -24,7 +24,7 @@
 
 		<!-- Orange rule level with the third line, running off the right edge. -->
 		<div
-			class="pointer-events-none absolute top-[min(14.95vw,213px)] right-[-50vw] left-[85.56%] hidden h-[3px] bg-accent md:block"
+			class="pointer-events-none absolute top-[calc(3.079*var(--text-hero)_-_1.5px)] right-[-50vw] left-[85.56%] hidden h-[3px] bg-accent md:block"
 			aria-hidden="true"
 		></div>
 
