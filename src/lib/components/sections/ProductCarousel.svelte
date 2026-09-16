@@ -23,23 +23,32 @@
 			/>
 
 			<!-- Rule running in from the page edge, stopping at "talk" with a dot.
-			     Measured against the design by pixel-scanning both: the rule's centre
-			     sits 0.1259em below the line-3 baseline there. An earlier reading put
-			     it at 0.1715em, which rendered 2.5px low. Line 3's
-			     baseline is 2L + (L - 1.21em)/2 + 0.9688em = 2.9388em at L = 1.03em,
-			     which puts the 3px rule's top at 2.9388em + 7px. Derived from the
-			     heading's own token so it tracks the clamp instead of drifting. -->
+			     Both this and the circle below are anchored to the heading's ink top
+			     rather than to a computed baseline. The baseline formula kept moving
+			     these because it takes the leading as an input, and this heading's
+			     leading is 1.176 against the 1.03 the rest of the page uses - so every
+			     correction to one broke the other.
+
+			     Scanned off talk-to-your-clients-heading.png instead, which puts the
+			     face at 56.1px and the rule's centre 168.5px below the heading's first
+			     ink row. Normalised by the face that is 3.0036em, and the ink top
+			     itself sits 0.501em below the element's box top, so the 2px rule's top
+			     is 3.486em. That export carries no line-3 text - only the two navy
+			     lines and these two orange marks - but both marks and the anchor share
+			     one ink top, so the offsets stand without it. -->
 			<div
-				class="pointer-events-none absolute top-[calc(2.955*var(--text-h2))] right-[48.2%] left-[-50vw] hidden h-[2px] bg-accent md:block"
+				class="pointer-events-none absolute top-[calc(3.486*var(--text-h2))] right-[48.2%] left-[-50vw] hidden h-[2px] bg-accent md:block"
 				aria-hidden="true"
 			>
 				<span class="absolute -top-[5px] -right-[6px] h-3 w-3 rounded-full bg-accent"></span>
 			</div>
 
 			<!-- Circle closing the heading: sits after "clients" and rides above the
-			     baseline so it reads as raised against the "s", not inline with it. -->
+			     baseline so it reads as raised against the "s", not inline with it.
+			     Same anchor as the rule - centre 140.5px below the ink top on the
+			     export's 56.1px face, so 2.840em to this 18px circle's top. -->
 			<span
-				class="pointer-events-none absolute top-[calc(2.313*var(--text-h2))] left-[92.5%] hidden h-[18px] w-[18px] rounded-full bg-accent lg:block"
+				class="pointer-events-none absolute top-[calc(2.840*var(--text-h2))] left-[92.5%] hidden h-[18px] w-[18px] rounded-full bg-accent lg:block"
 				aria-hidden="true"
 			></span>
 		</div>

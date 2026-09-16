@@ -82,20 +82,49 @@
 				{#each documents as doc (doc.label)}
 					<li class="flex flex-col rounded-[16px] bg-[#EFEFEE] p-8 lg:p-10">
 						<p class="flex-1 text-[15px] leading-7 text-ink/80">{doc.body}</p>
-						<!-- The supplied button frame settles what these are: a light plate,
-						     not a navy pill and not bare text. Inside the plate the palette is
-						     #FBF9F4 across 41,216px with navy on only 460 — the label. At 1:1
-						     with this page's 17px type the plate measures 404x112 with a ~15px
-						     radius, and both plates in the asset inset their label 34px from
-						     the left and centre it vertically. -->
+						<!-- Read off download-button-frame-privacy.png (424x132, the plate
+						     itself 404x112 with a 10px transparent margin, no drop shadow).
+						     The plate is #FBF9F4 with a 20px radius - fitted, not guessed: the
+						     corner inset profile runs 11,8,7,6,5,4,4,3,2,2,2,1,1 at depths 2..15,
+						     which r - sqrt(2rd - d^2) matches at r=20 to within a pixel.
+
+						     Three parts, not one: the label sits 33px in from the left on the
+						     plate's centre line; a 32px disc of #F3F2EE sits 33px in from the
+						     right, same centre line, carrying a 9x14 navy down-arrow; and a 1px
+						     mint hairline runs 24px in from each side, 16px above the base. The
+						     hairline samples #8DDDC5, which is exactly --color-mint at 50% over
+						     this plate on all three channels, so it is opacity and not a
+						     separate tint. The same three parts appear on both plates of the
+						     earlier 935x487 export, so this is the button, not one state of it. -->
 						<div class="mt-8">
 							<a
 								href={doc.file}
-								class="flex min-h-[112px] w-full items-center rounded-[15px] bg-[#FBF9F4]
-								       px-[34px] text-[17px] font-medium text-ink transition-colors
-								       hover:bg-white focus-visible:ring-2 focus-visible:ring-ink"
+								class="relative flex min-h-[112px] w-full items-center justify-between
+								       rounded-[20px] bg-[#FBF9F4] pr-[33px] pl-[33px] text-[18px]
+								       font-medium text-ink transition-colors hover:bg-white
+								       focus-visible:ring-2 focus-visible:ring-ink"
 							>
 								{doc.label}
+
+								<span
+									class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F3F2EE]"
+									aria-hidden="true"
+								>
+									<svg width="9" height="14" viewBox="0 0 9 14" fill="none">
+										<path
+											d="M4.5 0v13M4.5 13 0 8.5M4.5 13 9 8.5"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
+								</span>
+
+								<span
+									class="pointer-events-none absolute right-[24px] bottom-4 left-[24px] h-px bg-mint/50"
+									aria-hidden="true"
+								></span>
 							</a>
 						</div>
 					</li>

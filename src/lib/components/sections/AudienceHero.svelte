@@ -116,16 +116,26 @@
 			<div
 				class="relative mx-auto aspect-[420/560] w-full max-w-[340px] sm:max-w-[380px] lg:aspect-[700/783] lg:max-w-none"
 			>
-				<!-- The bracket's vertical, its arrowhead and its terminating dot share
-				     one axis in the design, and that axis is the exact ink centre of
-				     the "t" of "connects" (x761 of 1425). Everything here is a
-				     percentage of the cluster box, and the cluster is a percentage of
-				     the viewport, so that axis holds at every width. -->
+				<!-- The bracket's vertical, its arrowhead, the dot below the heading
+				     and the short stem under that dot all share one axis. Sized off
+				     the hero-wrapper export rather than from the heading's letterforms,
+				     which is what the earlier "ink centre of the t of connects" note
+				     was doing and why this sat 36px right: measured at a 1354-wide
+				     hero, the export puts the left axis at x690 and the right rail at
+				     x1326, and the build had them at x726 and x1325. Holding the right
+				     rail and widening to match moves the left axis onto x690 and, on
+				     the same 6.1%, drops the arrowhead's base from y124 onto the
+				     export's y130 - one scale correcting both, which is what says the
+				     frame was undersized rather than mispositioned.
+
+				     The dot (16px at y283.5) and its 3px stem (y292..y316) live in the
+				     SVG, not in the markup, so they inherit that axis for free instead
+				     of needing their own percentages to track it. -->
 				<img
 					src="/icons/hero-frame.svg"
 					alt=""
 					aria-hidden="true"
-					class="absolute top-[6.75%] left-[5.8%] hidden w-[93.4%] lg:block"
+					class="absolute top-[6.75%] left-[0.364%] hidden w-[99.09%] lg:block"
 				/>
 				<!-- The bracket's horizontal exit stops at the artwork's own edge. It
 				     used to carry a `-100vw` continuation so the stroke ran off-screen,
@@ -166,11 +176,15 @@
 					/>
 				</div>
 				<!-- Placed off the hero-wrapper export by isolating the pole as its own
-				     connected orange region — 15x258 at x680..694, y349..606 in the
-				     export against 14x245 at x715..728, y304..548 here. That is a
-				     1.053x scale and a -35px, +45px move at the export's 1354 width,
-				     which works through the cluster box to 44.02% wide at
-				     left -3.77%, top 48.38%.
+				     connected orange region. Scanned row by row in a narrow band, the
+				     export's pole starts at y320 on axis x686.75; the build's started
+				     at y349 on x683.75. Widths agree at 12-13px, so this is a straight
+				     +3px, -29px move and not a scale, which through the cluster box is
+				     left -3.33%, top 44.575%.
+
+				     The -29px is what closes the gap under the dot: the pole has to
+				     meet the stem the frame now draws, and at the old top the two were
+				     a third of the dot's height apart.
 
 				     Measuring the pole as a region rather than scanning for rules is
 				     what makes this reliable: earlier passes kept locking onto the
@@ -185,7 +199,7 @@
 					src={mascot}
 					alt=""
 					aria-hidden="true"
-					class="absolute top-[48.38%] left-[-3.77%] hidden w-[44.02%] -scale-x-100 lg:block"
+					class="absolute top-[44.575%] left-[-3.33%] hidden w-[44.02%] -scale-x-100 lg:block"
 				/>
 			</div>
 		</div>
