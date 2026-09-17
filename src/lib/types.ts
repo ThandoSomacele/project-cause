@@ -8,7 +8,8 @@ export interface Segment {
 	weight?: 'strong';
 	/** `italic` matches the design's italic runs ("Choose", "Shift", "lets you"). */
 	style?: 'italic';
-	/** `boxed` draws the design's rectangular outline around a run — the client
+	/** `boxed` draws the design's rectangular outline around a run, always in
+	 *  the accent colour regardless of the run's own tone — the client
 	 *  hero rings "carpenter" to mark it as the interchangeable trade. */
 	boxed?: boolean;
 }

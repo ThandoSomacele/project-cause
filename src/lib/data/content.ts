@@ -68,19 +68,27 @@ export const audience = {
 export const clients = {
 	heading: [
 		[{ text: 'The simple way' }],
-		[{ text: 'to connect with a' }],
 		[
-			{ text: 'verified ' },
+			{ text: 'to ' },
+			{ text: 'connect', tone: 'accent' as const, weight: 'strong' as const },
+			{ text: ' with' }
+		],
+		// The design breaks the line after "with" and opens line 3 on "a". It also
+		// leaves a stray "a" at the end of line 2, so it reads "with a / a verified"
+		// — dropping that one, rather than line 3's, is what keeps the box and its
+		// ellipsis on the connector's axis: the axis is placed for a line 3 that
+		// starts with "a", and without it the whole run sits ~70px to the left.
+		[
+			{ text: 'a ' },
+			{ text: 'verified', tone: 'accent' as const, weight: 'strong' as const },
+			{ text: ' ' },
 			// The design rings this word: it is the one the reader swaps for their
 			// own trade, so it is drawn as a field rather than just coloured. The
-			// ellipsis sits outside the box, trailing off after it.
-			{
-				text: 'carpenter',
-				tone: 'accent' as const,
-				weight: 'strong' as const,
-				boxed: true
-			},
-			{ text: '...', tone: 'accent' as const, weight: 'strong' as const }
+			// box carries the accent; the run inside stays the heading's own colour
+			// and its own Light weight, and the ellipsis sits INSIDE the frame —
+			// all three measured off Figma 4612:24477, where the box's nine glyphs
+			// and three dots all fall within its x345..734 stroke.
+			{ text: 'carpenter...', boxed: true }
 		]
 	],
 	body: [
