@@ -81,7 +81,6 @@ export const clients = {
 		[
 			{ text: 'a ' },
 			{ text: 'verified', tone: 'accent' as const, weight: 'strong' as const },
-			{ text: ' ' },
 			// The design rings this word: it is the one the reader swaps for their
 			// own trade, so it is drawn as a field rather than just coloured. The
 			// box carries the accent; the run inside stays the heading's own colour
@@ -92,9 +91,13 @@ export const clients = {
 		]
 	],
 	body: [
-		'Find a service provider near you in 3 steps.',
-		'Pick from qualified & experienced providers.',
-		'Easily send a quote request from your phone.'
+		[
+			{ text: 'Find a service provider near you in ' },
+			{ text: '3 steps', weight: 'strong' as const },
+			{ text: '.' }
+		],
+		[{ text: 'Pick from qualified & experienced providers.' }],
+		[{ text: 'Easily send a quote request from your phone.' }]
 	],
 	chips: [
 		{ label: 'Experienced', icon: 'check-circle' as const },
@@ -114,7 +117,9 @@ export const clients = {
  */
 export const process = {
 	heading: [
-		[{ text: 'Reliably,' }],
+		// The design sets "Reliably" Bold and leaves its comma at the line's own
+		// Regular — the comma's stem measures half the letters' beside it.
+		[{ text: 'Reliably', weight: 'strong' as const }, { text: ',' }],
 		[
 			{ text: 'Hire ' },
 			{ text: 'Vetted', tone: 'accent' as const, weight: 'strong' as const },

@@ -17,6 +17,7 @@
 	body={clients.body}
 	chips={clients.chips}
 	source="clients"
+	frame="/icons/hero-frame-clients.svg"
 	bodyGap="lg:mt-[min(2.947vw,42px)]"
 	{form}
 />

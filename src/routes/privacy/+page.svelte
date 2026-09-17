@@ -66,9 +66,11 @@
 
 	<section data-section="privacy-documents" class="bg-[#FCFCFC] py-16 lg:py-[min(8.4vw,120px)]">
 		<div class="container-page">
-			<h2 class="text-h2 mx-auto max-w-[60rem] text-center font-normal text-ink">
+			<h2 class="text-h2 mx-auto max-w-[60rem] text-center font-bold text-ink">
 				Cause in an online marketplace for
-				<span class="block font-bold">vetted service providers to connect with clients</span>
+				<span class="block"
+					>vetted service providers to <span class="text-accent">connect</span> with clients</span
+				>
 			</h2>
 			<p class="mx-auto mt-6 max-w-[46rem] text-center text-[15px] leading-6 text-muted">
 				Everything you need to know about finding, hiring, and working with verified artisans on our

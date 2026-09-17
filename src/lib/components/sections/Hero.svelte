@@ -11,7 +11,7 @@
 <AudienceHero
 	name="hero"
 	heading={hero.headline}
-	body={[hero.subhead]}
+	body={[[{ text: hero.subhead }]]}
 	chips={hero.chips}
 	source="hero"
 	waitlistId="waitlist"

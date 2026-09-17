@@ -14,15 +14,24 @@
 		name: string;
 		id?: string;
 		heading: readonly Line[];
-		/** One entry per rendered line. The hero runs a single line, the client
-		 *  section three. */
-		body: readonly string[];
+		/** One entry per rendered line, each a run of segments so a phrase inside
+		 *  a line can carry its own weight — the client section bolds "3 steps".
+		 *  The hero runs a single line, the client section three. */
+		body: readonly Line[];
 		chips: readonly Chip[];
 		/** Distinguishes this waitlist form's result, and namespaces its ids. */
 		source: string;
 		form?: WaitlistResult | null;
 		/** Mascot artwork; both variants carry the pole on the mascot's left. */
 		mascot?: string;
+		/**
+		 * Bracket artwork. The two variants differ only in how far the rail runs
+		 * before its arrowhead: the hero's stops between heading lines 1 and 2,
+		 * the client section's one line lower, between 2 and 3, so it lands just
+		 * above the ringed word. Measured on the design at 9px of clearance in
+		 * both cases — the rail tracks the heading, not a fixed height.
+		 */
+		frame?: string;
 		/**
 		 * Top margin on the body block. The two variants anchor it differently:
 		 * the hero's single line and the client section's third line both finish
@@ -42,6 +51,7 @@
 		source,
 		form = null,
 		mascot = '/images/mascot-pole.svg',
+		frame = '/icons/hero-frame.svg',
 		bodyGap = 'lg:mt-[min(7.228vw,103px)]',
 		waitlistId
 	}: Props = $props();
@@ -70,14 +80,16 @@
 
 	<div class="container-wide relative">
 		<div class="relative z-10 max-w-[780px] pt-10 pb-12 lg:pt-[min(3.79vw,54px)] lg:pb-24">
-			<!-- Light, and it must stay Light. The design's stems measure a shade
-			     heavier than Inter Light, which tempts a bump to Regular — but the
-			     design's face carries that weight on the SAME advance widths, so
-			     Regular pushes every glyph right: the "d" of "leads" lands 12.7px
-			     off and the pole no longer runs through it. Measured at 1425, the
-			     d/s centres sit at 52.647/55.752% here against the design's
-			     52.596/55.754%. Alignment follows advance width, not stem weight. -->
-			<h2 class="text-hero font-light">
+			<!-- Regular, not Light. This ran Light for a long time on the argument
+			     that the design's face carries its extra weight on the SAME advance
+			     widths, so matching advances mattered more than matching stems.
+			     Measuring three sections settles it the other way: stem/x-height is
+			     0.153 on the provider hero, 0.144 on the client section and 0.141 on
+			     the final CTA, against 0.113 for Inter Light and 0.161 for Regular —
+			     every one of them interpolates to ~384. Regular is the nearest step.
+			     It does push every glyph right, so the frame's axis is re-measured
+			     against the letterforms below rather than held at its old x. -->
+			<h2 class="text-hero font-normal">
 				{#each heading as line, i (i)}
 					<span class="block"><RichText segments={line} /></span>
 				{/each}
@@ -85,7 +97,7 @@
 
 			<p class={['mt-10 text-[17px] leading-relaxed text-white/85', bodyGap]}>
 				{#each body as line (line)}
-					<span class="block">{line}</span>
+					<span class="block"><RichText segments={line} /></span>
 				{/each}
 			</p>
 
@@ -132,7 +144,7 @@
 				     SVG, not in the markup, so they inherit that axis for free instead
 				     of needing their own percentages to track it. -->
 				<img
-					src="/icons/hero-frame.svg"
+					src={frame}
 					alt=""
 					aria-hidden="true"
 					class="absolute top-[6.75%] left-[0.364%] hidden w-[99.09%] lg:block"
@@ -199,7 +211,7 @@
 					src={mascot}
 					alt=""
 					aria-hidden="true"
-					class="absolute top-[44.575%] left-[1.807%] hidden w-[44.02%] -scale-x-100 lg:block"
+					class="absolute top-[44.575%] left-[3.362%] hidden w-[44.02%] -scale-x-100 lg:block"
 				/>
 			</div>
 		</div>
