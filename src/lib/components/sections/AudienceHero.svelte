@@ -199,7 +199,7 @@
 					src={mascot}
 					alt=""
 					aria-hidden="true"
-					class="absolute top-[44.575%] left-[-3.33%] hidden w-[44.02%] -scale-x-100 lg:block"
+					class="absolute top-[44.575%] left-[1.807%] hidden w-[44.02%] -scale-x-100 lg:block"
 				/>
 			</div>
 		</div>

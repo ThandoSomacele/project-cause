@@ -30,14 +30,15 @@
 			     correction to one broke the other.
 
 			     Scanned off talk-to-your-clients-heading.png instead, which puts the
-			     face at 56.1px and the rule's centre 168.5px below the heading's first
-			     ink row. Normalised by the face that is 3.0036em, and the ink top
-			     itself sits 0.501em below the element's box top, so the 2px rule's top
-			     is 3.486em. That export carries no line-3 text - only the two navy
-			     lines and these two orange marks - but both marks and the anchor share
-			     one ink top, so the offsets stand without it. -->
+			     face at 56.1px. That export carries no line-3 text, though - only the
+			     two navy lines and these two orange marks - so it could not settle
+			     where the rule sits against "talk", and the offset it gave put the
+			     rule 11px below that word's baseline.
+
+			     Measured against the rendered line instead: "talk" has no descenders,
+			     so its ink ends on the baseline, and the rule's centre goes there. -->
 			<div
-				class="pointer-events-none absolute top-[calc(3.486*var(--text-h2))] right-[48.2%] left-[-50vw] hidden h-[2px] bg-accent md:block"
+				class="pointer-events-none absolute top-[calc(3.286*var(--text-h2))] right-[48.2%] left-[-50vw] hidden h-[2px] bg-accent md:block"
 				aria-hidden="true"
 			>
 				<span class="absolute -top-[5px] -right-[6px] h-3 w-3 rounded-full bg-accent"></span>
@@ -48,7 +49,7 @@
 			     Same anchor as the rule - centre 140.5px below the ink top on the
 			     export's 56.1px face, so 2.840em to this 18px circle's top. -->
 			<span
-				class="pointer-events-none absolute top-[calc(2.840*var(--text-h2))] left-[92.5%] hidden h-[18px] w-[18px] rounded-full bg-accent lg:block"
+				class="pointer-events-none absolute top-[calc(2.604*var(--text-h2))] left-[91.97%] hidden h-[18px] w-[18px] rounded-full bg-accent lg:block"
 				aria-hidden="true"
 			></span>
 		</div>
@@ -93,7 +94,7 @@
 							</div>
 						</div>
 
-						<div class="relative min-h-[min(16.84vw,240px)] bg-[#f1f1f3]">
+						<div class="relative min-h-[min(16.84vw,240px)] overflow-hidden bg-[#f1f1f3]">
 							<img
 								src={shots[item.image]}
 								alt="The Cause dashboard"
@@ -102,6 +103,42 @@
 								loading="lazy"
 								class="absolute inset-0 h-full w-full object-cover object-left"
 							/>
+
+							<!-- dashboard-requests.webp was exported with the sidebar avatar
+							     empty: the orange disc is there but the elephant mark inside it
+							     is missing, which the other two slides do carry. Rather than
+							     ship a slide with a blank disc, the mark is laid back over it.
+
+							     The overlay rides its own box rather than the image's, because
+							     the image is object-cover and the two do not scale alike. At
+							     every width this card takes, cover is height-limited (the box
+							     is nowhere near the source's 1.932 aspect), so the render is
+							     full-height, left-anchored and uniformly scaled - which a box
+							     of `h-full` at aspect 1600/828 reproduces exactly. Percentages
+							     inside it are then source pixels.
+
+							     Sized off the two source assets rather than off a screen
+							     capture - sips converts the webp, then the disc comes out as a
+							     connected orange region in each. Both carry the same 46x46 disc
+							     at x23..68; quotes has a 35x28 navy mark centred in it and
+							     requests has nothing, which is the defect. logo-mark.png is
+							     302x254 of ink on a 320x272 canvas, so the canvas has to run
+							     37.1px wide for its ink to measure 35, and the 1.04/0.81px ink
+							     offsets come off the placement. -->
+							{#if item.image === 'requests'}
+								<div
+									class="pointer-events-none absolute top-0 left-0 hidden aspect-[1600/828] h-full lg:block"
+									aria-hidden="true"
+								>
+									<img
+										src="/brand/logo-mark.png"
+										alt=""
+										width="320"
+										height="272"
+										class="absolute top-[3.382%] left-[1.654%] w-[2.318%]"
+									/>
+								</div>
+							{/if}
 						</div>
 
 						<img
