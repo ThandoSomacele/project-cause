@@ -96,14 +96,18 @@
 					     centre by construction, and the rule leaves from the dot's centre
 					     the way the artwork does.
 
+					     The terminal carries on the periods' own rhythm rather than
+					     standing clear of them: they step 17.6px at this size and it
+					     lands 19px past the last one, which is what the frame shows. The
+					     left margin is measured to the dot's centre, since that is where
+					     the rule now starts.
+
 					     Everything is in em so it tracks the heading as the type scales:
-					     the 11px terminal against the 56px face is 0.196em, and the left
-					     margin carries the gap plus the half-dot the rule now starts
-					     inside of. -->
+					     the 11px terminal against the 56px face is 0.196em. -->
 					<span
 						class={[
 							flow && 'hidden md:block',
-							'relative -mr-[50vw] mb-[0.114em] ml-[0.288em] h-[2px] flex-1 -translate-y-[0.064em] bg-accent'
+							'relative -mr-[50vw] mb-[0.114em] ml-[0.172em] h-[2px] flex-1 -translate-y-[0.064em] bg-accent'
 						]}
 						aria-hidden="true"
 					>
