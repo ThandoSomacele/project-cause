@@ -71,13 +71,14 @@ export const clients = {
 		[
 			{ text: 'to ' },
 			{ text: 'connect', tone: 'accent' as const, weight: 'strong' as const },
-			{ text: ' with a' }
+			{ text: ' with' }
 		],
-		// The frame reads "to connect with a / a verified artisan..." — the article
-		// is set twice, once at the end of line 2 and again at the start of line 3.
-		// It was dropped here for a while as a typo; the client has since asked for
-		// the frame verbatim, and line 2's ink measures 52px longer than the build's
-		// without it, which is an "a" and its space.
+		// The frame sets the article twice — "to connect with a / a verified
+		// artisan..." — and line 2's ink measures 52px longer than this, which is
+		// exactly an "a" and its space. It is a slip in the frame rather than a
+		// deliberate repetition: the client has confirmed it reads wrong, and on
+		// mobile, where the heading runs as one sentence, it reads plainly as
+		// "with a a verified artisan". Line 3 keeps the article; line 2 drops it.
 		[
 			{ text: 'a ' },
 			{ text: 'verified', tone: 'accent' as const, weight: 'strong' as const },
@@ -365,11 +366,18 @@ export const clientBenefits = {
 };
 
 export const clientCta = {
+	// The frame italicises the question it opens on, and leaves the closing "?"
+	// at the line's own weight rather than carrying it into the bold run.
 	heading: [
-		[{ text: 'Risky DIY?... Or a trusted & vetted' }],
-		[{ text: 'service provider?', weight: 'strong' as const }]
+		[
+			{ text: 'Risky DIY?...', style: 'italic' as const },
+			{ text: ' Or a trusted & vetted' }
+		],
+		[{ text: 'service provider', weight: 'strong' as const }, { text: '?' }]
 	],
-	subhead: 'Join the waitlist and get early access to a new era'
+	subhead: 'Join the waitlist and get early access to a new era',
+	// Shorter than the address the hero's frame sets.
+	placeholder: 'nomsa@example.com'
 };
 
 export const pricing = {

@@ -54,5 +54,12 @@
 <ProcessSteps />
 <Comparison data={clientComparison} name="client-comparison" />
 <GetPaid data={clientBenefits} name="client-benefits" photo="/images/kitchen-consult.webp" />
-<WaitlistCta {form} data={clientCta} name="client-cta" source="client-cta" connector />
+<WaitlistCta
+	{form}
+	data={clientCta}
+	name="client-cta"
+	source="client-cta"
+	placeholder={clientCta.placeholder}
+	connector
+/>
 <Faq data={clientFaq} name="client-faq" />

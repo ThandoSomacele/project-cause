@@ -6,7 +6,7 @@
 		href?: string;
 		type?: 'button' | 'submit';
 		variant?: 'primary' | 'accent-ink' | 'dark' | 'white' | 'outline';
-		size?: 'md' | 'lg';
+		size?: 'md' | 'lg' | 'form';
 		disabled?: boolean;
 		class?: string;
 		children: Snippet;
@@ -39,7 +39,11 @@
 
 	const sizes = {
 		md: 'px-6 py-3 text-[15px]',
-		lg: 'px-8 py-3.5 text-base'
+		lg: 'px-8 py-3.5 text-base',
+		// The waitlist submit is taller and wider than a body button in every
+		// frame that carries one — 153x56 against this md size's 135x47 — and it
+		// has to match the field it sits beside.
+		form: 'px-[33px] py-[16.5px] text-[15px]'
 	};
 
 	const classes = $derived([base, variants[variant], sizes[size], className]);

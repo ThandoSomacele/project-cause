@@ -8,7 +8,8 @@
 		data = finalCta,
 		name = 'cta',
 		source = 'cta',
-		connector = false
+		connector = false,
+		placeholder = undefined
 	}: {
 		form?: WaitlistResult | null;
 		/** The client half closes with the same panel and its own headline. */
@@ -19,6 +20,8 @@
 		 *  left screen edge. Opt-in: only the client panel shows it in the design
 		 *  I have — the provider frame has not been checked. */
 		connector?: boolean;
+		/** Example address in the field; the two panels' frames differ. */
+		placeholder?: string;
 	} = $props();
 </script>
 
@@ -87,6 +90,6 @@
 
 		<p class="mt-5 text-[17px] text-ink/80">{data.subhead}</p>
 
-		<EmailCapture {source} tone="light" {form} class="mx-auto mt-8 max-w-[560px] text-left" />
+		<EmailCapture {source} tone="light" {form} {placeholder} class="mx-auto mt-8 max-w-[648px] text-left" />
 	</div>
 </section>
