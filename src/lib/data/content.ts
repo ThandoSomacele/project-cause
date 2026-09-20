@@ -236,9 +236,11 @@ export const comparison = {
 		[{ text: 'Don’t Pay for “Maybe?”,' }],
 		[
 			{ text: 'Just, ' },
-			// Three periods, like the client half — the fourth dot the copy used to
-			// carry is the rule's own terminal, which the heading draws itself.
-			{ text: 'Get Paid!...', tone: 'accent' as const, weight: 'strong' as const }
+			// Four periods here, against the client half's three — the two frames
+			// differ, and this one is counted off a 1:1 render rather than assumed
+			// from the other. The round terminal after them belongs to the rule,
+			// which the heading draws itself.
+			{ text: 'Get Paid!....', tone: 'accent' as const, weight: 'strong' as const }
 		]
 	],
 	alternatives: {

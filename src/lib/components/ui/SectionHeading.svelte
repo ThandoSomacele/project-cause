@@ -91,7 +91,7 @@
 						aria-hidden="true"
 					></span>
 					<span
-						class="-mr-[50vw] -ml-[0.125em] mb-[0.114em] h-[3px] flex-1 -translate-y-[0.064em] bg-accent"
+						class="-mr-[50vw] -ml-[0.125em] mb-[0.114em] h-[2px] flex-1 -translate-y-[0.064em] bg-accent"
 						aria-hidden="true"
 					></span>
 				</span>

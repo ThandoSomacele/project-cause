@@ -62,7 +62,12 @@
 		     this used to carry its own, older copy of the artwork, whose heads and
 		     stroke weights did not match it or the frame. Anchored the way that
 		     one is: the mark's base on the heading's third baseline, which lands
-		     at 3.9 x --text-h2, and the rule 10.6px under it. -->
+		     at 3.9 x --text-h2, and the rule 10.5px under it.
+
+		     The rule leaves from the dot's left edge, and the dot centres on the
+		     mark's own axis — it sat 17px left of it — so the rule's left is the
+		     mark's centre less half a dot. 3px of stroke, not 2: measured 4.76px
+		     on the 1.612x render, which is 2.95 at the design's own scale. -->
 		<img
 			src="/icons/process-crew.svg"
 			alt=""
@@ -73,10 +78,10 @@
 		/>
 
 		<div
-			class="pointer-events-none absolute top-[calc(4.089*var(--text-h2)_-_1px)] right-[-50vw] left-[83.6%] hidden h-[2px] bg-accent md:block"
+			class="pointer-events-none absolute top-[calc(4.089*var(--text-h2)_-_1.5px)] right-[-50vw] left-[84.89%] hidden h-[3px] bg-accent md:block"
 			aria-hidden="true"
 		>
-			<span class="absolute -top-[7px] left-0 h-4 w-4 rounded-full bg-accent"></span>
+			<span class="absolute -top-[6.5px] left-0 h-4 w-4 rounded-full bg-accent"></span>
 		</div>
 
 		<!-- This frame sets its heading larger and much looser than the shared
