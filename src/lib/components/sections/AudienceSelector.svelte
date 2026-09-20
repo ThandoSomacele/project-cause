@@ -121,23 +121,21 @@
 			</div>
 
 			<!-- From lg the two captions share ONE grid cell and fade between each
-			     other, so the swap cannot shift anything below. That stacking is
-			     also why they need a second layout below lg: the rules that hide
-			     the inactive one live in the 64rem media query, so without this
-			     both captions painted on top of each other. Below lg each one
-			     takes its own column, on the same two-column track and gap as the
-			     tiles above, so each caption sits under its own photograph. -->
-			<!-- Centred from lg, where one caption sits under the pair and reads as
-			     a label for whichever tile is active. Below lg each caption belongs
-			     to the tile above it, so it ranges left against that tile's edge
-			     instead — centred, the two columns' ragged inner edges ran into
-			     each other. -->
-			<div class="mt-3 grid grid-cols-2 gap-x-3 text-left lg:grid-cols-1 lg:text-center">
+			     other, so the swap cannot shift anything below. Below lg there is
+			     no hover to swap on, and the rules that hide the inactive one live
+			     in the 64rem query, so both were painting into that single cell on
+			     top of each other.
+
+			     They take a row each there instead, on one full-width column under
+			     the pair. Giving each its own column under its own tile reads
+			     tidily but squeezes the paragraphs into half a screen, which is
+			     four or five words to a line. -->
+			<div class="mt-3 grid text-left lg:text-center">
 				{#each audience.options as option (option.id)}
 					<span class="option-caption block lg:col-start-1 lg:row-start-1">
 						<span class="block text-[17px] font-bold">{option.title}</span>
 						<span
-							class="mt-2.5 block max-w-full pr-3 pb-8 text-[13px] leading-[1.75] text-white/75 lg:mx-auto lg:mt-1.5 lg:max-w-[74.6%] lg:pr-0 lg:leading-[1.65]"
+							class="mt-2 block max-w-full pb-6 text-[13px] leading-[1.75] text-white/75 lg:mx-auto lg:mt-1.5 lg:max-w-[74.6%] lg:pb-8 lg:leading-[1.65]"
 						>
 							{option.body}
 						</span>
