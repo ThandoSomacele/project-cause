@@ -157,20 +157,25 @@
 					</h3>
 					<p class="mt-2 max-w-[38rem] text-[15px] text-white/75">{calculator.feesBody}</p>
 
-					<div class="mt-7 flex flex-wrap gap-4">
-						<p class="flex items-center gap-4 rounded-lg bg-cream py-4 pr-8 pl-5 text-ink">
+					<!-- Two equal plates rather than two content-width ones: the figures
+					     inside them are different lengths, so packed they came out
+					     visibly mismatched. Half a narrow screen is not much room for
+					     "R200.00" beside a rule and a label, so the padding and the
+					     figure both come in a step below sm. -->
+					<div class="mt-7 grid grid-cols-2 gap-3 sm:gap-4">
+						<p class="flex items-center gap-3 rounded-lg bg-cream px-4 py-4 text-ink sm:gap-4 sm:pr-8 sm:pl-5">
 							<span class="h-10 w-1 shrink-0 rounded bg-accent"></span>
 							<span>
-								<span class="block text-[24px] font-semibold">{formatPct(fees.ratePct)} %</span>
+								<span class="block text-[20px] font-semibold sm:text-[24px]">{formatPct(fees.ratePct)} %</span>
 								<span class="font-mono block text-[11px] tracking-[0.1em] text-muted">
 									{calculator.labels.feeEstimate}
 								</span>
 							</span>
 						</p>
-						<p class="flex items-center gap-4 rounded-lg bg-white py-4 pr-8 pl-5 text-ink">
+						<p class="flex items-center gap-3 rounded-lg bg-white px-4 py-4 text-ink sm:gap-4 sm:pr-8 sm:pl-5">
 							<span class="h-10 w-1 shrink-0 rounded bg-ink"></span>
 							<span>
-								<span class="block text-[24px] font-semibold">{formatZarTight(fees.fee)}</span>
+								<span class="block text-[20px] font-semibold sm:text-[24px]">{formatZarTight(fees.fee)}</span>
 								<span class="font-mono block text-[11px] tracking-[0.1em] text-muted">
 									{calculator.labels.deduction}
 								</span>

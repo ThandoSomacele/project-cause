@@ -44,35 +44,52 @@
 
 		       L + (L - 1.21em)/2 + 0.9688em  =  1.9088em   (L = 1.03em here)
 
-		     so the 2px rule's top is calc(1.9088 x --text-h2 - 2px). Because that
-		     reads the same token the heading does, the rule tracks it through the
-		     clamp at every width instead of drifting. -->
+		     so the rule's top is that baseline less its own 2px. Because it reads
+		     the same token the heading does, the rule tracks it through the clamp
+		     at every width instead of drifting.
+
+		     This heading runs 1.098x the token on a 1.275 leading, so its second
+		     baseline lands at 2.5 x --text-h2 rather than the 1.9088 the token's
+		     own 1.03 would put it at. -->
 		<div
-			class="pointer-events-none absolute top-[calc(1.9088*var(--text-h2)_-_2px)] right-[74.4%] left-[-50vw] hidden h-[2px] bg-ink md:block"
+			class="pointer-events-none absolute top-[calc(2.5*var(--text-h2)_-_2px)] right-[74.4%] left-[-50vw] hidden h-[2px] bg-ink md:block"
 			aria-hidden="true"
 		>
 			<span class="absolute -top-[4px] -right-[3px] h-[10px] w-[10px] rounded-full bg-ink"></span>
 		</div>
 
+		<!-- The same crew mark the process section closes on, off the same trace —
+		     this used to carry its own, older copy of the artwork, whose heads and
+		     stroke weights did not match it or the frame. Anchored the way that
+		     one is: the mark's base on the heading's third baseline, which lands
+		     at 3.9 x --text-h2, and the rule 10.6px under it. -->
 		<img
-			src="/icons/reach-clients.svg"
+			src="/icons/process-crew.svg"
 			alt=""
 			aria-hidden="true"
-			width="63"
-			height="63"
-			class="pointer-events-none absolute top-[min(9.54vw,136px)] left-[83.6%] hidden w-[63px] lg:block"
+			width="100"
+			height="101"
+			class="pointer-events-none absolute top-[calc(2.811*var(--text-h2))] left-[83.2%] hidden h-[calc(1.089*var(--text-h2))] w-auto lg:block"
 		/>
 
 		<div
-			class="pointer-events-none absolute top-[min(14.67vw,209px)] right-[-50vw] left-[85.5%] hidden h-[2px] bg-accent md:block"
+			class="pointer-events-none absolute top-[calc(4.089*var(--text-h2)_-_1px)] right-[-50vw] left-[83.6%] hidden h-[2px] bg-accent md:block"
 			aria-hidden="true"
 		>
 			<span class="absolute -top-[7px] left-0 h-4 w-4 rounded-full bg-accent"></span>
 		</div>
 
+		<!-- This frame sets its heading larger and much looser than the shared
+		     token: the three lines fit 61.5px rather than 56 — each of them
+		     independently, and the indents confirm the scale — on a 78.4px pitch,
+		     which is 1.275 against the token's 1.03. Expressed against the token
+		     so it keeps the same clamp on the way down; the tracking comes with
+		     it, since overriding the size drops what the token carried. -->
 		<SectionHeading
 			lines={valueOffering.heading}
 			weight="font-normal"
+			size="text-[calc(1.098*var(--text-h2))] tracking-[-0.02em]"
+			leading="leading-[1.275]"
 			indents={['lg:pl-[0.6%]', 'lg:pl-[26.3%]', 'lg:pl-[51.4%]']}
 		/>
 

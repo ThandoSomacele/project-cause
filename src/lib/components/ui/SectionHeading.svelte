@@ -35,6 +35,14 @@
 		 *  carousel's heading runs a 66px pitch on a 56px face — 1.176em —
 		 *  against the 1.03 the token sets for everything else. */
 		leading?: string;
+		/**
+		 * Size override, replacing the `text-h2` token rather than sitting beside
+		 * it — two font-size utilities on one element resolve by stylesheet order,
+		 * not by class order, so the loser is not predictable. A caller setting
+		 * this owns the tracking and the leading with it, since the token carried
+		 * both.
+		 */
+		size?: string;
 		class?: string;
 		id?: string;
 	}
@@ -45,12 +53,13 @@
 		ruleAfter,
 		weight = 'font-light',
 		leading = '',
+		size = 'text-h2',
 		class: className = '',
 		id
 	}: Props = $props();
 </script>
 
-<h2 {id} class={['text-h2 text-ink', weight, leading, className]}>
+<h2 {id} class={[size, 'text-ink', weight, leading, className]}>
 	{#each lines as line, i (i)}
 		<span class={['block', indents[i]]}>
 			{#if ruleAfter === i}

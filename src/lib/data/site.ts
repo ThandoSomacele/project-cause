@@ -9,9 +9,10 @@ export const site = {
 export const nav = [
 	// Jumps to the service-provider block on the landing page rather than
 	// loading a route. Rooted at "/" so it still resolves from other pages.
+	//
+	// "About Cause" was here pointing at /about, which has never been built.
 	{ label: 'Service Providers', href: '/#service-providers' },
-	{ label: 'Clients', href: '/#clients' },
-	{ label: 'About Cause', href: '/about' }
+	{ label: 'Clients', href: '/#clients' }
 ];
 
 export const footer = {
