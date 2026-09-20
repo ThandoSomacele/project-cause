@@ -123,23 +123,26 @@
 			<!-- From lg the two captions share ONE grid cell and fade between each
 			     other, so the swap cannot shift anything below. Below lg there is
 			     no hover to swap on, and the rules that hide the inactive one live
-			     in the 64rem query, so both were painting into that single cell on
-			     top of each other.
+			     in the 64rem query, so both would paint into that single cell on
+			     top of each other. Each takes its own column there instead, on the
+			     same two-column track and gap as the tiles, so a caption sits
+			     under the photograph it belongs to.
 
-			     They take a row each there instead, on one full-width column under
-			     the pair. Giving each its own column under its own tile reads
-			     tidily but squeezes the paragraphs into half a screen, which is
-			     four or five words to a line. -->
-			<div class="mt-3 grid text-left lg:text-center">
+			     Each caption is a link to the same place its tile goes: on a
+			     narrow screen the tiles are small and the words under them are the
+			     larger target. At lg the inactive one is faded out, so the
+			     stylesheet takes its pointer events with it — an invisible link
+			     over the visible one would swallow the clicks. -->
+			<div class="mt-3 grid grid-cols-2 gap-x-3 text-left lg:grid-cols-1 lg:text-center">
 				{#each audience.options as option (option.id)}
-					<span class="option-caption block lg:col-start-1 lg:row-start-1">
+					<a href={option.href} class="option-caption block lg:col-start-1 lg:row-start-1">
 						<span class="block text-[17px] font-bold">{option.title}</span>
 						<span
-							class="mt-2 block max-w-full pb-6 text-[13px] leading-[1.75] text-white/75 lg:mx-auto lg:mt-1.5 lg:max-w-[74.6%] lg:pb-8 lg:leading-[1.65]"
+							class="mt-2.5 block max-w-full pr-3 pb-8 text-[13px] leading-[1.75] text-white/75 lg:mx-auto lg:mt-1.5 lg:max-w-[74.6%] lg:pr-0 lg:leading-[1.65]"
 						>
 							{option.body}
 						</span>
-					</span>
+					</a>
 				{/each}
 			</div>
 		</div>
