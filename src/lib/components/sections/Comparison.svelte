@@ -2,15 +2,18 @@
 	import { comparison } from '$lib/data/content';
 	import SectionHeading from '$lib/components/ui/SectionHeading.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
+	import type { Line } from '$lib/types';
 
 	/** The client half of the page renders this same composition with its own
-	 *  copy, so the content comes in as a prop rather than being imported here. */
+	 *  copy, so the content comes in as a prop rather than being imported here.
+	 *  The heading is widened to `Line[]`: the two halves emphasise different
+	 *  things, so one's runs carry fields the other's never use. */
 	let {
 		data = comparison,
 		name = 'comparison',
 		indents = ['lg:pl-[10.4%]', 'lg:pl-[44%]']
 	}: {
-		data?: typeof comparison;
+		data?: Omit<typeof comparison, 'heading'> & { heading: readonly Line[] };
 		name?: string;
 		indents?: [string, string];
 	} = $props();
@@ -21,7 +24,7 @@
 		<div class="relative">
 			<SectionHeading
 				lines={data.heading}
-				weight="font-bold"
+				weight="font-semibold"
 				{indents}
 				ruleAfter={1}
 			/>

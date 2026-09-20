@@ -235,7 +235,9 @@ export const comparison = {
 		[{ text: 'Don’t Pay for “Maybe?”,' }],
 		[
 			{ text: 'Just, ' },
-			{ text: 'Get Paid!....', tone: 'accent' as const, weight: 'strong' as const }
+			// Three periods, like the client half — the fourth dot the copy used to
+			// carry is the rule's own terminal, which the heading draws itself.
+			{ text: 'Get Paid!...', tone: 'accent' as const, weight: 'strong' as const }
 		]
 	],
 	alternatives: {
@@ -301,10 +303,16 @@ export const getPaid = {
  */
 export const clientComparison = {
 	heading: [
-		[{ text: 'From ' }, { text: 'repair headache', style: 'italic' as const }],
+		// The frame sets "From" and "to," a step lighter than the two runs they
+		// introduce, and closes on three periods — the fourth dot in the old copy
+		// was the rule's own terminal, which the heading now draws separately.
+		[
+			{ text: 'From ' },
+			{ text: 'repair headache', style: 'italic' as const, weight: 'strong' as const }
+		],
 		[
 			{ text: 'to, ' },
-			{ text: 'peace of mind....', tone: 'accent' as const, weight: 'strong' as const }
+			{ text: 'peace of mind...', tone: 'accent' as const, weight: 'strong' as const }
 		]
 	],
 	alternatives: {

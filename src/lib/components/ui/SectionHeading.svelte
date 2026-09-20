@@ -25,7 +25,10 @@
 		 * Base weight for the heading. The design is not uniform: measured off
 		 * the 1:1 render, the hero, value-offering and get-paid headings run at
 		 * Light, the carousel at Regular and the comparison at SemiBold. Stem
-		 * widths at 56px were 5px, 6px and 8px respectively.
+		 * widths at 56px were 5px, 6px and 8px respectively. The runs a heading
+		 * emphasises go a step above whatever this sets, so setting it to Bold
+		 * leaves them nothing to climb to — which is why the comparison headings
+		 * read flat against their frames.
 		 */
 		weight?: string;
 		/** Line-height override. The design is not uniform here either: the
@@ -53,18 +56,22 @@
 			{#if ruleAfter === i}
 				<span class="flex items-baseline">
 					<span class="shrink-0"><RichText segments={line} /></span>
-					<!-- Runs off-canvas, and is centred on the trailing dots rather than
-					     sitting on the baseline: in the design the rule and the four
-					     periods share a centre line, which puts it about half a dot above
-					     the baseline. The offset is in em so it tracks the heading as the
-					     type scales.
+					<!-- The rule is headed by its own round terminal, the way the
+					     carousel's is: the frame sets three periods, then clear space, then
+					     a dot about twice their size, and the stroke leaves from that dot's
+					     centre. It used to be a bare stroke butted against a fourth period,
+					     which is what that dot had been read as.
 
-					     The negative left margin closes the last dot's right side bearing.
-					     Without it the rule begins 3.5px clear of the dot; the design has
-					     them touching, so the rule reads as the dots continuing rather
-					     than as a separate stroke. -->
+					     Both sit on the periods' centre line rather than the baseline —
+					     0.205em above it — which is what `mb` buys in a baseline-aligned
+					     row. Everything is in em so it tracks the heading as the type
+					     scales. -->
 					<span
-						class="-mr-[50vw] -ml-[0.0625em] mb-[0.114em] h-[3px] flex-1 -translate-y-[0.064em] bg-accent"
+						class="mb-[0.08em] ml-[0.19em] h-[0.25em] w-[0.25em] shrink-0 rounded-full bg-accent"
+						aria-hidden="true"
+					></span>
+					<span
+						class="-mr-[50vw] -ml-[0.125em] mb-[0.114em] h-[3px] flex-1 -translate-y-[0.064em] bg-accent"
 						aria-hidden="true"
 					></span>
 				</span>
