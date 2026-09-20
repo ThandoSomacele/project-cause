@@ -48,9 +48,11 @@
 		 * wraps where it falls. The frames' line breaks are a desktop
 		 * composition: in a narrow column they land on top of the wrapping the
 		 * width already forces, which turns one sentence into several ragged
-		 * rows. Off by default — a heading with a `ruleAfter` cannot take it,
-		 * since its rule would end up mid-sentence — and gated at md rather than
-		 * lg so the breaks come back at the same width the decorations do.
+		 * rows. Off by default, and gated at md rather than lg so the breaks
+		 * come back at the same width the decorations do. A heading with a
+		 * `ruleAfter` can take it: its rule and terminal drop out while the
+		 * lines are flowing, since there is no end of a line for them to
+		 * leave from.
 		 */
 		flow?: boolean;
 		class?: string;
@@ -74,7 +76,11 @@
 	{#each lines as line, i (i)}
 		<span class={[flow ? 'md:block' : 'block', indents[i]]}>
 			{#if ruleAfter === i}
-				<span class="flex items-baseline">
+				<!-- Flowing, the rule has to go: it runs off the right edge from the
+				     end of a line, and there is no end of a line to leave from once
+				     the heading is one wrapping sentence. It comes back with the row
+				     at md, the width the breaks come back at. -->
+				<span class={[flow ? 'md:flex' : 'flex', 'items-baseline']}>
 					<span class="shrink-0"><RichText segments={line} /></span>
 					<!-- The rule is headed by its own round terminal, the way the
 					     carousel's is: the frame sets three periods, then clear space, then
@@ -87,11 +93,17 @@
 					     row. Everything is in em so it tracks the heading as the type
 					     scales. -->
 					<span
-						class="mb-[0.08em] ml-[0.19em] h-[0.25em] w-[0.25em] shrink-0 rounded-full bg-accent"
+						class={[
+							flow && 'hidden md:block',
+							'mb-[0.08em] ml-[0.19em] h-[0.25em] w-[0.25em] shrink-0 rounded-full bg-accent'
+						]}
 						aria-hidden="true"
 					></span>
 					<span
-						class="-mr-[50vw] -ml-[0.125em] mb-[0.114em] h-[2px] flex-1 -translate-y-[0.064em] bg-accent"
+						class={[
+							flow && 'hidden md:block',
+							'-mr-[50vw] -ml-[0.125em] mb-[0.114em] h-[2px] flex-1 -translate-y-[0.064em] bg-accent'
+						]}
 						aria-hidden="true"
 					></span>
 				</span>

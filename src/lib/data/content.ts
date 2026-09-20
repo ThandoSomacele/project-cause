@@ -236,11 +236,11 @@ export const comparison = {
 		[{ text: 'Don’t Pay for “Maybe?”,' }],
 		[
 			{ text: 'Just, ' },
-			// Four periods here, against the client half's three — the two frames
-			// differ, and this one is counted off a 1:1 render rather than assumed
-			// from the other. The round terminal after them belongs to the rule,
-			// which the heading draws itself.
-			{ text: 'Get Paid!....', tone: 'accent' as const, weight: 'strong' as const }
+			// Three periods, measured off the frame export: three 10px dots sitting
+			// on the baseline after the "!". A build screenshot read as four for a
+			// while — the fourth mark in it is the rule's own round terminal, which
+			// the heading draws separately.
+			{ text: 'Get Paid!...', tone: 'accent' as const, weight: 'strong' as const }
 		]
 	],
 	alternatives: {

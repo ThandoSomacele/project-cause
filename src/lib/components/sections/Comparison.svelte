@@ -27,6 +27,7 @@
 				weight="font-semibold"
 				{indents}
 				ruleAfter={1}
+				flow
 			/>
 		</div>
 
