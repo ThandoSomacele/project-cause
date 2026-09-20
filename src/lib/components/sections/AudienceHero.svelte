@@ -26,10 +26,11 @@
 		mascot?: string;
 		/**
 		 * Bracket artwork. The two variants differ only in how far the rail runs
-		 * before its arrowhead: the hero's stops between heading lines 1 and 2,
-		 * the client section's one line lower, between 2 and 3, so it lands just
-		 * above the ringed word. Measured on the design at 9px of clearance in
-		 * both cases — the rail tracks the heading, not a fixed height.
+		 * before its pointer: the hero's stops between heading lines 1 and 2, the
+		 * client section's one line lower, between 2 and 3, so it lands just above
+		 * the ringed word. Both now clear the ink below them by 20px — they sat at
+		 * 9px and 11px, close enough to the letterforms to read as touching them,
+		 * and close enough to each other to look unintentional rather than equal.
 		 */
 		frame?: string;
 		/**
@@ -89,9 +90,19 @@
 			     every one of them interpolates to ~384. Regular is the nearest step.
 			     It does push every glyph right, so the frame's axis is re-measured
 			     against the letterforms below rather than held at its old x. -->
+			<!-- The design's line breaks are a desktop composition: at 390 the
+			     column is narrow enough that line 2 and line 3 each wrap again, so
+			     forcing the breaks as well turned one sentence into five ragged
+			     rows. Below lg the lines run inline and the heading wraps where it
+			     naturally falls. The separator is an explicit space rather than the
+			     markup's own whitespace, which Svelte collapses away — without it
+			     the heading read "The only platformthat simply". It costs nothing
+			     at lg, where a trailing space in a block box is ignored. -->
 			<h2 class="text-hero font-normal">
 				{#each heading as line, i (i)}
-					<span class="block"><RichText segments={line} /></span>
+					<span class="lg:block"
+						><RichText segments={line} />{i < heading.length - 1 ? ' ' : ''}</span
+					>
 				{/each}
 			</h2>
 
@@ -149,13 +160,23 @@
 					aria-hidden="true"
 					class="absolute top-[6.75%] left-[0.364%] hidden w-[99.09%] lg:block"
 				/>
-				<!-- The bracket's horizontal exit stops at the artwork's own edge. It
-				     used to carry a `-100vw` continuation so the stroke ran off-screen,
-				     but the design turns the line down into the frame's right vertical
-				     instead of bleeding: measured on the reference, the horizontal ends
-				     at x2511 and the vertical picks up at x2522, with navy continuing
-				     ~79px past it to the viewport edge. The continuation was the thin
-				     orange line still showing to the right of the phones. -->
+				<!-- The bracket's exit runs off the right edge of the screen. The
+				     artwork's own stub stops at x673.16 of its 674.66 viewBox, which
+				     lands on the viewport edge only while the container is at its
+				     94.456vw cap; past ~1425 the container stops growing and the stub
+				     ends well inside the navy, which is what this continues.
+
+				     Anchored to the cluster box, not the viewport: 99.23% of it is
+				     where the stub's own end falls, and 68.99% down is the stub's
+				     centre line — the artwork sits at top 6.75% and keeps its natural
+				     674.66:730 aspect, so the stub's 474/730 lands there. The section
+				     clips it, so -50vw simply means "past the edge". An earlier version
+				     of this ran off the TOP horizontal instead, which is why a stray
+				     orange line used to show beside the phones. -->
+				<span
+					class="pointer-events-none absolute top-[68.99%] right-[-50vw] left-[99.23%] hidden h-[3px] -translate-y-1/2 bg-accent lg:block"
+					aria-hidden="true"
+				></span>
 				<!-- The three mockups move as one unit: the wrapper fills the cluster
 				     box, so every child's percentage still resolves against the same
 				     rectangle it did before, and the group shifts together. 2.789% of

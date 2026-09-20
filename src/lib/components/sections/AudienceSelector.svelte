@@ -42,9 +42,14 @@
 			     Marketplace" and both accent runs carry `weight: 'strong'` in the
 			     content while "to", "clients" and "&" stay Light. Leading is 73.9px
 			     against a 75.6px face — tighter than the shared token's 1.02. -->
+			<!-- Inline below lg so the sentence runs on and wraps where it falls,
+			     rather than carrying the desktop composition's breaks on top of
+			     the wrapping the narrow column already forces. -->
 			<h1 class="text-hero font-light lg:leading-[0.9775] lg:tracking-[-0.019em]">
 				{#each audience.heading as line, i (i)}
-					<span class="block"><RichText segments={line} /></span>
+					<span class="lg:block"
+						><RichText segments={line} />{i < audience.heading.length - 1 ? ' ' : ''}</span
+					>
 				{/each}
 			</h1>
 
@@ -106,17 +111,25 @@
 
 			<!-- Which option is active. Indicators, not controls: the tiles above
 			     are the real controls, and a dot that looked clickable but did
-			     nothing would be worse than none. -->
-			<div class="mt-4 flex items-center justify-center gap-2" aria-hidden="true">
+			     nothing would be worse than none. Desktop only — the swap they
+			     track is a hover state, and below lg both captions are on screen
+			     at once, so a dot marking one of them would be telling the truth
+			     about nothing. -->
+			<div class="mt-4 hidden items-center justify-center gap-2 lg:flex" aria-hidden="true">
 				<span class="option-dot h-2 w-2 rounded-full bg-accent"></span>
 				<span class="option-dot h-2 w-2 rounded-full bg-mint/35"></span>
 			</div>
 
-			<!-- Both captions occupy one grid cell, so swapping between them cannot
-			     move anything below. -->
-			<div class="mt-3 grid text-center">
+			<!-- From lg the two captions share ONE grid cell and fade between each
+			     other, so the swap cannot shift anything below. That stacking is
+			     also why they need a second layout below lg: the rules that hide
+			     the inactive one live in the 64rem media query, so without this
+			     both captions painted on top of each other. Below lg each one
+			     takes its own column, on the same two-column track and gap as the
+			     tiles above, so each caption sits under its own photograph. -->
+			<div class="mt-3 grid grid-cols-2 gap-x-3 text-center lg:grid-cols-1">
 				{#each audience.options as option (option.id)}
-					<span class="option-caption col-start-1 row-start-1 block">
+					<span class="option-caption block lg:col-start-1 lg:row-start-1">
 						<span class="block text-[17px] font-bold">{option.title}</span>
 						<span
 							class="mx-auto mt-1.5 block max-w-full pb-8 text-[13px] leading-[1.65] text-white/75 lg:max-w-[74.6%]"

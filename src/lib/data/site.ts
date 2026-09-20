@@ -1,6 +1,6 @@
 export const site = {
 	name: 'Cause',
-	tagline: 'The only platform that simply connects you to potential leads',
+	tagline: 'The only platform that simply connects you to potential clients',
 	description:
 		'Cause connects South African service providers to client leads with no credit system — one fixed monthly fee, transparent processes, and payments on your terms.',
 	url: 'https://cause.co.za'
@@ -18,7 +18,8 @@ export const footer = {
 	// Real company details, from the revised Figma footer (node 4680:13932).
 	address: ['Khowa, Elliot,', 'Eastern Cape', '5460', 'South Africa'],
 	legal: '© All rights reserved 2026',
-	privacy: { label: 'Privacy NOTE', href: '/privacy' },
+	// Rendered uppercase by the footer's own styling.
+	privacy: { label: 'Legal & Privacy', href: '/privacy' },
 	// Instagram is held back until the account is live — the design carries it,
 	// so it is commented out rather than deleted, ready to switch back on.
 	socials: [

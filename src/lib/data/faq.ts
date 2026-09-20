@@ -1,11 +1,13 @@
 /**
  * The six questions come from the design (node 4612:24300). Every row is
- * collapsed in the Figma frame, so the answers are NOT in the design — they are
- * drafted here from the claims the rest of the page makes (R95/mnth, no credit
- * system, banded rates topping out at 5% excl. VAT on instant EFT, cash
- * payments not charged).
+ * collapsed in the Figma frame, so the answers are NOT in the design. The ones
+ * marked verbatim came from the client; the rest are drafted here from the
+ * claims the rest of the page makes (R95/mnth, no credit system, a transaction
+ * fee topping out at 4.8% inclusive of VAT on instant EFT, cash payments not
+ * charged).
  *
- * These need a review pass from whoever owns the product copy before launch.
+ * The undrafted ones still need a review pass from whoever owns the product
+ * copy before launch.
  */
 
 export interface FaqItem {
@@ -35,13 +37,14 @@ export const faq = {
 		},
 		{
 			question: 'Do I pay to chat to clients?',
+			// Supplied verbatim by the client.
 			answer:
-				'No. Messaging clients is included in your subscription. You are never charged per conversation, per quote, or per lead, so you can talk to as many clients as you like.'
+				'No, send unlimited messages to prospective and existing clients you connect with'
 		},
 		{
 			question: 'Do I get charged for cash payments?',
 			answer:
-				'No. If you and the client settle in cash, Cause takes nothing. The transaction fee of up to 5% excluding VAT applies only to instant EFT payments processed through the platform.'
+				'No. If you and the client settle in cash, Cause takes nothing. The transaction fee of up to 4.8% applies only to instant EFT payments processed through the platform.'
 		},
 		{
 			question: 'What do I need to register?',

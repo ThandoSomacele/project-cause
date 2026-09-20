@@ -7,7 +7,13 @@
 		calculateFees,
 		clampInvoice
 	} from '$lib/utils/fees';
-	import { formatPct, formatZar, formatZarWhole, parseAmount } from '$lib/utils/format';
+	import {
+		formatPct,
+		formatZar,
+		formatZarTight,
+		formatZarWholeTight,
+		parseAmount
+	} from '$lib/utils/format';
 
 	// One source of truth; the slider, chips and text field all write to it.
 	let amount = $state(10_000);
@@ -20,7 +26,7 @@
 
 	let scope = $state<HTMLElement | null>(null);
 
-	// The slider fill and the value bubble both read --progress. It is written
+	// The slider fill reads --progress. It is written
 	// through the CSSOM rather than a `style` attribute because a strict CSP
 	// cannot allow-list inline style attributes — a nonce or hash only covers
 	// style and script elements. CSSOM writes are not policed by CSP, so this
@@ -48,15 +54,22 @@
 	     (Figma "Vector 22"): a dot, down, across to the left, then down into the
 	     card. Drawn rather than shipped as an asset so it stays crisp and takes
 	     the ink token. Desktop only — below lg the sections stack too tightly for
-	     it to read. -->
+	     it to read.
+
+	     It used to start 107px below the carousel's card with nothing above it,
+	     so the dot read as floating in the white rather than as the head of a
+	     line leaving that section. Raised to sit 20px under the card's base and
+	     lengthened by the same amount, so the foot still runs 8px into this
+	     card's top edge. Every other rule on the page attaches at both ends —
+	     a button, a heading, a card — and this one now does too. -->
 	<svg
-		class="pointer-events-none absolute -top-[min(3.86vw,55px)] left-[46.3%] hidden w-[min(21.4vw,305px)] overflow-visible lg:block"
-		viewBox="0 0 305 286"
+		class="pointer-events-none absolute -top-[min(9.96vw,142px)] left-[46.3%] hidden w-[min(21.4vw,305px)] overflow-visible lg:block"
+		viewBox="0 0 305 373"
 		fill="none"
 		aria-hidden="true"
 	>
 		<path
-			d="M297 14v67a16 16 0 0 1-16 16H19A16 16 0 0 0 3 113v173"
+			d="M297 14v67a16 16 0 0 1-16 16H19A16 16 0 0 0 3 113v260"
 			stroke="var(--color-ink)"
 			stroke-width="3"
 		/>
@@ -73,15 +86,10 @@
 					</h2>
 
 					<div class="fee-scope mt-8" bind:this={scope}>
-						<!-- Value bubble tracks the handle. -->
-						<div class="relative h-10">
-							<span
-								class="fee-bubble absolute -translate-x-1/2 rounded-[12px] border border-white/15 bg-white/10 px-4 py-2 text-[18px] font-semibold whitespace-nowrap"
-							>
-								Current: {formatZar(amount)}
-							</span>
-						</div>
-
+						<!-- The design carries no value bubble over the handle: the amount is
+						     already on the field below and in the results column, and the
+						     bubble put a third copy of it on screen. The handle still
+						     announces itself through aria-valuetext. -->
 						<label class="sr-only" for="fee-slider">Invoice amount</label>
 						<input
 							id="fee-slider"
@@ -96,14 +104,14 @@
 						/>
 
 						<div class="mt-3 flex justify-between text-[15px]">
-							<span>{formatZarWhole(MIN_INVOICE)}</span>
-							<span>{formatZar(MAX_INVOICE)}</span>
+							<span>{formatZarWholeTight(MIN_INVOICE)}</span>
+							<span>{formatZarTight(MAX_INVOICE)}</span>
 						</div>
 					</div>
 
 					<fieldset class="mt-9">
-						<legend class="text-[13px] font-semibold text-[#94a3b8]">{calculator.quickSelectLabel}</legend>
-						<div class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+						<legend class="sr-only">{calculator.quickSelectLabel}</legend>
+						<div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
 							{#each QUICK_AMOUNTS as value (value)}
 								<button
 									type="button"
@@ -119,7 +127,7 @@
 											: 'border-white/15 hover:border-white/45'
 									]}
 								>
-									{formatZarWhole(value)}
+									{formatZarWholeTight(value)}
 								</button>
 							{/each}
 						</div>
@@ -157,7 +165,7 @@
 						<p class="flex items-center gap-4 rounded-lg bg-white py-4 pr-8 pl-5 text-ink">
 							<span class="h-10 w-1 shrink-0 rounded bg-ink"></span>
 							<span>
-								<span class="block text-[24px] font-semibold">{formatZar(fees.fee)}</span>
+								<span class="block text-[24px] font-semibold">{formatZarTight(fees.fee)}</span>
 								<span class="font-mono block text-[11px] tracking-[0.1em] text-muted">
 									{calculator.labels.deduction}
 								</span>
@@ -166,14 +174,15 @@
 					</div>
 				</div>
 
-				<!-- Results -->
+				<!-- Results. The design rules the two figures apart as well as ruling
+				     the column off from the controls. -->
 				<div class="flex flex-col gap-10 lg:border-l lg:border-white/20 lg:pl-14">
 					<div>
-						<p class="text-[clamp(2.25rem,1.9rem+1.4vw,2.8125rem)] leading-none font-semibold tracking-[-0.06em] text-[#f7f4ee]">{formatZar(fees.invoice)}</p>
+						<p class="text-[clamp(2.25rem,1.9rem+1.4vw,2.8125rem)] leading-none font-semibold tracking-[-0.06em] text-[#f7f4ee]">{formatZarTight(fees.invoice)}</p>
 						<p class="mt-3 text-[14px] text-[#f4f2ec]/70">{calculator.labels.invoice}</p>
 					</div>
-					<div class="lg:mt-14">
-						<p class="text-[clamp(2.5rem,2rem+2vw,3.75rem)] leading-none font-semibold tracking-[-0.045em] text-[#f7f4ee]">{formatZar(fees.payout)}</p>
+					<div class="border-t border-white/20 pt-10 lg:mt-4">
+						<p class="text-[clamp(2.5rem,2rem+2vw,3.75rem)] leading-none font-semibold tracking-[-0.045em] text-[#f7f4ee]">{formatZarTight(fees.payout)}</p>
 						<p class="mt-3 text-[14px] text-[#f4f2ec]/70">{calculator.labels.payout}</p>
 					</div>
 				</div>
@@ -187,10 +196,6 @@
 	   rendered markup paints correctly before hydration sets the real value. */
 	.fee-scope {
 		--progress: 50%;
-	}
-
-	.fee-bubble {
-		left: clamp(6rem, var(--progress), calc(100% - 6rem));
 	}
 
 	/* The forms plugin strips the native control, so the track and handle are

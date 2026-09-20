@@ -33,6 +33,21 @@ export function formatZarWhole(amount: number): string {
 	return toDesignConvention(zarWhole.format(amount));
 }
 
+/**
+ * The design sets amounts tight against the R — "R20 000.00", "R200.00" — in
+ * every place but the exact-amount field, which keeps the locale's space. Only
+ * the first non-breaking space is dropped; the ones grouping the digits stay,
+ * so the number still will not wrap mid-way.
+ */
+export function formatZarTight(amount: number): string {
+	return formatZar(amount).replace(NBSP, '');
+}
+
+/** e.g. 1000 -> "R1 000" — the quick-select chips and the slider's floor. */
+export function formatZarWholeTight(amount: number): string {
+	return formatZarWhole(amount).replace(NBSP, '');
+}
+
 /** e.g. 4.8 -> "4.8" */
 export function formatPct(value: number): string {
 	return value.toFixed(1);

@@ -144,48 +144,55 @@ test.describe('fee calculator', () => {
 	const exact = (page: Page) => page.locator('#fee-exact');
 	const payout = (page: Page) => page.locator('[data-section] >> text=paid out to you').locator('..');
 
-	test('applies the banded rate and derives the payout', async ({ page }) => {
+	test('the ceiling holds the fee and the rate falls away', async ({ page }) => {
 		await slider(page).fill('10000');
 
-		// R10 000 sits in the Medium band (up to R11 000) at 4%.
-		await expect(page.getByText('4.0 %')).toBeVisible();
+		// 4.8% of R10 000 is R480, so the R200 ceiling sets the fee and the
+		// effective rate lands at 2.0%.
+		await expect(page.getByText('2.0 %')).toBeVisible();
 		expect(plain(await exact(page).inputValue())).toBe('R 10 000.00');
 
 		const section = page.locator('#fees');
-		await expect(section).toContainText('400.00'); // deduction
-		await expect(section).toContainText('9 600.00'); // payout
+		await expect(section).toContainText('R200.00'); // deduction
+		await expect(section).toContainText('9 800.00'); // payout
 	});
 
 	test('zero invoice yields a zero fee and a 0.0% rate', async ({ page }) => {
 		await slider(page).fill('0');
 		await expect(page.getByText('0.0 %')).toBeVisible();
-		await expect(page.locator('#fees')).toContainText('R 0.00');
+		await expect(page.locator('#fees')).toContainText('R0.00');
 	});
 
-	test('the maximum invoice resolves at the Large band', async ({ page }) => {
+	test('the maximum invoice sits at the ceiling', async ({ page }) => {
 		await slider(page).fill('20000');
 		const section = page.locator('#fees');
-		await expect(page.getByText('3.0 %')).toBeVisible();
-		await expect(section).toContainText('600.00'); // 3% of 20 000
-		await expect(section).toContainText('19 400.00'); // payout
+		await expect(page.getByText('1.0 %')).toBeVisible();
+		await expect(section).toContainText('R200.00');
+		await expect(section).toContainText('19 800.00'); // payout
 	});
 
-	// Band edges are where a tiered model most easily regresses: a tier owns its
-	// own upper bound, and the next rand crosses into the band below it. Driven
-	// through the exact-amount field because the slider steps in hundreds and
-	// cannot express a one-rand crossing.
-	test('each band claims its own upper bound', async ({ page }) => {
+	// Below the crossover the quoted rate applies flat; above it the fee is
+	// pinned and the effective rate decays. Driven through the exact-amount
+	// field because the slider steps in hundreds.
+	test('the quoted rate applies until the ceiling takes over', async ({ page }) => {
 		for (const [amount, rate] of [
-			['2000', '5.0 %'],
-			['2001', '4.5 %'],
-			['4000', '4.5 %'],
-			['4001', '4.0 %'],
-			['11000', '4.0 %'],
-			['11001', '3.0 %']
+			['1000', '4.8 %'],
+			['4000', '4.8 %'],
+			['5000', '4.0 %'],
+			['10000', '2.0 %'],
+			['20000', '1.0 %']
 		] as const) {
 			await exact(page).fill(amount);
 			await expect(page.getByText(rate)).toBeVisible();
 		}
+	});
+
+	// The copy quotes a rate; the model charges one. They are set from the same
+	// place, and this is what notices if they ever stop agreeing.
+	test('the copy quotes the maximum rate the model actually charges', async ({ page }) => {
+		await expect(page.locator('#fees')).toContainText(
+			'maximum transaction fee of 4.8% inclusive of VAT'
+		);
 	});
 
 	test('quick-select, slider and text field stay in sync', async ({ page }) => {

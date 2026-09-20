@@ -87,7 +87,12 @@ export const clients = {
 			// and its own Light weight, and the ellipsis sits INSIDE the frame —
 			// all three measured off Figma 4612:24477, where the box's nine glyphs
 			// and three dots all fall within its x345..734 stroke.
-			{ text: 'carpenter...', boxed: true }
+			//
+			// It reads "artisan" rather than a single trade because it is meant to
+			// rotate: carpenter, plumber, electrician, painter, contractor. Nothing
+			// cycles it yet — when that lands, this is the one run to drive, and the
+			// box is already sized off its own text rather than a fixed width.
+			{ text: 'artisan...', boxed: true }
 		]
 	],
 	body: [
@@ -160,7 +165,7 @@ export const hero = {
 		],
 		[
 			{ text: 'you to potential ' },
-			{ text: 'leads', tone: 'accent' as const, weight: 'strong' as const }
+			{ text: 'clients', tone: 'accent' as const, weight: 'strong' as const }
 		]
 	],
 	subhead: 'Gain access to leads & unlimited job opportunities.',
@@ -201,8 +206,13 @@ export const valueOffering = {
 			// orange the flat SVG set has no equivalent for.
 			activeIcon: '/icons/jobs-active.png',
 			label: 'Jobs',
-			title: [{ text: 'Real Jobs', weight: 'strong' as const }, { text: ', Not Just Enquiries' }],
-			body: 'Every lead comes from a client who has described the work and is ready to hire. Review the brief, then decide whether to quote.',
+			title: [
+				{ text: 'Get Discovered through ' },
+				{ text: 'Cause Search', weight: 'strong' as const }
+			],
+			// The frame sets a space before the semicolon ("move it ; but only").
+			// Closed up here — everything else is the design's wording.
+			body: 'Verified projects determine your tier and where you appear in the search results. Membership can move it; but only inside the band your verified projects have already earned.',
 			image: 'jobs'
 		},
 		{
@@ -379,9 +389,10 @@ export const pricing = {
 				[{ text: 'Receive your project payments as cash OR' }],
 				[{ text: 'Receive your payments as instant EFT *' }]
 			],
-			// The design reads "inclusive of VAT"; kept as exclusive per the brief,
-			// which changed that wording after the frame was drawn.
-			note: 'Payments on the platform have a maximum transaction fee of 5% exclusive of VAT and payment gateway costs, refer to calculator.*'
+			// Verbatim from the frame. The 5% here is the all-in ceiling — it covers
+			// the payment gateway's cut as well as VAT — which is why it sits above
+			// the 4.8% the estimator quotes for the platform's own fee.
+			note: 'Payments on the platform have a maximum transaction fee of 5% inclusive of VAT and payment gateway costs, refer to calculator.*'
 		},
 		{
 			id: 'free',
@@ -461,14 +472,16 @@ export const carousel = {
 
 export const calculator = {
 	title: 'Fee Estimate Slider',
+	// The design shows no caption over the quick-select row, but the row is a
+	// group of controls and needs a name, so this is read out rather than drawn.
 	quickSelectLabel: 'Quick select',
 	exactLabel: 'Enter exact invoice amount',
 	feesTitle: 'Platform fees',
 	feesBody:
-		'Payments on the platform have a maximum transaction fee of 5% excluding VAT.',
+		'Payments on the platform have a maximum transaction fee of 4.8% inclusive of VAT.',
 	labels: {
 		feeEstimate: 'PLATFORM FEE ESTIMATE',
-		deduction: 'AMOUNT ESTIMATE',
+		deduction: 'DEDUCTION ESTIMATE',
 		invoice: 'your invoice estimate',
 		payout: 'paid out to you'
 	}

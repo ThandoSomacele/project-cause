@@ -94,7 +94,12 @@
 							</div>
 						</div>
 
-						<div class="relative min-h-[min(16.84vw,240px)] overflow-hidden bg-[#f1f1f3]">
+						<!-- Desktop only. Stacked under the copy the panel is a 66px band,
+						     and the dashboard is object-cover and left-anchored inside it, so
+						     all it showed was an unreadable strip of the screenshot's top-left
+						     corner. Nothing is lost by dropping it: the slide's copy and its
+						     button carry the whole message. -->
+						<div class="relative hidden min-h-[min(16.84vw,240px)] overflow-hidden bg-[#f1f1f3] lg:block">
 							<img
 								src={shots[item.image]}
 								alt="The Cause dashboard"
