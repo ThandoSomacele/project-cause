@@ -61,6 +61,7 @@
 			lines={data.heading}
 			weight="font-normal"
 			{indents}
+			flow
 		/>
 
 		<!-- Sized off the design rather than by eye: the chip cap height runs 45.5%

@@ -91,6 +91,7 @@
 			size="text-[calc(1.098*var(--text-h2))] tracking-[-0.02em]"
 			leading="leading-[1.275]"
 			indents={['lg:pl-[0.6%]', 'lg:pl-[26.3%]', 'lg:pl-[51.4%]']}
+			flow
 		/>
 
 		<div class="mt-12 lg:mt-16">

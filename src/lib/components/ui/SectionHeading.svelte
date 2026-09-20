@@ -43,6 +43,16 @@
 		 * both.
 		 */
 		size?: string;
+		/**
+		 * Runs the lines inline below md so the heading reads as one sentence and
+		 * wraps where it falls. The frames' line breaks are a desktop
+		 * composition: in a narrow column they land on top of the wrapping the
+		 * width already forces, which turns one sentence into several ragged
+		 * rows. Off by default — a heading with a `ruleAfter` cannot take it,
+		 * since its rule would end up mid-sentence — and gated at md rather than
+		 * lg so the breaks come back at the same width the decorations do.
+		 */
+		flow?: boolean;
 		class?: string;
 		id?: string;
 	}
@@ -54,6 +64,7 @@
 		weight = 'font-light',
 		leading = '',
 		size = 'text-h2',
+		flow = false,
 		class: className = '',
 		id
 	}: Props = $props();
@@ -61,7 +72,7 @@
 
 <h2 {id} class={[size, 'text-ink', weight, leading, className]}>
 	{#each lines as line, i (i)}
-		<span class={['block', indents[i]]}>
+		<span class={[flow ? 'md:block' : 'block', indents[i]]}>
 			{#if ruleAfter === i}
 				<span class="flex items-baseline">
 					<span class="shrink-0"><RichText segments={line} /></span>
@@ -85,7 +96,7 @@
 					></span>
 				</span>
 			{:else}
-				<RichText segments={line} />
+				<RichText segments={line} />{flow && i < lines.length - 1 ? ' ' : ''}
 			{/if}
 		</span>
 	{/each}

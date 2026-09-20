@@ -20,6 +20,7 @@
 				weight="font-medium"
 				leading="lg:leading-[1.176]"
 				indents={['lg:pl-[7.5%]', 'lg:pl-[42.5%]', 'lg:pl-[52.3%]']}
+				flow
 			/>
 
 			<!-- Rule running in from the page edge, stopping at "talk" with a dot.
