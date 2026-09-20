@@ -49,10 +49,9 @@
 		 * composition: in a narrow column they land on top of the wrapping the
 		 * width already forces, which turns one sentence into several ragged
 		 * rows. Off by default, and gated at md rather than lg so the breaks
-		 * come back at the same width the decorations do. A heading with a
-		 * `ruleAfter` can take it: its rule and terminal drop out while the
-		 * lines are flowing, since there is no end of a line for them to
-		 * leave from.
+		 * come back at the same width the decorations do. The line carrying a
+		 * `ruleAfter` is held out of it and stays a block at every width, since
+		 * its rule needs a row to grow into.
 		 */
 		flow?: boolean;
 		class?: string;
@@ -74,13 +73,14 @@
 
 <h2 {id} class={[size, 'text-ink', weight, leading, className]}>
 	{#each lines as line, i (i)}
-		<span class={[flow ? 'md:block' : 'block', indents[i]]}>
+		<!-- The line that carries the rule stays a block even while the others
+		     flow: the rule is a flex child that grows into the space after the
+		     words, which needs a row to grow in. At the widths this matters the
+		     line ahead of it fills its own measure anyway, so nothing joins up
+		     that would otherwise have. -->
+		<span class={[flow && ruleAfter !== i ? 'md:block' : 'block', indents[i]]}>
 			{#if ruleAfter === i}
-				<!-- Flowing, the rule has to go: it runs off the right edge from the
-				     end of a line, and there is no end of a line to leave from once
-				     the heading is one wrapping sentence. It comes back with the row
-				     at md, the width the breaks come back at. -->
-				<span class={[flow ? 'md:flex' : 'flex', 'items-baseline']}>
+				<span class="flex items-baseline">
 					<span class="shrink-0"><RichText segments={line} /></span>
 					<!-- Measured off the supplied artwork (Figma "Vector 21", 350x11): an
 					     11px round terminal with a 2px stroke leaving from its centre. The
@@ -105,10 +105,7 @@
 					     Everything is in em so it tracks the heading as the type scales:
 					     the 11px terminal against the 56px face is 0.196em. -->
 					<span
-						class={[
-							flow && 'hidden md:block',
-							'relative -mr-[50vw] mb-[0.114em] ml-[0.172em] h-[2px] flex-1 -translate-y-[0.064em] bg-accent'
-						]}
+						class="relative -mr-[50vw] mb-[0.114em] ml-[0.172em] h-[2px] flex-1 -translate-y-[0.064em] bg-accent"
 						aria-hidden="true"
 					>
 						<span
