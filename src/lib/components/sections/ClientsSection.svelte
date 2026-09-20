@@ -19,5 +19,7 @@
 	source="clients"
 	frame="/icons/hero-frame-clients.svg"
 	bodyGap="lg:mt-[min(2.947vw,42px)]"
+	chipLeads={['', 'lg:ms-[min(5.404vw,77px)]', 'lg:ms-[min(6.105vw,87px)]']}
+	captureWidth="lg:max-w-[656px]"
 	{form}
 />

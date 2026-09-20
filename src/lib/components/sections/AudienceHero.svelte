@@ -41,13 +41,18 @@
 		bodyGap?: string;
 		/** Extra classes on the waitlist wrapper — the hero carries #waitlist. */
 		waitlistId?: string;
+		/**
+		 * Left leads for chips 2 and 3. Both frames start their chip icons at
+		 * roughly x72 / x276 / x466 of 1425, but the two rows carry different
+		 * words, so the clear space between them differs and a shared set of
+		 * leads would land them in different places. Measured per section against
+		 * the rendered row.
+		 */
+		chipLeads?: readonly string[];
+		/** Width of the waitlist row. 689px on the hero's frame, 656 on the
+		 *  client section's. */
+		captureWidth?: string;
 	}
-
-	/** Left leads for chips 2 and 3. The frame starts their icons at x275 and
-	 *  x466 of 1425; measured against the rendered row that is 90px and 53px of
-	 *  clear space. In vw so the row tracks the rest of the layout, capped at
-	 *  the design value. */
-	const chipLead = ['', 'lg:ms-[min(6.316vw,90px)]', 'lg:ms-[min(3.719vw,53px)]'];
 
 	let {
 		name,
@@ -60,7 +65,9 @@
 		mascot = '/images/mascot-pole.svg',
 		frame = '/icons/hero-frame.svg',
 		bodyGap = 'lg:mt-[min(7.228vw,103px)]',
-		waitlistId
+		waitlistId,
+		chipLeads = ['', 'lg:ms-[min(6.316vw,90px)]', 'lg:ms-[min(3.719vw,53px)]'],
+		captureWidth = 'lg:max-w-[689px]'
 	}: Props = $props();
 </script>
 
@@ -139,7 +146,7 @@
 					<li
 						class={[
 							'flex items-center gap-2.5 text-[16px] font-semibold text-[#DBDBDB]',
-							chipLead[i]
+							chipLeads[i]
 						]}
 					>
 						<Icon name={chip.icon} class="h-[22px] w-[22px]" width={22} height={22} />
@@ -148,10 +155,9 @@
 				{/each}
 			</ul>
 
-			<!-- 689px across in the frame, from x71 to x759. -->
 			<div
 				id={waitlistId}
-				class="mt-7 max-w-[630px] scroll-mt-24 lg:mt-[min(2.456vw,35px)] lg:max-w-[689px]"
+				class={['mt-7 max-w-[630px] scroll-mt-24 lg:mt-[min(2.456vw,35px)]', captureWidth]}
 			>
 				<EmailCapture {source} tone="dark" {form} />
 			</div>

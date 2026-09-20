@@ -71,13 +71,13 @@ export const clients = {
 		[
 			{ text: 'to ' },
 			{ text: 'connect', tone: 'accent' as const, weight: 'strong' as const },
-			{ text: ' with' }
+			{ text: ' with a' }
 		],
-		// The design breaks the line after "with" and opens line 3 on "a". It also
-		// leaves a stray "a" at the end of line 2, so it reads "with a / a verified"
-		// — dropping that one, rather than line 3's, is what keeps the box and its
-		// ellipsis on the connector's axis: the axis is placed for a line 3 that
-		// starts with "a", and without it the whole run sits ~70px to the left.
+		// The frame reads "to connect with a / a verified artisan..." — the article
+		// is set twice, once at the end of line 2 and again at the start of line 3.
+		// It was dropped here for a while as a typo; the client has since asked for
+		// the frame verbatim, and line 2's ink measures 52px longer than the build's
+		// without it, which is an "a" and its space.
 		[
 			{ text: 'a ' },
 			{ text: 'verified', tone: 'accent' as const, weight: 'strong' as const },
