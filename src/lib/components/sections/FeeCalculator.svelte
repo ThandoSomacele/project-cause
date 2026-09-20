@@ -157,13 +157,20 @@
 					</h3>
 					<p class="mt-2 max-w-[38rem] text-[15px] text-white/75">{calculator.feesBody}</p>
 
-					<!-- Two equal plates rather than two content-width ones: the figures
-					     inside them are different lengths, so packed they came out
-					     visibly mismatched. Half a narrow screen is not much room for
-					     "R200.00" beside a rule and a label, so the padding and the
-					     figure both come in a step below sm. -->
-					<div class="mt-7 grid grid-cols-2 gap-3 sm:gap-4">
-						<p class="flex items-center gap-3 rounded-lg bg-cream px-4 py-4 text-ink sm:gap-4 sm:pr-8 sm:pl-5">
+					<!-- Two equal columns below sm, where the plates stack across half a
+					     narrow screen each and packing them left them visibly mismatched.
+					     The padding and the figure come in a step there too, so "R200.00"
+					     still fits beside its rule.
+
+					     From sm they take the frame's own measurements instead: both plates
+					     233.6px wide with 41px between them. Equal, but at a set width —
+					     letting the columns stretch them to fill the left column was what
+					     broke the desktop, and letting them size to their content left the
+					     shorter figure's plate 22px narrower than the other. -->
+					<div
+						class="mt-7 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-[min(2.877vw,41px)]"
+					>
+						<p class="flex items-center gap-3 rounded-lg bg-cream px-4 py-4 text-ink sm:w-[min(16.392vw,234px)] sm:gap-4 sm:pr-8 sm:pl-5">
 							<span class="h-10 w-1 shrink-0 rounded bg-accent"></span>
 							<span>
 								<span class="block text-[20px] font-semibold sm:text-[24px]">{formatPct(fees.ratePct)} %</span>
@@ -172,7 +179,7 @@
 								</span>
 							</span>
 						</p>
-						<p class="flex items-center gap-3 rounded-lg bg-white px-4 py-4 text-ink sm:gap-4 sm:pr-8 sm:pl-5">
+						<p class="flex items-center gap-3 rounded-lg bg-white px-4 py-4 text-ink sm:w-[min(16.392vw,234px)] sm:gap-4 sm:pr-8 sm:pl-5">
 							<span class="h-10 w-1 shrink-0 rounded bg-ink"></span>
 							<span>
 								<span class="block text-[20px] font-semibold sm:text-[24px]">{formatZarTight(fees.fee)}</span>
