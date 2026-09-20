@@ -47,12 +47,6 @@
 		class="pointer-events-none absolute top-[-23.6vw] left-0 -z-10 w-screen max-w-none"
 	/>
 
-	<!-- On narrow viewports the band is short and the tools crowd the copy. -->
-	<div
-		class="pointer-events-none absolute inset-0 -z-10 bg-amber/80 md:hidden"
-		aria-hidden="true"
-	></div>
-
 	{#if connector}
 		<!-- The supplied connector, used as-is rather than drawn from three spans:
 		     308x197 with the knob at its top-right and the path dropping, turning
