@@ -82,30 +82,35 @@
 				     at md, the width the breaks come back at. -->
 				<span class={[flow ? 'md:flex' : 'flex', 'items-baseline']}>
 					<span class="shrink-0"><RichText segments={line} /></span>
-					<!-- The rule is headed by its own round terminal, the way the
-					     carousel's is: the frame sets three periods, then clear space, then
-					     a dot about twice their size, and the stroke leaves from that dot's
-					     centre. It used to be a bare stroke butted against a fourth period,
-					     which is what that dot had been read as.
+					<!-- Measured off the supplied artwork (Figma "Vector 21", 350x11): an
+					     11px round terminal with a 2px stroke leaving from its centre. The
+					     heading's own periods stop at three — the fourth mark the eye counts
+					     in a render of this line is this terminal, which is what sent the
+					     copy to four periods and back again.
 
-					     Both sit on the periods' centre line rather than the baseline —
-					     0.205em above it — which is what `mb` buys in a baseline-aligned
-					     row. Everything is in em so it tracks the heading as the type
-					     scales. -->
+					     The terminal hangs off the rule rather than sitting beside it in
+					     the row: aligning two items to a shared baseline and then nudging
+					     one onto the other's centre line left them 0.9px apart however the
+					     margin was set, because a flex item with no text of its own aligns
+					     by its bottom margin edge. Positioned inside, the two share a
+					     centre by construction, and the rule leaves from the dot's centre
+					     the way the artwork does.
+
+					     Everything is in em so it tracks the heading as the type scales:
+					     the 11px terminal against the 56px face is 0.196em, and the left
+					     margin carries the gap plus the half-dot the rule now starts
+					     inside of. -->
 					<span
 						class={[
 							flow && 'hidden md:block',
-							'mb-[0.08em] ml-[0.19em] h-[0.25em] w-[0.25em] shrink-0 rounded-full bg-accent'
+							'relative -mr-[50vw] mb-[0.114em] ml-[0.288em] h-[2px] flex-1 -translate-y-[0.064em] bg-accent'
 						]}
 						aria-hidden="true"
-					></span>
-					<span
-						class={[
-							flow && 'hidden md:block',
-							'-mr-[50vw] -ml-[0.125em] mb-[0.114em] h-[2px] flex-1 -translate-y-[0.064em] bg-accent'
-						]}
-						aria-hidden="true"
-					></span>
+					>
+						<span
+							class="absolute top-1/2 left-0 h-[0.196em] w-[0.196em] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent"
+						></span>
+					</span>
 				</span>
 			{:else}
 				<RichText segments={line} />{flow && i < lines.length - 1 ? ' ' : ''}

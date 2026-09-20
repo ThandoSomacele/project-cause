@@ -35,7 +35,7 @@
 <div id="service-providers" class="scroll-mt-[84px]">
 	<Hero {form} />
 	<ValueOffering />
-	<Comparison />
+	<Comparison ruleAfter={1} />
 	<GetPaid />
 	<SubscriptionCard />
 	<ProductCarousel />

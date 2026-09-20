@@ -19,9 +19,10 @@
 		indents?: [string, string];
 		/**
 		 * Index of the heading line that carries the orange rule out to the right
-		 * edge. Off here: the frame export of this half shows the heading closing
-		 * on its periods with nothing after them. The client half does carry one,
-		 * so it opts in.
+		 * edge. A prop rather than something the component always draws, since it
+		 * lives on its own layer in the file — a frame export of the card shows
+		 * the heading closing on its periods with nothing after them, which is
+		 * what that layer not being a child of the card looks like.
 		 */
 		ruleAfter?: number;
 	} = $props();
