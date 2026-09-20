@@ -168,7 +168,9 @@ export const hero = {
 			{ text: 'clients', tone: 'accent' as const, weight: 'strong' as const }
 		]
 	],
-	subhead: 'Gain access to leads & unlimited job opportunities.',
+	// Title Case, as the frame sets it. The frame also spells it
+	// "Opportunites"; corrected here.
+	subhead: 'Gain Access to Leads & Unlimited Job Opportunities.',
 	chips: [
 		{ label: 'No Credits', icon: 'no-credits' as const },
 		{ label: 'No Confusion', icon: 'no-confusion' as const },

@@ -56,20 +56,25 @@
 	     the ink token. Desktop only — below lg the sections stack too tightly for
 	     it to read.
 
-	     It used to start 107px below the carousel's card with nothing above it,
-	     so the dot read as floating in the white rather than as the head of a
-	     line leaving that section. Raised to sit 20px under the card's base and
-	     lengthened by the same amount, so the foot still runs 8px into this
-	     card's top edge. Every other rule on the page attaches at both ends —
-	     a button, a heading, a card — and this one now does too. -->
+	     Placed off the reference rather than by eye. Two things fix it: the dot
+	     sits on the container's centre line — the same axis the carousel's own
+	     dots are centred on, which is what makes it read as leaving that
+	     section — and it hangs 96px under the card's base. The dot is 297 of the
+	     305-unit viewBox, so left = centre - 297; the section is 1425 at the
+	     design width, which puts that at 29.19%, and 63px above this section's
+	     top edge. The height then follows: the foot has to keep running 8px into
+	     this card, so the last leg is whatever closes that gap.
+
+	     It sat at 46.3% and 107px for a long time, which put the dot a quarter
+	     of the width right of the axis it belongs on, floating in the white. -->
 	<svg
-		class="pointer-events-none absolute -top-[min(9.96vw,142px)] left-[46.3%] hidden w-[min(21.4vw,305px)] overflow-visible lg:block"
-		viewBox="0 0 305 373"
+		class="pointer-events-none absolute -top-[min(4.42vw,63px)] left-[29.19%] hidden w-[min(21.4vw,305px)] overflow-visible lg:block"
+		viewBox="0 0 305 294"
 		fill="none"
 		aria-hidden="true"
 	>
 		<path
-			d="M297 14v67a16 16 0 0 1-16 16H19A16 16 0 0 0 3 113v260"
+			d="M297 14v67a16 16 0 0 1-16 16H19A16 16 0 0 0 3 113v181"
 			stroke="var(--color-ink)"
 			stroke-width="3"
 		/>

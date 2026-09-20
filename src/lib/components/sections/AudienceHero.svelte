@@ -43,6 +43,12 @@
 		waitlistId?: string;
 	}
 
+	/** Left leads for chips 2 and 3. The frame starts their icons at x275 and
+	 *  x466 of 1425; measured against the rendered row that is 90px and 53px of
+	 *  clear space. In vw so the row tracks the rest of the layout, capped at
+	 *  the design value. */
+	const chipLead = ['', 'lg:ms-[min(6.316vw,90px)]', 'lg:ms-[min(3.719vw,53px)]'];
+
 	let {
 		name,
 		id,
@@ -80,7 +86,11 @@
 	<div class="hero-backdrop pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
 
 	<div class="container-wide relative">
-		<div class="relative z-10 max-w-[780px] pt-10 pb-12 lg:pt-[min(3.79vw,54px)] lg:pb-24">
+		<!-- 820, not the frame's 780: the frame's last line is "you to potential
+		     leads" at 756px of advance, and "clients" carries it to 802. At 780 it
+		     wrapped, turning the frame's three-line composition into four and
+		     pushing everything under it down by a full line. -->
+		<div class="relative z-10 max-w-[820px] pt-10 pb-12 lg:pt-[min(3.79vw,54px)] lg:pb-24">
 			<!-- Regular, not Light. This ran Light for a long time on the argument
 			     that the design's face carries its extra weight on the SAME advance
 			     widths, so matching advances mattered more than matching stems.
@@ -98,7 +108,10 @@
 			     markup's own whitespace, which Svelte collapses away — without it
 			     the heading read "The only platformthat simply". It costs nothing
 			     at lg, where a trailing space in a block box is ignored. -->
-			<h2 class="text-hero font-normal">
+			<!-- The frame's line pitch is 74.5px on a 75.6px face — 0.9855, against
+			     the 1.02 the shared token sets. Over three lines that is 8px, which
+			     is why the headline used to finish low against the frame. -->
+			<h2 class="text-hero leading-[0.9855] font-normal text-[#DBDBDB]">
 				{#each heading as line, i (i)}
 					<span class="lg:block"
 						><RichText segments={line} />{i < heading.length - 1 ? ' ' : ''}</span
@@ -106,24 +119,39 @@
 				{/each}
 			</h2>
 
-			<p class={['mt-10 text-[17px] leading-relaxed text-white/85', bodyGap]}>
+			<!-- 19.6px from lg, which is what the frame sets and what the audience
+			     selector's subhead above it already uses. It ran at 17. -->
+			<p class={['mt-10 text-[17px] leading-relaxed text-white/85 lg:text-[19.6px]', bodyGap]}>
 				{#each body as line (line)}
 					<span class="block"><RichText segments={line} /></span>
 				{/each}
 			</p>
 
-			<ul class="mt-4 flex flex-wrap items-center gap-x-8 gap-y-3 lg:mt-[min(0.842vw,12px)]">
-				{#each chips as chip (chip.label)}
-					<li class="flex items-center gap-2.5 text-[15px] text-white/90">
-						<Icon name={chip.icon} class="h-5 w-5" width={20} height={20} />
+			<!-- The frame's chip row is not evenly spaced — its icons start at x72,
+			     x275 and x466 of 1425, so the gaps between them are not equal and a
+			     single flex `gap` cannot express it. Same shape as the audience
+			     selector's row above: no gap from lg, and each chip after the first
+			     carries its own lead. Icons are 22px there, not 20. -->
+			<ul
+				class="mt-4 flex flex-wrap items-center gap-x-8 gap-y-3 lg:mt-[min(0.842vw,12px)] lg:gap-x-0"
+			>
+				{#each chips as chip, i (chip.label)}
+					<li
+						class={[
+							'flex items-center gap-2.5 text-[16px] font-semibold text-[#DBDBDB]',
+							chipLead[i]
+						]}
+					>
+						<Icon name={chip.icon} class="h-[22px] w-[22px]" width={22} height={22} />
 						{chip.label}
 					</li>
 				{/each}
 			</ul>
 
+			<!-- 689px across in the frame, from x71 to x759. -->
 			<div
 				id={waitlistId}
-				class="mt-7 max-w-[630px] scroll-mt-24 lg:mt-[min(2.456vw,35px)]"
+				class="mt-7 max-w-[630px] scroll-mt-24 lg:mt-[min(2.456vw,35px)] lg:max-w-[689px]"
 			>
 				<EmailCapture {source} tone="dark" {form} />
 			</div>
@@ -238,11 +266,14 @@
 		</div>
 	</div>
 
-	<!-- Mint rule closing the section (Figma "Vector 24"): 5px, inset ~2% each
-	     side, sitting on the bottom edge. Measured at x28..1394 of 1425 on both
-	     the hero and the client section. -->
+	<!-- Orange rule on the bottom edge, running from about two thirds across to
+	     the right edge. Both node renders carry it: the hero's starts at 67.44%
+	     of 1425 and the client section's at 65.66% of 1354, 2px in each. It read
+	     as a full-bleed 5px MINT rule here for a long time, off a pair of older
+	     page screenshots — those still carry a navbar above the hero, which the
+	     node renders do not, so they are a previous state of the file. -->
 	<span
-		class="pointer-events-none absolute right-[2.18%] bottom-0 left-[1.96%] h-[5px] bg-mint"
+		class="pointer-events-none absolute right-0 bottom-0 left-[66.5%] h-[2px] bg-accent"
 		aria-hidden="true"
 	></span>
 </section>
