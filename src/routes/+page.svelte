@@ -52,7 +52,7 @@
      client copy, which is what keeps the two halves visually identical. -->
 <ClientsSection {form} />
 <ProcessSteps />
-<Comparison data={clientComparison} name="client-comparison" />
+<Comparison data={clientComparison} name="client-comparison" ruleAfter={1} />
 <GetPaid data={clientBenefits} name="client-benefits" photo="/images/kitchen-consult.webp" />
 <WaitlistCta
 	{form}
