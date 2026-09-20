@@ -127,12 +127,17 @@
 			     both captions painted on top of each other. Below lg each one
 			     takes its own column, on the same two-column track and gap as the
 			     tiles above, so each caption sits under its own photograph. -->
-			<div class="mt-3 grid grid-cols-2 gap-x-3 text-center lg:grid-cols-1">
+			<!-- Centred from lg, where one caption sits under the pair and reads as
+			     a label for whichever tile is active. Below lg each caption belongs
+			     to the tile above it, so it ranges left against that tile's edge
+			     instead — centred, the two columns' ragged inner edges ran into
+			     each other. -->
+			<div class="mt-3 grid grid-cols-2 gap-x-3 text-left lg:grid-cols-1 lg:text-center">
 				{#each audience.options as option (option.id)}
 					<span class="option-caption block lg:col-start-1 lg:row-start-1">
 						<span class="block text-[17px] font-bold">{option.title}</span>
 						<span
-							class="mx-auto mt-1.5 block max-w-full pb-8 text-[13px] leading-[1.65] text-white/75 lg:max-w-[74.6%]"
+							class="mt-2.5 block max-w-full pr-3 pb-8 text-[13px] leading-[1.75] text-white/75 lg:mx-auto lg:mt-1.5 lg:max-w-[74.6%] lg:pr-0 lg:leading-[1.65]"
 						>
 							{option.body}
 						</span>
