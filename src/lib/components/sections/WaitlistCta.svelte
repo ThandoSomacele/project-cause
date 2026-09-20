@@ -8,7 +8,6 @@
 		data = finalCta,
 		name = 'cta',
 		source = 'cta',
-		connector = false,
 		placeholder = undefined
 	}: {
 		form?: WaitlistResult | null;
@@ -16,10 +15,6 @@
 		data?: typeof finalCta;
 		name?: string;
 		source?: string;
-		/** Draws the rule that hangs off the submit button and runs out to the
-		 *  left screen edge. Opt-in: only the client panel shows it in the design
-		 *  I have — the provider frame has not been checked. */
-		connector?: boolean;
 		/** Example address in the field; the two panels' frames differ. */
 		placeholder?: string;
 	} = $props();
@@ -49,37 +44,6 @@
 		loading="lazy"
 		class="pointer-events-none absolute top-[-23.6vw] left-0 -z-10 w-screen max-w-none"
 	/>
-
-	{#if connector}
-		<!-- The supplied connector, used as-is rather than drawn from three spans:
-		     308x197 with the knob at its top-right and the path dropping, turning
-		     left and falling away. Anchored so the knob's top meets the submit
-		     button's base — the knob centres 8.5px in from the asset's right edge,
-		     which puts that edge at x941.5 of the 1425 frame, and its top at y408.
-		     Percentages of the section, so it holds as the panel scales.
-
-		     The asset's own tail stops 197px down, well short of the panel's base,
-		     so the column runs to `bottom-0` and a flex child carries the stroke
-		     the rest of the way. The tail leaves the asset flush with its left
-		     edge and 3px wide, so the continuation is 3/308 of the same width and
-		     needs no left offset; the -0.65% top margin (a percentage margin
-		     resolves against the width, so 2px at full size) closes the two
-		     transparent rows at the asset's foot. -->
-		<div
-			class="pointer-events-none absolute top-[65.28%] bottom-0 left-[44.46%] hidden w-[min(21.61vw,308px)] max-w-none flex-col lg:flex"
-			aria-hidden="true"
-		>
-			<img
-				src="/images/cta-connector.png"
-				alt=""
-				width="308"
-				height="197"
-				loading="lazy"
-				class="w-full"
-			/>
-			<span class="-mt-[0.65%] w-[0.974%] flex-1 bg-ink"></span>
-		</div>
-	{/if}
 
 	<div class="container-page w-full py-20 text-center lg:pt-[min(11.58vw,165px)] lg:pb-16">
 		<h2 class="text-h2 mx-auto max-w-[70rem] font-normal text-ink">

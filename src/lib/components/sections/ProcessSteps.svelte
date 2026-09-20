@@ -105,14 +105,14 @@
 						     right edge hang off the same box, on its axis, 0.177em (10.6px)
 						     below that baseline. -->
 						<span
-							class="relative ml-[0.33em] inline-flex h-0 w-[1.094em] align-baseline"
+							class="relative ml-[0.33em] inline-flex h-0 w-[1.059em] align-baseline"
 						>
 							<img
 								src="/icons/process-crew.svg"
 								alt=""
 								aria-hidden="true"
-								width="46"
-								height="45"
+								width="100"
+								height="101"
 								class="absolute bottom-0 left-0 h-[1.075em] w-full"
 							/>
 							<span

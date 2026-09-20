@@ -60,6 +60,5 @@
 	name="client-cta"
 	source="client-cta"
 	placeholder={clientCta.placeholder}
-	connector
 />
 <Faq data={clientFaq} name="client-faq" />
