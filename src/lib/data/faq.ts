@@ -3,8 +3,7 @@
  * collapsed in the Figma frame, so the answers are NOT in the design. The ones
  * marked verbatim came from the client; the rest are drafted here from the
  * claims the rest of the page makes (R95/mnth, no credit system, a transaction
- * fee topping out at 4.8% inclusive of VAT on instant EFT, cash payments not
- * charged).
+ * fee topping out at 5% on instant EFT, cash payments not charged).
  *
  * The undrafted ones still need a review pass from whoever owns the product
  * copy before launch.
@@ -44,7 +43,7 @@ export const faq = {
 		{
 			question: 'Do I get charged for cash payments?',
 			answer:
-				'No. If you and the client settle in cash, Cause takes nothing. The transaction fee of up to 4.8% applies only to instant EFT payments processed through the platform.'
+				'No. If you and the client settle in cash, Cause takes nothing. The transaction fee of up to 5% applies only to instant EFT payments processed through the platform.'
 		},
 		{
 			question: 'What do I need to register?',

@@ -144,17 +144,15 @@ test.describe('fee calculator', () => {
 	const exact = (page: Page) => page.locator('#fee-exact');
 	const payout = (page: Page) => page.locator('[data-section] >> text=paid out to you').locator('..');
 
-	test('the ceiling holds the fee and the rate falls away', async ({ page }) => {
+	test('the fee is the quoted rate on the whole invoice', async ({ page }) => {
 		await slider(page).fill('10000');
 
-		// 4.8% of R10 000 is R480, so the R200 ceiling sets the fee and the
-		// effective rate lands at 2.0%.
-		await expect(page.getByText('2.0 %')).toBeVisible();
+		await expect(page.getByText('5.0 %')).toBeVisible();
 		expect(plain(await exact(page).inputValue())).toBe('R 10 000.00');
 
 		const section = page.locator('#fees');
-		await expect(section).toContainText('R200.00'); // deduction
-		await expect(section).toContainText('9 800.00'); // payout
+		await expect(section).toContainText('R500.00'); // deduction
+		await expect(section).toContainText('9 500.00'); // payout
 	});
 
 	test('zero invoice yields a zero fee and a 0.0% rate', async ({ page }) => {
@@ -163,27 +161,29 @@ test.describe('fee calculator', () => {
 		await expect(page.locator('#fees')).toContainText('R0.00');
 	});
 
-	test('the maximum invoice sits at the ceiling', async ({ page }) => {
+	test('the maximum invoice is charged the same rate as any other', async ({ page }) => {
 		await slider(page).fill('20000');
 		const section = page.locator('#fees');
-		await expect(page.getByText('1.0 %')).toBeVisible();
-		await expect(section).toContainText('R200.00');
-		await expect(section).toContainText('19 800.00'); // payout
+		await expect(page.getByText('5.0 %')).toBeVisible();
+		await expect(section).toContainText('R1 000.00');
+		await expect(section).toContainText('19 000.00'); // payout
 	});
 
-	// Below the crossover the quoted rate applies flat; above it the fee is
-	// pinned and the effective rate decays. Driven through the exact-amount
-	// field because the slider steps in hundreds.
-	test('the quoted rate applies until the ceiling takes over', async ({ page }) => {
-		for (const [amount, rate] of [
-			['1000', '4.8 %'],
-			['4000', '4.8 %'],
-			['5000', '4.0 %'],
-			['10000', '2.0 %'],
-			['20000', '1.0 %']
+	// The fee used to be pinned at R200 above R4 000, which left every invoice
+	// past that quoting the same deduction however large it got. It is flat:
+	// the rate does not move, and the deduction tracks the invoice.
+	test('the rate holds and the deduction grows across the range', async ({ page }) => {
+		const section = page.locator('#fees');
+		for (const [amount, deduction] of [
+			['1000', 'R50.00'],
+			['2700', 'R135.00'],
+			['5000', 'R250.00'],
+			['10000', 'R500.00'],
+			['20000', 'R1 000.00']
 		] as const) {
 			await exact(page).fill(amount);
-			await expect(page.getByText(rate)).toBeVisible();
+			await expect(page.getByText('5.0 %')).toBeVisible();
+			await expect(section).toContainText(deduction);
 		}
 	});
 
@@ -191,7 +191,7 @@ test.describe('fee calculator', () => {
 	// place, and this is what notices if they ever stop agreeing.
 	test('the copy quotes the maximum rate the model actually charges', async ({ page }) => {
 		await expect(page.locator('#fees')).toContainText(
-			'maximum transaction fee of 4.8% inclusive of VAT'
+			'maximum transaction fee of 5%'
 		);
 	});
 

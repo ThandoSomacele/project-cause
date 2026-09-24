@@ -409,9 +409,8 @@ export const pricing = {
 				[{ text: 'Receive your project payments as cash OR' }],
 				[{ text: 'Receive your payments as instant EFT *' }]
 			],
-			// Verbatim from the frame. The 5% here is the all-in ceiling — it covers
-			// the payment gateway's cut as well as VAT — which is why it sits above
-			// the 4.8% the estimator quotes for the platform's own fee.
+			// Verbatim from the frame, and the same 5% the estimator quotes; this
+			// line adds what that rate is inclusive of.
 			note: 'Payments on the platform have a maximum transaction fee of 5% inclusive of VAT and payment gateway costs, refer to calculator.*'
 		},
 		{
@@ -497,8 +496,8 @@ export const calculator = {
 	quickSelectLabel: 'Quick select',
 	exactLabel: 'Enter exact invoice amount',
 	feesTitle: 'Platform fees',
-	feesBody:
-		'Payments on the platform have a maximum transaction fee of 4.8% inclusive of VAT.',
+	// Verbatim from the frame: no VAT clause, and 5%.
+	feesBody: 'Payments on the platform have a maximum transaction fee of 5%.',
 	labels: {
 		feeEstimate: 'PLATFORM FEE ESTIMATE',
 		deduction: 'DEDUCTION ESTIMATE',

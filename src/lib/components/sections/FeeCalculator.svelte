@@ -163,27 +163,30 @@
 					     still fits beside its rule.
 
 					     From sm they take the frame's own measurements instead: both plates
-					     233.6px wide with 41px between them. Equal, but at a set width —
+					     233.6px wide and 74.7px tall — 21/17 of padding, 14px of gutter,
+					     and the frame's own 21.7/17.05 leading on the two lines, with
+					     41px between the plates — at the 20/32 this carried before, "PLATFORM FEE
+					     ESTIMATE" lost 12px and wrapped. Equal, but at a set width —
 					     letting the columns stretch them to fill the left column was what
 					     broke the desktop, and letting them size to their content left the
 					     shorter figure's plate 22px narrower than the other. -->
 					<div
 						class="mt-7 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-[min(2.877vw,41px)]"
 					>
-						<p class="flex items-center gap-3 rounded-lg bg-cream px-4 py-4 text-ink sm:w-[min(16.392vw,234px)] sm:gap-4 sm:pr-8 sm:pl-5">
+						<p class="flex items-center gap-3 rounded-lg bg-cream px-4 py-4 text-ink sm:w-[min(16.392vw,234px)] sm:gap-[14px] sm:px-[21px] sm:py-[17px]">
 							<span class="h-10 w-1 shrink-0 rounded bg-accent"></span>
 							<span>
-								<span class="block text-[20px] font-semibold sm:text-[24px]">{formatPct(fees.ratePct)} %</span>
-								<span class="font-mono block text-[11px] tracking-[0.1em] text-muted">
+								<span class="block text-[20px] font-semibold sm:text-[24px] sm:leading-[21.7px]">{formatPct(fees.ratePct)} %</span>
+								<span class="font-mono block text-[11px] leading-[17.05px] tracking-[0.1em] text-muted">
 									{calculator.labels.feeEstimate}
 								</span>
 							</span>
 						</p>
-						<p class="flex items-center gap-3 rounded-lg bg-white px-4 py-4 text-ink sm:w-[min(16.392vw,234px)] sm:gap-4 sm:pr-8 sm:pl-5">
+						<p class="flex items-center gap-3 rounded-lg bg-white px-4 py-4 text-ink sm:w-[min(16.392vw,234px)] sm:gap-[14px] sm:px-[21px] sm:py-[17px]">
 							<span class="h-10 w-1 shrink-0 rounded bg-ink"></span>
 							<span>
-								<span class="block text-[20px] font-semibold sm:text-[24px]">{formatZarTight(fees.fee)}</span>
-								<span class="font-mono block text-[11px] tracking-[0.1em] text-muted">
+								<span class="block text-[20px] font-semibold sm:text-[24px] sm:leading-[21.7px]">{formatZarTight(fees.fee)}</span>
+								<span class="font-mono block text-[11px] leading-[17.05px] tracking-[0.1em] text-muted">
 									{calculator.labels.deduction}
 								</span>
 							</span>
