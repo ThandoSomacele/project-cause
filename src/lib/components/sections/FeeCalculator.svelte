@@ -26,7 +26,7 @@
 
 	let scope = $state<HTMLElement | null>(null);
 
-	// The slider fill reads --progress. It is written
+	// The slider fill and the value bubble both read --progress. It is written
 	// through the CSSOM rather than a `style` attribute because a strict CSP
 	// cannot allow-list inline style attributes — a nonce or hash only covers
 	// style and script elements. CSSOM writes are not policed by CSP, so this
@@ -91,10 +91,18 @@
 					</h2>
 
 					<div class="fee-scope mt-8" bind:this={scope}>
-						<!-- The design carries no value bubble over the handle: the amount is
-						     already on the field below and in the results column, and the
-						     bubble put a third copy of it on screen. The handle still
-						     announces itself through aria-valuetext. -->
+						<!-- The frame carries a value bubble over the handle, and it rides
+						     --progress so it tracks the handle rather than sitting still.
+						     The clamp keeps it off both ends, where it would otherwise hang
+						     past the track. -->
+						<div class="relative h-10">
+							<span
+								class="fee-bubble absolute -translate-x-1/2 rounded-[12px] border border-white/15 bg-white/10 px-4 py-2 text-[18px] font-semibold whitespace-nowrap"
+							>
+								Current: {formatZar(amount)}
+							</span>
+						</div>
+
 						<label class="sr-only" for="fee-slider">Invoice amount</label>
 						<input
 							id="fee-slider"
@@ -115,8 +123,10 @@
 					</div>
 
 					<fieldset class="mt-9">
-						<legend class="sr-only">{calculator.quickSelectLabel}</legend>
-						<div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+						<legend class="text-[13px] font-semibold text-[#94a3b8]">
+							{calculator.quickSelectLabel}
+						</legend>
+						<div class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
 							{#each QUICK_AMOUNTS as value (value)}
 								<button
 									type="button"
@@ -216,6 +226,10 @@
 	   rendered markup paints correctly before hydration sets the real value. */
 	.fee-scope {
 		--progress: 50%;
+	}
+
+	.fee-bubble {
+		left: clamp(6rem, var(--progress), calc(100% - 6rem));
 	}
 
 	/* The forms plugin strips the native control, so the track and handle are

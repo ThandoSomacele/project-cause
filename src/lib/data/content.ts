@@ -491,8 +491,6 @@ export const carousel = {
 
 export const calculator = {
 	title: 'Fee Estimate Slider',
-	// The design shows no caption over the quick-select row, but the row is a
-	// group of controls and needs a name, so this is read out rather than drawn.
 	quickSelectLabel: 'Quick select',
 	exactLabel: 'Enter exact invoice amount',
 	feesTitle: 'Platform fees',
@@ -500,7 +498,7 @@ export const calculator = {
 	feesBody: 'Payments on the platform have a maximum transaction fee of 5%.',
 	labels: {
 		feeEstimate: 'PLATFORM FEE ESTIMATE',
-		deduction: 'DEDUCTION ESTIMATE',
+		deduction: 'AMOUNT ESTIMATE',
 		invoice: 'your invoice estimate',
 		payout: 'paid out to you'
 	}
