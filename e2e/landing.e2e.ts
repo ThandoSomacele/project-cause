@@ -144,15 +144,16 @@ test.describe('fee calculator', () => {
 	const exact = (page: Page) => page.locator('#fee-exact');
 	const payout = (page: Page) => page.locator('[data-section] >> text=paid out to you').locator('..');
 
-	test('the fee is the quoted rate on the whole invoice', async ({ page }) => {
+	test('applies the banded rate and derives the payout', async ({ page }) => {
 		await slider(page).fill('10000');
 
-		await expect(page.getByText('5.0 %')).toBeVisible();
+		// R10 000 sits in the Medium band (up to R11 000) at 4%.
+		await expect(page.getByText('4.0 %')).toBeVisible();
 		expect(plain(await exact(page).inputValue())).toBe('R 10 000.00');
 
 		const section = page.locator('#fees');
-		await expect(section).toContainText('R500.00'); // deduction
-		await expect(section).toContainText('9 500.00'); // payout
+		await expect(section).toContainText('R400.00'); // deduction
+		await expect(section).toContainText('9 600.00'); // payout
 	});
 
 	test('zero invoice yields a zero fee and a 0.0% rate', async ({ page }) => {
@@ -161,38 +162,38 @@ test.describe('fee calculator', () => {
 		await expect(page.locator('#fees')).toContainText('R0.00');
 	});
 
-	test('the maximum invoice is charged the same rate as any other', async ({ page }) => {
+	test('the maximum invoice resolves at the Large band', async ({ page }) => {
 		await slider(page).fill('20000');
 		const section = page.locator('#fees');
-		await expect(page.getByText('5.0 %')).toBeVisible();
-		await expect(section).toContainText('R1 000.00');
-		await expect(section).toContainText('19 000.00'); // payout
+		await expect(page.getByText('3.0 %')).toBeVisible();
+		await expect(section).toContainText('R600.00'); // 3% of 20 000
+		await expect(section).toContainText('19 400.00'); // payout
 	});
 
-	// The fee used to be pinned at R200 above R4 000, which left every invoice
-	// past that quoting the same deduction however large it got. It is flat:
-	// the rate does not move, and the deduction tracks the invoice.
-	test('the rate holds and the deduction grows across the range', async ({ page }) => {
-		const section = page.locator('#fees');
-		for (const [amount, deduction] of [
-			['1000', 'R50.00'],
-			['2700', 'R135.00'],
-			['5000', 'R250.00'],
-			['10000', 'R500.00'],
-			['20000', 'R1 000.00']
+	// Band edges are where a tiered model most easily regresses: a tier owns its
+	// own upper bound, and the next rand crosses into the band below it. Driven
+	// through the exact-amount field because the slider steps in hundreds and
+	// cannot express a one-rand crossing.
+	test('each band claims its own upper bound', async ({ page }) => {
+		for (const [amount, rate] of [
+			['2000', '5.0 %'],
+			['2001', '4.5 %'],
+			['4000', '4.5 %'],
+			['4001', '4.0 %'],
+			['11000', '4.0 %'],
+			['11001', '3.0 %']
 		] as const) {
 			await exact(page).fill(amount);
-			await expect(page.getByText('5.0 %')).toBeVisible();
-			await expect(section).toContainText(deduction);
+			await expect(page.getByText(rate)).toBeVisible();
 		}
 	});
 
-	// The copy quotes a rate; the model charges one. They are set from the same
-	// place, and this is what notices if they ever stop agreeing.
-	test('the copy quotes the maximum rate the model actually charges', async ({ page }) => {
-		await expect(page.locator('#fees')).toContainText(
-			'maximum transaction fee of 5%'
-		);
+	// The copy quotes the top tier's rate. Both come from FEE_TIERS, and this is
+	// what notices if they ever stop agreeing.
+	test('the copy quotes the rate of the highest band', async ({ page }) => {
+		await exact(page).fill('1000');
+		await expect(page.getByText('5.0 %')).toBeVisible();
+		await expect(page.locator('#fees')).toContainText('maximum transaction fee of 5%');
 	});
 
 	test('quick-select, slider and text field stay in sync', async ({ page }) => {
