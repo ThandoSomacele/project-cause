@@ -233,13 +233,21 @@
 	}
 
 	/* The forms plugin strips the native control, so the track and handle are
-	   rebuilt here. The filled portion is a gradient driven by --progress. */
+	   rebuilt here. The filled portion is a gradient driven by --progress.
+
+	   Measured off the 2x render of the handle: the visible disc is 32px on an
+	   8px track, and it is separated from the rail by 5.5px of the card's own
+	   navy on both sides — the mint stops 21.5px short of the handle's centre,
+	   which is that ring plus half the disc. Drawn as a ring rather than a gap
+	   in the gradient so the fill stays one continuous track. The 40px the
+	   handle carried before was the frame's container, not its artwork. */
 	.fee-slider {
 		--track: 8px;
-		--thumb: 40px;
+		--thumb: 32px;
+		--thumb-ring: 5.5px;
 		appearance: none;
 		width: 100%;
-		height: var(--thumb);
+		height: calc(var(--thumb) + 2 * var(--thumb-ring));
 		background: transparent;
 		cursor: pointer;
 	}
@@ -274,6 +282,7 @@
 		border-radius: 999px;
 		background: var(--color-accent);
 		border: none;
+		box-shadow: 0 0 0 var(--thumb-ring) var(--color-ink);
 	}
 
 	.fee-slider::-moz-range-thumb {
@@ -282,5 +291,6 @@
 		border-radius: 999px;
 		background: var(--color-accent);
 		border: none;
+		box-shadow: 0 0 0 var(--thumb-ring) var(--color-ink);
 	}
 </style>
