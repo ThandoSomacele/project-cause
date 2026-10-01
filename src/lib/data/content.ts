@@ -519,5 +519,14 @@ export const waitlist = {
 	placeholder: 'nomsa.ngewu@example.com',
 	submit: 'Join Waitlist',
 	success: "You're on the list. We'll be in touch before launch.",
-	label: 'Email address'
+	label: 'Email address',
+	// The first two are the wording the old server action returned, carried over
+	// unchanged. `failed` covers anything that stops a signup being saved, and
+	// `rate` is waitlist.php turning away a burst of repeat submissions.
+	errors: {
+		empty: 'Enter your email address.',
+		invalid: 'That doesn’t look like a valid email address.',
+		rate: 'Too many attempts. Please wait a few minutes and try again.',
+		failed: 'We couldn’t add you just now. Please try again.'
+	}
 };

@@ -1,5 +1,8 @@
-# Build settings. Security headers live in src/hooks.server.ts instead — rules
-# here only reliably reach statically-served files, not the SSR function.
+# The site builds to static files in build/ (adapter-static) and is hosted in
+# public_html — see deploy/README.md. This file is kept only for a Netlify
+# preview: the pages work there, but signups do not, because the waitlist
+# posts to waitlist.php and Netlify does not run PHP. The form says so rather
+# than pretending to succeed.
 [build]
 	command = "pnpm run build"
 	publish = "build"

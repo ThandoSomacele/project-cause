@@ -14,8 +14,6 @@
 	import ProcessSteps from '$lib/components/sections/ProcessSteps.svelte';
 	import { clientComparison, clientBenefits, clientCta } from '$lib/data/content';
 	import { clientFaq } from '$lib/data/faq';
-
-	let { form } = $props();
 </script>
 
 <svelte:head>
@@ -33,14 +31,14 @@
      straight to it without leaving the page. scroll-mt clears the 84px sticky
      navbar so the section's top edge is not hidden under it on arrival. -->
 <div id="service-providers" class="scroll-mt-[84px]">
-	<Hero {form} />
+	<Hero />
 	<ValueOffering />
 	<Comparison ruleAfter={1} />
 	<GetPaid />
 	<SubscriptionCard />
 	<ProductCarousel />
 	<FeeCalculator />
-	<WaitlistCta {form} />
+	<WaitlistCta />
 	<Faq />
 </div>
 
@@ -50,12 +48,11 @@
      It mirrors the provider half section for section, as the design does: the
      same Comparison, GetPaid, WaitlistCta and Faq components render again with
      client copy, which is what keeps the two halves visually identical. -->
-<ClientsSection {form} />
+<ClientsSection />
 <ProcessSteps />
 <Comparison data={clientComparison} name="client-comparison" ruleAfter={1} />
 <GetPaid data={clientBenefits} name="client-benefits" photo="/images/kitchen-consult.webp" />
 <WaitlistCta
-	{form}
 	data={clientCta}
 	name="client-cta"
 	source="client-cta"

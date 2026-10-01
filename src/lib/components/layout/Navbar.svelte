@@ -29,7 +29,7 @@
 		</nav>
 
 		<div class="ml-auto flex items-center gap-3">
-			<Button href="#waitlist" variant="outline" class="hidden sm:inline-flex">Book Demo</Button>
+			<Button href="/#waitlist" variant="outline" class="hidden sm:inline-flex">Book Demo</Button>
 
 			<button
 				type="button"

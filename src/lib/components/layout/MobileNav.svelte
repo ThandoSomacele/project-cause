@@ -121,6 +121,6 @@
 			</ul>
 		</nav>
 
-		<Button href="#waitlist" variant="outline" class="w-full">Book Demo</Button>
+		<Button href="/#waitlist" variant="outline" class="w-full">Book Demo</Button>
 	</div>
 {/if}

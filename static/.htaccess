@@ -1,0 +1,42 @@
+# Apache configuration for hosting build/ in public_html (cPanel and similar).
+# Netlify ignores this file and reads static/_headers instead, so the two must
+# be kept in step: a header added to one belongs in the other.
+
+# --- Clean URLs --------------------------------------------------------------
+# The build writes /privacy as privacy.html, and every link on the site points
+# at /privacy. Netlify maps one to the other on its own; Apache answers 404
+# unless told to. Only extensionless paths with a matching .html file are
+# rewritten, so assets and real files are never touched.
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME}.html -f
+	RewriteRule ^([^.]+?)/?$ $1.html [L]
+</IfModule>
+
+# --- Security headers --------------------------------------------------------
+# The same set static/_headers gives Netlify. The page's own CSP arrives as a
+# <meta> tag with hashes of its scripts; frame-ancestors cannot be set from
+# <meta>, so it goes out here. Browsers enforce both policies together, so this
+# only adds that restriction.
+<IfModule mod_headers.c>
+	Header always set X-Content-Type-Options "nosniff"
+	Header always set Referrer-Policy "strict-origin-when-cross-origin"
+	Header always set X-Frame-Options "SAMEORIGIN"
+	Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+	Header always set Content-Security-Policy "frame-ancestors 'self'"
+
+	# Everything under _app/immutable/ carries a content hash in its name, so a
+	# changed file is always a new URL. Browsers can keep these for a year.
+	<If "%{REQUEST_URI} =~ m#^/_app/immutable/#">
+		Header set Cache-Control "public, max-age=31536000, immutable"
+	</If>
+</IfModule>
+
+# --- Files that are not part of the site ------------------------------------
+# _headers is Netlify's config; on Apache it would otherwise be a public
+# download.
+<Files "_headers">
+	Require all denied
+</Files>

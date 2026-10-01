@@ -1,0 +1,19 @@
+# Security headers for the static build. Netlify reads this file from the
+# publish directory, and `vite preview` reads it too (see vite.config.ts), so
+# local runs and production send the same headers from one definition.
+#
+# They used to be set per response in src/hooks.server.ts, which a static
+# build has no server to run.
+#
+# The CSP itself is NOT here: SvelteKit writes it into each page as a <meta>
+# tag with hashes for its own inline scripts. The one directive it cannot carry
+# there is frame-ancestors — browsers ignore it in <meta> — so it goes out as a
+# header. Both policies are enforced together, so this adds that restriction
+# without loosening anything the page's own policy sets.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Content-Security-Policy: frame-ancestors 'self'

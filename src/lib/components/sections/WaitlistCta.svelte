@@ -1,16 +1,14 @@
 <script lang="ts">
 	import { finalCta } from '$lib/data/content';
 	import RichText from '$lib/components/ui/RichText.svelte';
-	import EmailCapture, { type WaitlistResult } from '$lib/components/ui/EmailCapture.svelte';
+	import EmailCapture from '$lib/components/ui/EmailCapture.svelte';
 
 	let {
-		form = null,
 		data = finalCta,
 		name = 'cta',
 		source = 'cta',
 		placeholder = undefined
 	}: {
-		form?: WaitlistResult | null;
 		/** The client half closes with the same panel and its own headline. */
 		data?: typeof finalCta;
 		name?: string;
@@ -54,6 +52,6 @@
 
 		<p class="mt-5 text-[17px] text-ink/80">{data.subhead}</p>
 
-		<EmailCapture {source} tone="light" {form} {placeholder} class="mx-auto mt-8 max-w-[648px] text-left" />
+		<EmailCapture {source} tone="light" {placeholder} class="mx-auto mt-8 max-w-[648px] text-left" />
 	</div>
 </section>

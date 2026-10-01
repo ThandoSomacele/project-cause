@@ -274,6 +274,21 @@ test.describe('value tabs', () => {
 });
 
 test.describe('waitlist', () => {
+	// The forms post to static/waitlist.php, which needs PHP and so does not run
+	// under `vite preview`. Its answer is stubbed here — `{ ok: true }` unless a
+	// test says otherwise — so these check the page's side of the exchange: what
+	// it sends, and what it tells the visitor. The script itself is exercised
+	// against real PHP separately.
+	const isEndpoint = (url: URL) => url.pathname === '/waitlist.php';
+	const answer = (body: unknown, status = 200) => ({
+		status,
+		contentType: 'application/json',
+		body: JSON.stringify(body)
+	});
+	test.beforeEach(async ({ page }) => {
+		await page.route(isEndpoint, (route) => route.fulfill(answer({ ok: true })));
+	});
+
 	test('rejects a malformed address without submitting', async ({ page }) => {
 		const email = page.locator('#hero-email');
 		await email.fill('not-an-address');
@@ -286,6 +301,62 @@ test.describe('waitlist', () => {
 		await page.locator('#hero-email').fill('nomsa@example.com');
 		await page.getByRole('button', { name: 'Join Waitlist' }).first().click();
 		await expect(page.locator('#hero-message')).toContainText("You're on the list");
+	});
+
+	// Without JavaScript the browser posts the form itself, so the endpoint has
+	// to be in the markup rather than only in the fetch call.
+	test('every waitlist form posts to the endpoint', async ({ page }) => {
+		const forms = page.locator('form[action="/waitlist.php"][method="post" i]');
+		await expect(forms).toHaveCount(4);
+	});
+
+	test('posts the fields the endpoint reads, and asks for JSON', async ({ page }) => {
+		const posted = page.waitForRequest(
+			(req) => req.method() === 'POST' && isEndpoint(new URL(req.url()))
+		);
+		await page.locator('#hero-email').fill('nomsa@example.com');
+		await page.getByRole('button', { name: 'Join Waitlist' }).first().click();
+
+		const request = await posted;
+		expect(request.headers()['content-type']).toBe('application/x-www-form-urlencoded');
+		expect(request.headers()['accept']).toBe('application/json');
+		const body = new URLSearchParams(request.postData() ?? '');
+		expect(body.get('email')).toBe('nomsa@example.com');
+		expect(body.get('source')).toBe('hero');
+		expect(body.get('company')).toBe('');
+	});
+
+	// The bug this guards against: on a host that does not run the script, a
+	// POST came back 200 with the homepage's HTML, and the form took the 200 as
+	// success — telling the visitor they were in while the address went nowhere.
+	test('a 200 that is not the endpoint’s own answer is not taken as success', async ({
+		page
+	}) => {
+		await page.route(isEndpoint, (route) =>
+			route.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><p>home</p>' })
+		);
+		await page.locator('#hero-email').fill('nomsa@example.com');
+		await page.getByRole('button', { name: 'Join Waitlist' }).first().click();
+		await expect(page.locator('#hero-message')).toContainText('couldn’t add you');
+		await expect(page.locator('#hero-message')).not.toContainText("You're on the list");
+	});
+
+	test('says so when the signup cannot be saved', async ({ page }) => {
+		await page.route(isEndpoint, (route) =>
+			route.fulfill(answer({ ok: false, error: 'storage' }, 500))
+		);
+		await page.locator('#hero-email').fill('nomsa@example.com');
+		await page.getByRole('button', { name: 'Join Waitlist' }).first().click();
+		await expect(page.locator('#hero-message')).toContainText('couldn’t add you');
+	});
+
+	test('passes on the endpoint’s rate limit', async ({ page }) => {
+		await page.route(isEndpoint, (route) =>
+			route.fulfill(answer({ ok: false, error: 'rate' }, 429))
+		);
+		await page.locator('#hero-email').fill('nomsa@example.com');
+		await page.getByRole('button', { name: 'Join Waitlist' }).first().click();
+		await expect(page.locator('#hero-message')).toContainText('Too many attempts');
 	});
 
 	test('the three forms report independently', async ({ page }) => {

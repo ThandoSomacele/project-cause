@@ -1,15 +1,25 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('security headers', () => {
-	test('sends a strict CSP with a script nonce and no unsafe-inline scripts', async ({ page }) => {
+	// The site is prerendered, so SvelteKit carries the policy in a <meta> tag
+	// with hashes of its inline scripts — nonces are per-response and forbidden
+	// on static pages. frame-ancestors cannot be set from <meta>, so it arrives
+	// as a header from static/_headers instead; both policies are enforced.
+	test('carries a strict hash-based CSP and no unsafe-inline scripts', async ({ page }) => {
 		const response = await page.goto('/');
-		const csp = response?.headers()['content-security-policy'] ?? '';
+		const csp =
+			(await page
+				.locator('meta[http-equiv="content-security-policy"]')
+				.getAttribute('content')) ?? '';
 
 		expect(csp).toContain("default-src 'self'");
 		expect(csp).toContain("object-src 'none'");
 		expect(csp).toContain("base-uri 'self'");
 		expect(csp).toContain("form-action 'self'");
-		expect(csp).toMatch(/script-src 'self' 'nonce-[^']+'/);
+		expect(csp).toMatch(/script-src 'self' 'sha256-[^']+'/);
+		expect(csp).not.toContain('nonce-');
+
+		expect(response?.headers()['content-security-policy']).toBe("frame-ancestors 'self'");
 
 		// style-src itself must stay strict — only the attribute variant is relaxed,
 		// which cannot be used to inject a <style> element or an external sheet.

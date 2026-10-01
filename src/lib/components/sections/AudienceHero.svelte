@@ -1,5 +1,5 @@
 <script lang="ts">
-	import EmailCapture, { type WaitlistResult } from '$lib/components/ui/EmailCapture.svelte';
+	import EmailCapture from '$lib/components/ui/EmailCapture.svelte';
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import RichText from '$lib/components/ui/RichText.svelte';
 	import type { Line } from '$lib/types';
@@ -19,9 +19,8 @@
 		 *  The hero runs a single line, the client section three. */
 		body: readonly Line[];
 		chips: readonly Chip[];
-		/** Distinguishes this waitlist form's result, and namespaces its ids. */
+		/** Tags this waitlist form's submissions, and namespaces its ids. */
 		source: string;
-		form?: WaitlistResult | null;
 		/** Mascot artwork; both variants carry the pole on the mascot's left. */
 		mascot?: string;
 		/**
@@ -61,7 +60,6 @@
 		body,
 		chips,
 		source,
-		form = null,
 		mascot = '/images/mascot-pole.svg',
 		frame = '/icons/hero-frame.svg',
 		bodyGap = 'lg:mt-[min(7.228vw,103px)]',
@@ -159,7 +157,7 @@
 				id={waitlistId}
 				class={['mt-7 max-w-[630px] scroll-mt-24 lg:mt-[min(2.456vw,35px)]', captureWidth]}
 			>
-				<EmailCapture {source} tone="dark" {form} />
+				<EmailCapture {source} tone="dark" />
 			</div>
 		</div>
 

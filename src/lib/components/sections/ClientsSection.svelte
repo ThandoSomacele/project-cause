@@ -1,9 +1,6 @@
 <script lang="ts">
 	import { clients } from '$lib/data/content';
 	import AudienceHero from './AudienceHero.svelte';
-	import type { WaitlistResult } from '$lib/components/ui/EmailCapture.svelte';
-
-	let { form = null }: { form?: WaitlistResult | null } = $props();
 </script>
 
 <!-- The client side of the product, closing the page. Same composition as the
@@ -21,5 +18,4 @@
 	bodyGap="lg:mt-[min(2.947vw,42px)]"
 	chipLeads={['', 'lg:ms-[min(5.404vw,77px)]', 'lg:ms-[min(6.105vw,87px)]']}
 	captureWidth="lg:max-w-[656px]"
-	{form}
 />
